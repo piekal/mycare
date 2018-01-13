@@ -14,7 +14,7 @@ const PrimaryNav = StackNavigator(
 		NavigationDrawer: { screen: NavigationDrawer },
 	},
 	{
-		initialRouteName: "Login",
+		initialRouteName: "LaunchScreen",
 		headerMode: "none",
 	}
 );
