@@ -149,16 +149,17 @@ class SignupScreen extends React.PureComponent {
         let formBtn = this.formIsValid ? formValidBtn : formInvalidBtn;
 
         return (
-            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+            <Item style={{ alignItems: 'center', justifyContent: 'center', borderBottomColor: '#FBFBFB' }}>
                 {formBtn}
-            </View>
+            </Item>
         );
     }
 
     render() {
         return (
             <Container >
-                <Content contentContainerStyle={{ backgroundColor: '#FBFBFB' }} style={{ flex: 1}}>
+                <Content contentContainerStyle={{ backgroundColor: '#FBFBFB', flexGrow: 1,
+            paddingHorizontal: 10, paddingVertical: 80, justifyContent: 'space-between' }}>
                     {this.renderSignupForm()}
                     {this.renderContinueButton()}
                 </Content>
