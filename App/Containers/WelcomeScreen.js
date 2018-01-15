@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { View } from 'react-native';
 // import { Container, Header, Title, Content, Footer, FooterTab, Left, Right, Body, Icon, Text } from 'native-base';
-import { Container, Content, Text, Button } from 'native-base';
+import { Container, Content, Text, Button, Icon } from 'native-base';
 
-export class WelcomeScreen extends React.PureComponent {
+class WelcomeScreen extends React.PureComponent {
     render() {
         return (
             <Container>
@@ -17,7 +17,8 @@ export class WelcomeScreen extends React.PureComponent {
                 </View>
 
                 <View style={{ width: 327 }}>
-                    <Button block large style={{ marginVertical: 30, backgroundColor: '#333333', height: 52}}>
+                    <Button block large onPress={ () => { this.props.navigation.navigate('Signup') }}
+                    style={{ marginVertical: 30, backgroundColor: '#333333', height: 52}}>
                         <Text uppercase={false} 
                         style={{fontSize: 16, lineHeight: 20, fontFamily: 'Source Sans Pro'}}>Create an Account</Text>
                     </Button>

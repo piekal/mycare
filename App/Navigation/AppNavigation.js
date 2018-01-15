@@ -6,14 +6,16 @@ import styles from "./Styles/NavigationStyles";
 import Login from "../Containers/LoginScreen";
 import LaunchScreen from "../Containers/LaunchScreen";
 import NavigationDrawer from "./NavigationDrawer";
-import Welcome from '../Containers/WelcomeScreen';;
+import Welcome from '../Containers/WelcomeScreen';
+import Signup from '../Containers/SignupScreen';
 
 const PrimaryNav = StackNavigator(
 	{
 		Login: { screen: Login },
 		LaunchScreen: { screen: LaunchScreen },
 		NavigationDrawer: { screen: NavigationDrawer },
-		Welcome: { screen: Welcome }
+		Welcome: { screen: Welcome },
+		Signup: { screen: Signup }
 	},
 	{
 		initialRouteName: "Welcome",
