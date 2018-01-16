@@ -23,5 +23,8 @@ export default StyleSheet.create({
     },
     buttonFormInvalid : {
         backgroundColor: '#C6CBD4'
+    },
+    buttonFormValid: {
+        backgroundColor: '#5082C3'
     }
 });
