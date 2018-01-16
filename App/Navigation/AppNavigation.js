@@ -9,6 +9,7 @@ import NavigationDrawer from "./NavigationDrawer";
 import Welcome from '../Containers/WelcomeScreen';
 import Signup from '../Containers/SignupScreen';
 import EmailSignin from '../Containers/EmailSigninScreen';
+import PasswordSignin from '../Containers/PasswordSigninScreen';
 
 const PrimaryNav = StackNavigator(
 	{
@@ -17,7 +18,8 @@ const PrimaryNav = StackNavigator(
 		NavigationDrawer: { screen: NavigationDrawer },
 		Welcome: { screen: Welcome },
 		Signup: { screen: Signup },
-		EmailSignin: { screen: EmailSignin }
+		EmailSignin: { screen: EmailSignin },
+		PasswordSignin: { screen: PasswordSignin }
 	},
 	{
 		initialRouteName: "Welcome",

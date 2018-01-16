@@ -38,5 +38,13 @@ export default StyleSheet.create({
     },
     buttonFormValid: {
         backgroundColor: '#1C58B5'
+    },
+    button: {
+        alignItems: 'center'
+    },
+    submitBtnText: {
+        fontSize: 16,
+        lineHeight: 20,
+        alignSelf: 'center'
     }
 });
