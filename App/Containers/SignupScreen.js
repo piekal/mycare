@@ -63,7 +63,7 @@ class SignupScreen extends React.PureComponent {
         return (
             <Item style={{ borderBottomColor: '#FBFBFB' }}>
                 <Text style={{
-                    color: '#F25050', fontSize: 10, lineHeight: 13,
+                    color: '#F25050', fontSize: 11, lineHeight: 14,
                     textAlign: 'left'
                 }}>
                     {msg}
@@ -104,6 +104,7 @@ class SignupScreen extends React.PureComponent {
                     this.firstNameIsInvalid && SignupStyles.labelInvalid]}>
                         Firstname</Label>
                     <Input style={[this.state.firstName.length > 0 && SignupStyles.inputValid]} placeholder="John"
+                        placeholderTextColor="#A8A8A8"
                         onChangeText={(text) => this.setState({ firstName: text, firstNameDirty: true })} value={this.state.firstName} />
                 </Item>
                 {this.showFirstNameErrorMsg()}
@@ -111,7 +112,7 @@ class SignupScreen extends React.PureComponent {
                 <Item style={[this.lastNameIsValid && SignupStyles.inputValid, this.lastNameIsInvalid && SignupStyles.inputInvalid]} stackedLabel>
                     <Label style={[SignupStyles.floatingLabel, this.lastNameIsValid && SignupStyles.labelValid,
                     this.lastNameIsInvalid && SignupStyles.labelInvalid]}>LastName</Label>
-                    <Input placeholder="Doe"
+                    <Input placeholder="Doe" placeholderTextColor="#A8A8A8"
                         onChangeText={(text) => this.setState({ lastName: text, lastNameDirty: true })} value={this.state.lastName} />
                 </Item>
                 {this.showLastNameErrorMsg()}
@@ -119,7 +120,8 @@ class SignupScreen extends React.PureComponent {
                 <Item style={[this.emailIsvalid && SignupStyles.inputValid, this.emailIsInvalid && SignupStyles.inputInvalid]} stackedLabel>
                     <Label style={[SignupStyles.floatingLabel, this.emailIsvalid && SignupStyles.labelValid,
                     this.emailIsInvalid && SignupStyles.labelInvalid]}>Email</Label>
-                    <Input placeholder="johndoe@example.com" onChangeText={(text) => this.setState({ email: text, emailDirty: true })} value={this.state.email} />
+                    <Input placeholderTextColor="#A8A8A8"
+                    placeholder="johndoe@example.com" onChangeText={(text) => this.setState({ email: text, emailDirty: true })} value={this.state.email} />
                 </Item>
                 {this.showEmailErrorMsg()}
 
@@ -127,7 +129,7 @@ class SignupScreen extends React.PureComponent {
                     <Label style={[SignupStyles.floatingLabel, this.passwordIsValid && SignupStyles.labelValid,
                     this.passwordIsInvalid && SignupStyles.labelInvalid]}>Password</Label>
                     <Input placeholder="******" onChangeText={(text) => this.setState({ password: text, passwordDirty: true })}
-                        value={this.state.password} secureTextEntry={this.state.hidePassword} />
+                        placeholderTextColor="#A8A8A8" value={this.state.password} secureTextEntry={this.state.hidePassword} />
                     {/* <Icon active name='swap' /> */}
                 </Item>
                 {this.showPasswordErrorMsg()}
@@ -136,13 +138,13 @@ class SignupScreen extends React.PureComponent {
     }
 
     renderContinueButton() {
-        let formInvalidBtn = (<Button iconRight style={[SignupStyles.buttonFormInvalid]}>
+        let formInvalidBtn = (<Button rounded iconRight style={[SignupStyles.buttonFormInvalid]}>
             <Icon name='arrow-forward' />
             <Text style={{ color: '#333333', fontSize: 16, lineHeight: 20 }} uppercase={false}>Continue</Text>
         </Button>);
 
         let formValidBtn = (
-            <Button iconRight style={[SignupStyles.buttonFormValid]}>
+            <Button rounded iconRight style={[SignupStyles.buttonFormValid]}>
                 <Icon name='arrow-forward' />
                 <Text style={{ color: '#FBFBFB', fontSize: 16, lineHeight: 20 }} uppercase={false}>Continue</Text>
             </Button>
@@ -172,7 +174,7 @@ class SignupScreen extends React.PureComponent {
 
                     <Item style={{ flex: 3, borderBottomColor: '#FBFBFB', alignItems: 'center', justifyContent: 'center'}}>
                         <Text>Already have an Account? 
-                        <Text style={{color: 'blue', fontSize: 14, lineHeight: 20}}> SIGN-IN</Text></Text>
+                        <Text style={{color: '#1C58B5', fontSize: 14, lineHeight: 20}}> SIGN-IN</Text></Text>
                     </Item>
                 </Content>
             </Container>

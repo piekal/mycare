@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
     inputValid: {
-        borderBottomColor: '#4B74FF'
+        borderBottomColor: '#1C58B5'
     },
 
     inputInvalid: {
@@ -10,7 +10,7 @@ export default StyleSheet.create({
     },
 
     labelValid: {
-        color: '#4B74FF',
+        color: '#1C58B5',
     },
 
     labelInvalid: {
@@ -25,6 +25,6 @@ export default StyleSheet.create({
         backgroundColor: '#C6CBD4'
     },
     buttonFormValid: {
-        backgroundColor: '#5082C3'
+        backgroundColor: '#1C58B5'
     }
 });
