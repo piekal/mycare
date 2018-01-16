@@ -21,6 +21,8 @@ const images = {
 	hamburger: require("../Images/Icons/hamburger.png"),
 	backButton: require("../Images/Icons/back-button.png"),
 	closeButton: require("../Images/Icons/close-button.png"),
+	initProfileBg: require("../Images/select_image.png"),
+	userIcon: require("../Images/user_icon.png") 
 };
 
 export default images;

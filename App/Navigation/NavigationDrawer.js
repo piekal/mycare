@@ -1,15 +1,20 @@
 import React from "react";
 import { DrawerNavigator } from "react-navigation";
-import Login from "../Containers/LoginScreen";
+import ProfileScreen from '../Containers/ProfileScreen'
+import ListviewExample from "../Containers/ListviewExample";
+import CardExample from "../Containers/CardExample";
+import DrawerContent from "../Containers/DrawerContent";
+
 
 import styles from "./Styles/NavigationStyles";
 
 const NavigationDrawer = DrawerNavigator({
-		Login: { screen: Login },
-	
+  		ProfileScreen: { screen: ProfileScreen },
+		ListviewExample: { screen: ListviewExample },
+		CardExample: { screen: CardExample },
 	},
 	{
-		initialRouteName: "Login",
+		initialRouteName: "ProfileScreen",
 		contentComponent: props => <DrawerContent {...props} />,
 	}
 );
