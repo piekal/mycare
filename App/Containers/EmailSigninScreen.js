@@ -72,13 +72,7 @@ class EmailSigninScreen extends React.PureComponent {
             </Button>
         );
 
-        let formBtn = this.formIsValid ? formValidBtn : formInvalidBtn;
-
-        return (
-            <Item style={{ alignItems: 'center', justifyContent: 'center', borderBottomColor: '#FBFBFB', flex: 0.5 }}>
-                {formBtn}
-            </Item>
-        );
+        return this.formIsValid ? formValidBtn : formInvalidBtn;
     }
 
     render() {
@@ -88,15 +82,17 @@ class EmailSigninScreen extends React.PureComponent {
                     backgroundColor: '#FBFBFB', flexGrow: 1,
                     paddingHorizontal: 10, paddingVertical: 60, justifyContent: 'space-between'
                 }}>
-                    <View style={{flex: 1.5}}>
+                    <View style={{ flex: 1.5 }}>
                         <Text style={{ color: "blue", fontSize: 32, fontWeight: 'bold', textAlign: 'center' }}>myCare</Text>
                     </View>
                     {this.renderEmailForm()}
 
-                    <View style={{flex: 2.5, justifyContent: 'space-between'}}>
+                    <View style={{ flex: 2.5, justifyContent: 'space-between' }}>
+                        <Item style={{ alignItems: 'center', justifyContent: 'center', borderBottomColor: '#FBFBFB', flex: 0.5 }}>
                         {this.renderContinueButton()}
-
-                        <View style={{ flex: 0.5, marginTop:15, borderBottomColor: '#FBFBFB', alignItems: 'center', justifyContent: 'center' }}>
+                        </Item>
+                        
+                        <View style={{ flex: 0.5, marginTop: 15, borderBottomColor: '#FBFBFB', alignItems: 'center', justifyContent: 'center' }}>
                             <Text>Dont have an Account?
                             <Text onPress={() => { this.props.navigation.navigate('Signup') }} style={{ color: '#1C58B5', fontSize: 14, lineHeight: 20 }}> SIGN-UP</Text></Text>
                         </View>
