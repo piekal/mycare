@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View } from 'react-native';
+import { View, Alert } from 'react-native';
 import { Container, Header, Content, Form, Item, Input, Label, Text, Button, Icon } from 'native-base';
 import SignupStyles from './Styles/SignupStyles';
 
@@ -174,7 +174,7 @@ class SignupScreen extends React.PureComponent {
 
                     <Item style={{ flex: 3, borderBottomColor: '#FBFBFB', alignItems: 'center', justifyContent: 'center'}}>
                         <Text>Already have an Account? 
-                        <Text style={{color: '#1C58B5', fontSize: 14, lineHeight: 20}}> SIGN-IN</Text></Text>
+                        <Text onPress={() => {this.props.navigation.navigate('EmailSignin')}} style={{color: '#1C58B5', fontSize: 14, lineHeight: 20}}> SIGN-IN</Text></Text>
                     </Item>
                 </Content>
             </Container>
