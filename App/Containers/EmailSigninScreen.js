@@ -52,7 +52,7 @@ class EmailSigninScreen extends React.PureComponent {
                     <Label style={[SigninScreenStyles.floatingLabel, this.emailIsvalid && SigninScreenStyles.labelValid,
                     this.emailIsInvalid && SigninScreenStyles.labelInvalid, { alignSelf: 'center' }]}>Email / Phone No.</Label>
                     <Input placeholderTextColor="#A8A8A8" style={[SigninScreenStyles.textInput]}
-                        placeholder="johndoe@example.com" onChangeText={(text) => this.setState({ email: text, emailDirty: true })} value={this.state.email} />
+                         onChangeText={(text) => this.setState({ email: text, emailDirty: true })} value={this.state.email} />
                 </Item>
                 {this.showEmailErrorMsg()}
             </View>
@@ -66,7 +66,7 @@ class EmailSigninScreen extends React.PureComponent {
         </Button>);
 
         let formValidBtn = (
-            <Button rounded iconRight style={[SigninScreenStyles.buttonFormValid]} onPress={() => {this.props.navigation.navigate('PasswordSignin')}}>
+            <Button rounded iconRight style={[SigninScreenStyles.buttonFormValid]} onPress={() => { this.props.navigation.navigate('PasswordSignin') }}>
                 {/* <Icon name='arrow-forward' /> */}
                 <Text style={{ color: '#FBFBFB', fontSize: 16, lineHeight: 20 }} uppercase={true}>Next</Text>
             </Button>
@@ -83,18 +83,21 @@ class EmailSigninScreen extends React.PureComponent {
                     paddingHorizontal: 10, paddingVertical: 60, justifyContent: 'space-between'
                 }}>
                     <View style={{ flex: 1.5 }}>
-                        <Text style={{ color: "blue", fontSize: 32, fontWeight: 'bold', textAlign: 'center' }}>myCare</Text>
+                        <Text style={{ color: Colors.appBlue, fontSize: 24, lineHeight: 32, textAlign: 'center' }}>
+                            my<Text style={{ fontWeight: 'bold', color: Colors.appBlue, fontSize: 24, lineHeight: 32 }}>Care.</Text>
+                        </Text>
+                        {/* <Text style={{ color: "blue", fontSize: 32, fontWeight: 'bold', textAlign: 'center' }}>myCare</Text> */}
                     </View>
                     {this.renderEmailForm()}
 
                     <View style={{ flex: 2.5, justifyContent: 'space-between' }}>
                         <Item style={{ alignItems: 'center', justifyContent: 'center', borderBottomColor: '#FBFBFB', flex: 0.5 }}>
-                        {this.renderContinueButton()}
+                            {this.renderContinueButton()}
                         </Item>
-                        
+
                         <View style={{ flex: 0.5, marginTop: 15, borderBottomColor: '#FBFBFB', alignItems: 'center', justifyContent: 'center' }}>
                             <Text>Dont have an Account?
-                            <Text onPress={() => { this.props.navigation.navigate('Signup') }} style={{ color: '#1C58B5', fontSize: 14, lineHeight: 20 }}> SIGN-UP</Text></Text>
+                            <Text onPress={() => { this.props.navigation.navigate('Signup') }} style={{ color: '#1C58B5', fontSize: 14, lineHeight: 20, fontWeight: '700' }}> SIGN-UP</Text></Text>
                         </View>
                     </View>
                 </Content>
