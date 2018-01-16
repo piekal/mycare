@@ -1,17 +1,19 @@
-//lets require/import the mongodb native drivers.
-var mongodb = require('mongodb');
-
-//We need to work with "MongoClient" interface in order to connect to a mongodb server.
-var MongoClient = mongodb.MongoClient;
-
-// Connection URL. This is where your mongodb server is running.
-
-//(Focus on This Variable)
 var url = 'mongodb://admin:admin@ds046357.mlab.com:46357/mycare_sandbox';      
-//(Focus on This Variable)
+
+var mongoose = require('mongoose');
+
+var options = {
+  useMongoClient: true,
+  autoIndex: false, // Don't build indexes
+  reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
+  reconnectInterval: 500, // Reconnect every 500ms
+  poolSize: 10, // Maintain up to 10 socket connections
+  // If not connected, return errors immediately rather than waiting for reconnect
+  bufferMaxEntries: 0
+};
 
 // Use connect method to connect to the Server
-  MongoClient.connect(url, function (err, db) {
+mongoose.connect(url, options, function (err, db) {
   if (err) {
     console.log('Unable to connect to the mongoDB server. Error:', err);
   } else {
@@ -20,6 +22,6 @@ var url = 'mongodb://admin:admin@ds046357.mlab.com:46357/mycare_sandbox';
     // do some work here with the database.
 
     //Close connection
-    db.close();
+    //db.close();
   }
 });
