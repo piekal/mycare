@@ -18,7 +18,7 @@ const PrimaryNav = StackNavigator(
 
 	},
 	{
-		initialRouteName: "Login",
+		initialRouteName: "LaunchScreen",
 		headerMode: "none",
 	}
 );
