@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { View, Alert } from 'react-native';
 import { Container, Header, Content, Form, Item, Input, Label, Text, Button, Icon } from 'native-base';
 import SignupStyles from './Styles/SignupStyles';
+import Colors from '../Themes/Colors';
 
 class SignupScreen extends React.PureComponent {
     constructor(props) {
@@ -140,7 +141,7 @@ class SignupScreen extends React.PureComponent {
     renderContinueButton() {
         let formInvalidBtn = (<Button rounded iconRight style={[SignupStyles.buttonFormInvalid]}>
             <Icon name='arrow-forward' />
-            <Text style={{ color: '#333333', fontSize: 16, lineHeight: 20 }} uppercase={false}>Continue</Text>
+            <Text style={{ color: '#333333', fontSize: 16, lineHeight: 20, fontWeight: '600' }} uppercase={false}>Continue</Text>
         </Button>);
 
         let formValidBtn = (
@@ -166,15 +167,17 @@ class SignupScreen extends React.PureComponent {
                     backgroundColor: '#FBFBFB', flexGrow: 1,
                     paddingHorizontal: 10, paddingVertical: 40, justifyContent: 'space-between'
                 }}>
-                    <View>
-                        <Text style={{ color: "blue", fontSize: 32, fontWeight: 'bold', textAlign: 'center' }}>myCare</Text>
+                    <View style={{flex: 2}}>
+                        <Text style={{ color: Colors.appBlue, fontSize: 24, lineHeight: 32, textAlign: 'center' }}>
+                            my<Text style={{fontWeight: 'bold', color: Colors.appBlue, fontSize: 24, lineHeight: 32}}>Care.</Text>
+                        </Text>
                     </View>
                     {this.renderSignupForm()}
                     {this.renderContinueButton()}
 
-                    <Item style={{ flex: 3, borderBottomColor: '#FBFBFB', alignItems: 'center', justifyContent: 'center'}}>
+                    <Item style={{ flex: 2, borderBottomColor: '#FBFBFB', alignItems: 'center', justifyContent: 'center'}}>
                         <Text>Already have an Account? 
-                        <Text onPress={() => {this.props.navigation.navigate('EmailSignin')}} style={{color: '#1C58B5', fontSize: 14, lineHeight: 20}}> SIGN-IN</Text></Text>
+                        <Text onPress={() => {this.props.navigation.navigate('EmailSignin')}} style={{color: '#1C58B5', fontSize: 14, lineHeight: 20, fontWeight:'700'}}> SIGN-IN</Text></Text>
                     </Item>
                 </Content>
             </Container>
