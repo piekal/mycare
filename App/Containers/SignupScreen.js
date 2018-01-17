@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, Alert,BackHandler } from 'react-native';
+import { View, Alert, BackHandler } from 'react-native';
 import { Container, Header, Content, Form, Item, Input, Label, Text, Button, Icon } from 'native-base';
 import SignupStyles from './Styles/SignupStyles';
 import Colors from '../Themes/Colors';
@@ -23,10 +23,10 @@ class SignupScreen extends React.PureComponent {
 
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', () => {
-          this.props.navigation.goBack();
-          return true
+            this.props.navigation.goBack();
+            return true
         })
-      }
+    }
 
     get firstNameIsValid() {
         return this.state.firstName.trim().length > 0;
@@ -125,11 +125,11 @@ class SignupScreen extends React.PureComponent {
                 </Item>
                 {this.showLastNameErrorMsg()}
 
-                <Item style={[SignupStyles.formItem,this.emailIsvalid && SignupStyles.inputValid, this.emailIsInvalid && SignupStyles.inputInvalid]} stackedLabel>
+                <Item style={[SignupStyles.formItem, this.emailIsvalid && SignupStyles.inputValid, this.emailIsInvalid && SignupStyles.inputInvalid]} stackedLabel>
                     <Label style={[SignupStyles.floatingLabel, this.emailIsvalid && SignupStyles.labelValid,
                     this.emailIsInvalid && SignupStyles.labelInvalid]}>Email</Label>
                     <Input placeholderTextColor="#A8A8A8"
-                    placeholder="johndoe@example.com" onChangeText={(text) => this.setState({ email: text, emailDirty: true })} value={this.state.email} />
+                        placeholder="johndoe@example.com" onChangeText={(text) => this.setState({ email: text, emailDirty: true })} value={this.state.email} />
                 </Item>
                 {this.showEmailErrorMsg()}
 
@@ -148,11 +148,11 @@ class SignupScreen extends React.PureComponent {
     renderContinueButton() {
         let formInvalidBtn = (<Button rounded iconRight style={[SignupStyles.buttonFormInvalid]}>
             <Text style={{ color: '#333333', fontSize: 16, lineHeight: 20, fontWeight: '600' }} uppercase={false}>Continue</Text>
-            <Icon style={{color: '#333333'}} name='ios-arrow-forward' />            
+            <Icon style={{ color: '#333333' }} name='ios-arrow-forward' />
         </Button>);
 
         let formValidBtn = (
-            <Button rounded iconRight style={[SignupStyles.buttonFormValid]} onPress={() => {this.props.navigation.navigate('Verification')}}>
+            <Button rounded iconRight style={[SignupStyles.buttonFormValid]} onPress={() => { this.props.navigation.navigate('Verification') }}>
                 <Text style={{ color: '#FBFBFB', fontSize: 16, lineHeight: 20 }} uppercase={false}>Continue</Text>
                 <Icon name='ios-arrow-forward' />
             </Button>
@@ -169,23 +169,40 @@ class SignupScreen extends React.PureComponent {
 
     render() {
         return (
-            <Container style={{backgroundColor: '#FBFBFB'}}>
+            <Container style={{ backgroundColor: '#FBFBFB' }}>
                 <Content contentContainerStyle={{
                     backgroundColor: '#FBFBFB', flexGrow: 1,
                     paddingHorizontal: 28, paddingVertical: 40, justifyContent: 'space-between'
                 }}>
-                    <View style={{flex: 2}}>
+                    <View style={{ flex: 2 }}>
                         <Text style={{ color: Colors.appBlue, fontSize: 24, lineHeight: 32, textAlign: 'center' }}>
-                            my<Text style={{fontWeight: 'bold', color: Colors.appBlue, fontSize: 24, lineHeight: 32}}>Care.</Text>
+                            my<Text style={{ fontWeight: 'bold', color: Colors.appBlue, fontSize: 24, lineHeight: 32 }}>Care.</Text>
                         </Text>
                     </View>
                     {this.renderSignupForm()}
-                    {this.renderContinueButton()}
 
-                    <Item style={{ flex: 2, borderBottomColor: '#FBFBFB', alignItems: 'center', justifyContent: 'center'}}>
+                    <View style={{ flex: 4, justifyContent: 'space-between', marginTop: 10 }}>
+                        <Item style={{ alignItems: 'center', justifyContent: 'center', borderBottomColor: '#FBFBFB', flex: 0.5 }}>
+                            {this.renderContinueButton()}
+                        </Item>
+
+                        <Item style={{ flex: 0.5, borderBottomColor: '#FBFBFB', alignItems: 'center', justifyContent: 'center' }}>
+                            <Text>Already have an Account?
+                        <Text onPress={() => { this.props.navigation.navigate('EmailSignin') }} style={{ color: '#1C58B5', fontSize: 14, lineHeight: 20, fontWeight: '700' }}> SIGN-IN</Text></Text>
+                        </Item>
+
+                        {/* <View style={{ flex: 0.5, marginTop: 15, borderBottomColor: '#FBFBFB', alignItems: 'center', justifyContent: 'center' }}>
+                            <Text>Dont have an Account?
+                            <Text onPress={() => { this.props.navigation.navigate('Signup') }} style={{ color: '#1C58B5', fontSize: 14, lineHeight: 20, fontWeight: '700' }}> SIGN-UP</Text></Text>
+                        </View> */}
+                    </View>
+
+                    {/* {this.renderContinueButton()} */}
+
+                    {/* <Item style={{ flex: 2, borderBottomColor: '#FBFBFB', alignItems: 'center', justifyContent: 'center'}}>
                         <Text>Already have an Account? 
                         <Text onPress={() => {this.props.navigation.navigate('EmailSignin')}} style={{color: '#1C58B5', fontSize: 14, lineHeight: 20, fontWeight:'700'}}> SIGN-IN</Text></Text>
-                    </Item>
+                    </Item> */}
                 </Content>
             </Container>
         )
