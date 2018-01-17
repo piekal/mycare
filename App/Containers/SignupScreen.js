@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, Alert } from 'react-native';
+import { View, Alert,BackHandler } from 'react-native';
 import { Container, Header, Content, Form, Item, Input, Label, Text, Button, Icon } from 'native-base';
 import SignupStyles from './Styles/SignupStyles';
 import Colors from '../Themes/Colors';
@@ -20,6 +20,13 @@ class SignupScreen extends React.PureComponent {
             emailDirty: false
         };
     }
+
+    componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', () => {
+          this.props.navigation.goBack();
+          return true
+        })
+      }
 
     get firstNameIsValid() {
         return this.state.firstName.trim().length > 0;
@@ -140,14 +147,14 @@ class SignupScreen extends React.PureComponent {
 
     renderContinueButton() {
         let formInvalidBtn = (<Button rounded iconRight style={[SignupStyles.buttonFormInvalid]}>
-            <Icon name='arrow-forward' />
             <Text style={{ color: '#333333', fontSize: 16, lineHeight: 20, fontWeight: '600' }} uppercase={false}>Continue</Text>
+            <Icon style={{color: '#333333'}} name='ios-arrow-forward' />            
         </Button>);
 
         let formValidBtn = (
             <Button rounded iconRight style={[SignupStyles.buttonFormValid]} onPress={() => {this.props.navigation.navigate('ProfileScreen')}}>
-                <Icon name='arrow-forward' />
                 <Text style={{ color: '#FBFBFB', fontSize: 16, lineHeight: 20 }} uppercase={false}>Continue</Text>
+                <Icon name='ios-arrow-forward' />
             </Button>
         );
 
@@ -162,7 +169,7 @@ class SignupScreen extends React.PureComponent {
 
     render() {
         return (
-            <Container >
+            <Container style={{backgroundColor: '#FBFBFB'}}>
                 <Content contentContainerStyle={{
                     backgroundColor: '#FBFBFB', flexGrow: 1,
                     paddingHorizontal: 28, paddingVertical: 40, justifyContent: 'space-between'

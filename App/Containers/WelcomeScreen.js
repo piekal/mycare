@@ -20,11 +20,11 @@ class WelcomeScreen extends React.PureComponent {
                     <Button rounded block large onPress={ () => { this.props.navigation.navigate('Signup') }}
                     style={{width: 327, marginVertical: 30, backgroundColor: Colors.appBlue, height: 52}}>
                         <Text uppercase={false} 
-                        style={{fontSize: 16, lineHeight: 20, fontFamily: 'Source Sans Pro'}}>Create an Account</Text>
+                        style={{fontSize: 16, lineHeight: 20, fontFamily: 'Source Sans Pro', fontWeight:'700'}}>Create an Account</Text>
                     </Button>
                     <Button rounded bordered block large style={{width: 327, height: 52}} onPress={() => {this.props.navigation.navigate('EmailSignin')}}>
                         <Text uppercase={true} 
-                        style={{fontSize: 16, lineHeight: 20, fontFamily: 'Source Sans Pro'}}>SIGN IN</Text>
+                        style={{fontSize: 16, lineHeight: 20, fontFamily: 'Source Sans Pro', fontWeight:'700'}}>SIGN IN</Text>
                     </Button>
                 </View>
                 </Content>

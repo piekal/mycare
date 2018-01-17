@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, Alert } from 'react-native';
+import { View, Alert, BackHandler } from 'react-native';
 import { Images, Metrics, Colors } from "../Themes";
 import { Container, Header, Content, Form, Item, Input, Label, Text, Button, Icon, Thumbnail, Left } from 'native-base';
 import SigninScreenStyles from './Styles/SigninScreenStyles';
+import { NavigationActions } from 'react-navigation'
 
-class PasswordSigninScreen extends React.PureComponent {
+class PasswordSigninScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -14,6 +15,13 @@ class PasswordSigninScreen extends React.PureComponent {
             user: { fullName: 'Larry Jones'}
         };
     }
+
+    componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', () => {
+          this.props.navigation.goBack();
+          return true
+        })
+      }
 
     get passwordIsValid() {
         return this.state.password.trim().length > 5;
@@ -67,7 +75,8 @@ class PasswordSigninScreen extends React.PureComponent {
         </Button>);
 
         let formValidBtn = (
-            <Button rounded iconRight style={[SigninScreenStyles.button, SigninScreenStyles.buttonFormValid]}>
+            <Button rounded onPress={() => {this.props.navigation.navigate('ProfileScreen')}}
+            iconRight style={[SigninScreenStyles.button, SigninScreenStyles.buttonFormValid]}>
                 {/* <Icon name='arrow-forward' /> */}
                 <Text style={{ color: '#FBFBFB', fontSize: 16, lineHeight: 20 }} uppercase={true}>Signin</Text>
             </Button>
@@ -78,10 +87,13 @@ class PasswordSigninScreen extends React.PureComponent {
 
     render() {
         return (
-            <Container >
+            <Container style={{backgroundColor: '#FBFBFB'}}>
+                <Button onPress={() => this.props.navigation.dispatch(NavigationActions.back())} transparent>
+                    <Icon name="ios-arrow-back" />
+                </Button>
                 <Content contentContainerStyle={{
                     backgroundColor: '#FBFBFB', flexGrow: 1,
-                    paddingHorizontal: 10, paddingVertical: 60, justifyContent: 'space-between'
+                    paddingHorizontal: 10, paddingTop: 30, paddingBottom: 60, justifyContent: 'space-between'
                 }}>
                     <View style={{ flex: 1.5 }}>
                         {/* <Left><Icon name="arrow-back" /></Left> */}

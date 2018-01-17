@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, Alert } from 'react-native';
+import { View, Alert, BackHandler } from 'react-native';
 import { Images, Metrics, Colors } from "../Themes";
 import { Container, Header, Content, Form, Item, Input, Label, Text, Button, Icon, Thumbnail } from 'native-base';
 import SigninScreenStyles from './Styles/SigninScreenStyles';
 
-class EmailSigninScreen extends React.PureComponent {
+class EmailSigninScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -13,6 +13,13 @@ class EmailSigninScreen extends React.PureComponent {
             emailDirty: false
         };
     }
+
+    componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', () => {
+          this.props.navigation.goBack();
+          return true
+        })
+      }
 
     get emailIsvalid() {
         let pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
