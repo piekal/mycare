@@ -152,7 +152,7 @@ class SignupScreen extends React.PureComponent {
         </Button>);
 
         let formValidBtn = (
-            <Button rounded iconRight style={[SignupStyles.buttonFormValid]} onPress={() => {this.props.navigation.navigate('ProfileScreen')}}>
+            <Button rounded iconRight style={[SignupStyles.buttonFormValid]} onPress={() => {this.props.navigation.navigate('Verification')}}>
                 <Text style={{ color: '#FBFBFB', fontSize: 16, lineHeight: 20 }} uppercase={false}>Continue</Text>
                 <Icon name='ios-arrow-forward' />
             </Button>

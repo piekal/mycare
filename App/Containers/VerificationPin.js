@@ -25,7 +25,7 @@ class VerificationPin extends Component {
 
   render() {
     return (
-      <Container>
+      <Container style={{backgroundColor: '#FBFBFB'}}>
         <Content padder>
           <View style={styles.logoContainer} >
             <Text style={styles.logoText}> my<Text style={[styles.logoText, styles.boldText]}>Care. </Text> </Text>
@@ -37,7 +37,7 @@ class VerificationPin extends Component {
             <View style={{ flexDirection: 'row' }}>
               <View>
                 <Item underline>
-                  <Input keyboardType='phone-pad' />
+                  <Input keyboardType='numeric' maxLength={1}/>
                 </Item>
                 <View style={{ width: 50, borderBottomWidth: 1, borderBottomColor: '#000' }} />
 
@@ -45,7 +45,7 @@ class VerificationPin extends Component {
 
               <View style={{ marginLeft: 10 }}>
                 <Item underline>
-                  <Input keyboardType='phone-pad' />
+                  <Input keyboardType='numeric' maxLength={1}/>
                 </Item>
                 <View style={{ width: 50, borderBottomWidth: 1, borderBottomColor: '#000' }} />
 
@@ -53,7 +53,7 @@ class VerificationPin extends Component {
 
               <View style={{ marginLeft: 10 }}>
                 <Item underline>
-                  <Input keyboardType='phone-pad' />
+                  <Input keyboardType='numeric' maxLength={1}/>
                 </Item>
                 <View style={{ width: 50, borderBottomWidth: 1, borderBottomColor: '#000' }} />
 
@@ -61,7 +61,7 @@ class VerificationPin extends Component {
 
               <View style={{ marginLeft: 10 }}>
                 <Item underline>
-                  <Input keyboardType='phone-pad' />
+                  <Input keyboardType='numeric' maxLength={1} />
                 </Item>
                 <View style={{ width: 50, borderBottomWidth: 1, borderBottomColor: '#000' }} />
 
@@ -69,7 +69,7 @@ class VerificationPin extends Component {
 
             </View>
 
-            <Button rounded style={styles.verifyBtn}>
+            <Button rounded style={styles.verifyBtn} onPress={() => {this.props.navigation.navigate('ProfileScreen')}}>
               <Text>VERIFY</Text>
             </Button>
             

@@ -29,7 +29,7 @@ class Verification extends Component {
 
   render() {
     return (
-      <Container>
+      <Container style={{backgroundColor: '#FBFBFB'}}>
         <Content padder>
           <View style={styles.logoContainer} >
             <Text style={styles.logoText}> my<Text style={[styles.logoText, styles.boldText]}>Care. </Text> </Text>
@@ -65,7 +65,7 @@ class Verification extends Component {
                 <View style={{ marginLeft: 10 }}>
                   <Item>
                     <Input
-                      keyboardType='phone-pad'
+                      keyboardType='numeric'
                     // onChangeText={(text)=> this.phoneInput(text)}
                     />
                   </Item>
@@ -78,7 +78,7 @@ class Verification extends Component {
 
           </View>
 
-          <Button rounded style={styles.nxtBtn}>
+          <Button rounded style={styles.nxtBtn} onPress={() => { this.props.navigation.navigate('VerificationPin')}}>
             <Text>NEXT</Text>
           </Button>
 

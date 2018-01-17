@@ -95,7 +95,7 @@ class EmailSigninScreen extends React.Component {
                         </Text>
                         {/* <Text style={{ color: "blue", fontSize: 32, fontWeight: 'bold', textAlign: 'center' }}>myCare</Text> */}
                     </View>
-                    {this.renderEmailForm()}
+                    {this.renderEmailForm()}{/*note form has Flex: 6*/}
 
                     <View style={{ flex: 2.5, justifyContent: 'space-between' }}>
                         <Item style={{ alignItems: 'center', justifyContent: 'center', borderBottomColor: '#FBFBFB', flex: 0.5 }}>
