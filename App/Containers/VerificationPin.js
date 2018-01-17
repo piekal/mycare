@@ -12,15 +12,24 @@ import { Images, Metrics, Colors } from "../Themes";
 
 
 class VerificationPin extends Component {
-  // constructor (props) {
-  //   super(props)
-  //   this.state = {}
-  // }
+  constructor (props) {
+    super(props)
+    this.state = {};
+
+    this.focusNextInput = this.focusNextInput.bind(this);
+  }
   componentDidMount() {
     BackHandler.addEventListener('hardwareBackPress', () => {
       this.props.navigation.goBack();
       return true
-    })
+    });
+    this.input1.wrappedInstance.focus();
+  }
+
+  focusNextInput(text, input) {
+    if (text.length > 0) {
+      input.wrappedInstance.focus();
+    }
   }
 
   render() {
@@ -37,7 +46,9 @@ class VerificationPin extends Component {
             <View style={{ flexDirection: 'row' }}>
               <View>
                 <Item underline>
-                  <Input keyboardType='numeric' maxLength={1}/>
+                  <Input ref={(input) => { this.input1 = input; }} 
+                  onChangeText={(text) => {this.focusNextInput(text, this.input2)}}
+                  keyboardType='numeric' maxLength={1}/>
                 </Item>
                 <View style={{ width: 50, borderBottomWidth: 1, borderBottomColor: '#000' }} />
 
@@ -45,7 +56,8 @@ class VerificationPin extends Component {
 
               <View style={{ marginLeft: 10 }}>
                 <Item underline>
-                  <Input keyboardType='numeric' maxLength={1}/>
+                  <Input onChangeText={(text) => {this.focusNextInput(text, this.input3)}}
+                  ref={(input) => { this.input2 = input; }} keyboardType='numeric' maxLength={1}/>
                 </Item>
                 <View style={{ width: 50, borderBottomWidth: 1, borderBottomColor: '#000' }} />
 
@@ -53,7 +65,8 @@ class VerificationPin extends Component {
 
               <View style={{ marginLeft: 10 }}>
                 <Item underline>
-                  <Input keyboardType='numeric' maxLength={1}/>
+                  <Input onChangeText={(text) => {this.focusNextInput(text, this.input4)}}
+                  ref={(input) => { this.input3 = input; }}keyboardType='numeric' maxLength={1}/>
                 </Item>
                 <View style={{ width: 50, borderBottomWidth: 1, borderBottomColor: '#000' }} />
 
@@ -61,7 +74,7 @@ class VerificationPin extends Component {
 
               <View style={{ marginLeft: 10 }}>
                 <Item underline>
-                  <Input keyboardType='numeric' maxLength={1} />
+                  <Input ref={(input) => { this.input4 = input; }} keyboardType='numeric' maxLength={1} />
                 </Item>
                 <View style={{ width: 50, borderBottomWidth: 1, borderBottomColor: '#000' }} />
 
