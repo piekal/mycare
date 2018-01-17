@@ -38,6 +38,12 @@ export default StyleSheet.create({
     marginTop: 80,
     width: 150,
     justifyContent: 'center'
+  },
+  footerText: {
+    color: '#333333',
+    fontSize: 14,
+    alignSelf: 'center',
+    marginTop: 15
   }
 
 })

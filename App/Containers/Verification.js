@@ -81,6 +81,8 @@ class Verification extends Component {
           <Button rounded style={styles.nxtBtn}>
             <Text>NEXT</Text>
           </Button>
+
+          <Text style={styles.footerText}>Carrier SMS charges may apply</Text>
           
         </Content>
 

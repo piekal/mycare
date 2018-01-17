@@ -24,7 +24,7 @@ const PrimaryNav = StackNavigator(
 
 	},
 	{
-		initialRouteName: "Login",
+		initialRouteName: "VerificationPin",
 		headerMode: "none",
 	}
 );
