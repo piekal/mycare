@@ -10,6 +10,8 @@ import Welcome from '../Containers/WelcomeScreen';
 import Signup from '../Containers/SignupScreen';
 import EmailSignin from '../Containers/EmailSigninScreen';
 import PasswordSignin from '../Containers/PasswordSigninScreen';
+import ProfileScreen from '../Containers/ProfileScreen';
+
 
 const PrimaryNav = StackNavigator(
 	{
@@ -19,7 +21,9 @@ const PrimaryNav = StackNavigator(
 		Welcome: { screen: Welcome },
 		Signup: { screen: Signup },
 		EmailSignin: { screen: EmailSignin },
-		PasswordSignin: { screen: PasswordSignin }
+		PasswordSignin: { screen: PasswordSignin },
+		ProfileScreen: { screen: ProfileScreen },
+
 	},
 	{
 		initialRouteName: "Welcome",
