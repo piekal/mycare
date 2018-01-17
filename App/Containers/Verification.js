@@ -13,12 +13,14 @@ import { Images, Metrics, Colors } from "../Themes";
 
 
 class Verification extends Component {
-  // constructor (props) {
-  //   super(props)
-  //   this.state = {
-  //     phoneNo: 123445566
-  //   }
-  // }
+  constructor(props) {
+    super(props)
+    this.state = {
+      phoneNo: ''
+    }
+
+    this.maskPhoneInput = this.maskPhoneInput.bind(this);
+  }
   componentDidMount() {
     BackHandler.addEventListener('hardwareBackPress', () => {
       this.props.navigation.goBack();
@@ -26,19 +28,44 @@ class Verification extends Component {
     })
   }
 
+  normalizePhone(value) {
+    if (!value) {
+      return value
+    }
+
+    const onlyNums = value.replace(/[^\d]/g, '')
+    if (onlyNums.length <= 3) {
+      return onlyNums
+    }
+    if (onlyNums.length <= 7) {
+      return `${onlyNums.slice(0, 3)}-${onlyNums.slice(3)}`
+    }
+    return `${onlyNums.slice(0, 3)}-${onlyNums.slice(3, 6)}-${onlyNums.slice(6, 10)}`
+  }
+
+  maskPhoneInput(text) {
+    if (text.length > 0) {
+      text = this.normalizePhone(text);
+    }
+
+    this.setState({ phoneNo: text });
+  }
 
   render() {
     return (
-      <Container style={{backgroundColor: '#FBFBFB'}}>
+      <Container style={{ backgroundColor: '#FBFBFB' }}>
         <Content padder>
           <View style={styles.logoContainer} >
-            <Text style={styles.logoText}> my<Text style={[styles.logoText, styles.boldText]}>Care. </Text> </Text>
+            <Text style={{ color: Colors.appBlue, fontSize: 24, lineHeight: 32, textAlign: 'center' }}>
+              my<Text style={{ fontWeight: 'bold', color: Colors.appBlue, fontSize: 24, lineHeight: 32 }}>Care.</Text>
+            </Text>
+            {/* <Text style={styles.logoText}> my<Text style={[styles.logoText, styles.boldText]}>Care. </Text> </Text> */}
           </View>
 
-          <View style={{alignItems: 'center'}}>
+          <View style={{ alignItems: 'center' }}>
             <Text style={[styles.themeColor, styles.boldText, styles.f18]} >Verify your phone Number</Text>
 
-            <Text style={[styles.themeColor,{textAlign: 'center', paddingBottom: 10}]}> my<Text style={[styles.themeColor, styles.boldText]}>Care </Text>
+            <Text style={[styles.themeColor, { textAlign: 'center', paddingBottom: 10 }]}> my<Text style={[styles.themeColor, styles.boldText]}>Care </Text>
               <Text>will send an SMS message to verify your phone number. Enter your country code and phone numnber</Text>
             </Text>
 
@@ -66,7 +93,8 @@ class Verification extends Component {
                   <Item>
                     <Input
                       keyboardType='numeric'
-                    // onChangeText={(text)=> this.phoneInput(text)}
+                      onChangeText={(text) => this.maskPhoneInput(text)}
+                      value={this.state.phoneNo}
                     />
                   </Item>
                   <View style={{ width: 200, borderBottomWidth: 1, borderBottomColor: '#000' }} />
@@ -78,12 +106,12 @@ class Verification extends Component {
 
           </View>
 
-          <Button rounded style={styles.nxtBtn} onPress={() => { this.props.navigation.navigate('VerificationPin')}}>
+          <Button rounded style={styles.nxtBtn} onPress={() => { this.props.navigation.navigate('VerificationPin') }}>
             <Text>NEXT</Text>
           </Button>
 
           <Text style={styles.footerText}>Carrier SMS charges may apply</Text>
-          
+
         </Content>
 
       </Container>
