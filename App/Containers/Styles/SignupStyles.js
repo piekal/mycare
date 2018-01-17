@@ -36,5 +36,9 @@ export default StyleSheet.create({
         width: 160,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    formItem: {
+        marginLeft: 0,
+        paddingLeft: 0
     }
 });

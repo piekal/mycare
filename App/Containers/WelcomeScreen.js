@@ -16,13 +16,13 @@ class WelcomeScreen extends React.PureComponent {
                     <Text style={{color: '#333333', fontSize: 32, textAlign: 'center'}}>Let's get started</Text>
                 </View>
 
-                <View style={{ width: 327 }}>
+                <View style={{ padding: 24 }}>
                     <Button rounded block large onPress={ () => { this.props.navigation.navigate('Signup') }}
-                    style={{ marginVertical: 30, backgroundColor: Colors.appBlue, height: 52}}>
+                    style={{width: 327, marginVertical: 30, backgroundColor: Colors.appBlue, height: 52}}>
                         <Text uppercase={false} 
                         style={{fontSize: 16, lineHeight: 20, fontFamily: 'Source Sans Pro'}}>Create an Account</Text>
                     </Button>
-                    <Button rounded bordered block large style={{ height: 52}} onPress={() => {this.props.navigation.navigate('EmailSignin')}}>
+                    <Button rounded bordered block large style={{width: 327, height: 52}} onPress={() => {this.props.navigation.navigate('EmailSignin')}}>
                         <Text uppercase={true} 
                         style={{fontSize: 16, lineHeight: 20, fontFamily: 'Source Sans Pro'}}>SIGN IN</Text>
                     </Button>

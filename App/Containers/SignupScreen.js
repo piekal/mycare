@@ -59,7 +59,7 @@ class SignupScreen extends React.PureComponent {
     }
 
     renderInvalidInputMsg(isEmail = false) {
-        let msg = isEmail ? 'Please input a valid email for this field' : 'Please input a valid email for this field';
+        let msg = isEmail ? 'Please input a valid email for this field' : 'Please input a valid value for this field';
 
         return (
             <Item style={{ borderBottomColor: '#FBFBFB' }}>
@@ -100,7 +100,7 @@ class SignupScreen extends React.PureComponent {
     renderSignupForm() {
         return (
             <Form style={{ flex: 4 }}>
-                <Item style={[this.firstNameIsValid && SignupStyles.inputValid, this.firstNameIsInvalid && SignupStyles.inputInvalid]} stackedLabel>
+                <Item style={[SignupStyles.formItem, this.firstNameIsValid && SignupStyles.inputValid, this.firstNameIsInvalid && SignupStyles.inputInvalid]} stackedLabel>
                     <Label style={[SignupStyles.floatingLabel, this.firstNameIsValid && SignupStyles.labelValid,
                     this.firstNameIsInvalid && SignupStyles.labelInvalid]}>
                         Firstname</Label>
@@ -110,7 +110,7 @@ class SignupScreen extends React.PureComponent {
                 </Item>
                 {this.showFirstNameErrorMsg()}
 
-                <Item style={[this.lastNameIsValid && SignupStyles.inputValid, this.lastNameIsInvalid && SignupStyles.inputInvalid]} stackedLabel>
+                <Item style={[SignupStyles.formItem, this.lastNameIsValid && SignupStyles.inputValid, this.lastNameIsInvalid && SignupStyles.inputInvalid]} stackedLabel>
                     <Label style={[SignupStyles.floatingLabel, this.lastNameIsValid && SignupStyles.labelValid,
                     this.lastNameIsInvalid && SignupStyles.labelInvalid]}>LastName</Label>
                     <Input placeholder="Doe" placeholderTextColor="#A8A8A8"
@@ -118,7 +118,7 @@ class SignupScreen extends React.PureComponent {
                 </Item>
                 {this.showLastNameErrorMsg()}
 
-                <Item style={[this.emailIsvalid && SignupStyles.inputValid, this.emailIsInvalid && SignupStyles.inputInvalid]} stackedLabel>
+                <Item style={[SignupStyles.formItem,this.emailIsvalid && SignupStyles.inputValid, this.emailIsInvalid && SignupStyles.inputInvalid]} stackedLabel>
                     <Label style={[SignupStyles.floatingLabel, this.emailIsvalid && SignupStyles.labelValid,
                     this.emailIsInvalid && SignupStyles.labelInvalid]}>Email</Label>
                     <Input placeholderTextColor="#A8A8A8"
@@ -126,7 +126,7 @@ class SignupScreen extends React.PureComponent {
                 </Item>
                 {this.showEmailErrorMsg()}
 
-                <Item style={[this.passwordIsValid && SignupStyles.inputValid, this.passwordIsInvalid && SignupStyles.inputInvalid]} stackedLabel>
+                <Item style={[SignupStyles.formItem, this.passwordIsValid && SignupStyles.inputValid, this.passwordIsInvalid && SignupStyles.inputInvalid]} stackedLabel>
                     <Label style={[SignupStyles.floatingLabel, this.passwordIsValid && SignupStyles.labelValid,
                     this.passwordIsInvalid && SignupStyles.labelInvalid]}>Password</Label>
                     <Input placeholder="******" onChangeText={(text) => this.setState({ password: text, passwordDirty: true })}
@@ -165,7 +165,7 @@ class SignupScreen extends React.PureComponent {
             <Container >
                 <Content contentContainerStyle={{
                     backgroundColor: '#FBFBFB', flexGrow: 1,
-                    paddingHorizontal: 10, paddingVertical: 40, justifyContent: 'space-between'
+                    paddingHorizontal: 28, paddingVertical: 40, justifyContent: 'space-between'
                 }}>
                     <View style={{flex: 2}}>
                         <Text style={{ color: Colors.appBlue, fontSize: 24, lineHeight: 32, textAlign: 'center' }}>
