@@ -11,6 +11,9 @@ import Signup from '../Containers/SignupScreen';
 import EmailSignin from '../Containers/EmailSigninScreen';
 import PasswordSignin from '../Containers/PasswordSigninScreen';
 import ProfileScreen from '../Containers/ProfileScreen';
+import VerificationPin from '../Containers/VerificationPin'
+import Verification from '../Containers/Verification'
+
 
 
 const PrimaryNav = StackNavigator(
@@ -23,6 +26,9 @@ const PrimaryNav = StackNavigator(
 		EmailSignin: { screen: EmailSignin },
 		PasswordSignin: { screen: PasswordSignin },
 		ProfileScreen: { screen: ProfileScreen },
+		VerificationPin: { screen: VerificationPin },
+		Verification: { screen: Verification }
+
 
 	},
 	{
