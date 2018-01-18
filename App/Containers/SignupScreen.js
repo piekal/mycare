@@ -4,6 +4,8 @@ import { View, Alert, BackHandler } from 'react-native';
 import { Container, Header, Content, Form, Item, Input, Label, Text, Button, Icon } from 'native-base';
 import SignupStyles from './Styles/SignupStyles';
 import Colors from '../Themes/Colors';
+import * as axios from 'axios';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 class SignupScreen extends React.PureComponent {
     constructor(props) {
@@ -17,8 +19,11 @@ class SignupScreen extends React.PureComponent {
             firstNameDirty: false,
             lastNameDirty: false,
             passwordDirty: false,
-            emailDirty: false
+            emailDirty: false,
+            showSpinner: false
         };
+
+        this.signup = this.signup.bind(this);
     }
 
     componentDidMount() {
@@ -104,6 +109,30 @@ class SignupScreen extends React.PureComponent {
         }
     }
 
+    signup() {
+        let userDetails = {
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            email: this.state.email,
+            password: this.state.password
+        };
+
+        this.setState({ showSpinner: true});
+
+        axios.post('https://www.mycare-api.com/api/v1/user', userDetails)
+            .then((response) => {
+                if (response.data.userId) {
+                    this.setState({ showSpinner: false });
+                    this.props.navigation.navigate('Verification');
+                }
+            })
+            .catch((err) => {
+                this.setState({ showSpinner: false });
+                console.log('registration failed with err');
+                console.log(err);
+            });
+    }
+
     renderSignupForm() {
         return (
             <Form style={{ flex: 4 }}>
@@ -152,7 +181,7 @@ class SignupScreen extends React.PureComponent {
         </Button>);
 
         let formValidBtn = (
-            <Button rounded iconRight style={[SignupStyles.buttonFormValid]} onPress={() => { this.props.navigation.navigate('Verification') }}>
+            <Button rounded iconRight style={[SignupStyles.buttonFormValid]} onPress={this.signup}>
                 <Text style={{ color: '#FBFBFB', fontSize: 16, lineHeight: 20 }} uppercase={false}>Continue</Text>
                 <Icon name='ios-arrow-forward' />
             </Button>
@@ -174,6 +203,8 @@ class SignupScreen extends React.PureComponent {
                     backgroundColor: '#FBFBFB', flexGrow: 1,
                     paddingHorizontal: 28, paddingVertical: 40, justifyContent: 'space-between'
                 }}>
+                    <Spinner visible={this.state.showSpinner} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
+
                     <View style={{ flex: 2 }}>
                         <Text style={{ color: Colors.appBlue, fontSize: 24, lineHeight: 32, textAlign: 'center' }}>
                             my<Text style={{ fontWeight: 'bold', color: Colors.appBlue, fontSize: 24, lineHeight: 32 }}>Care.</Text>

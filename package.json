@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "apisauce": "^0.14.0",
+    "axios": "^0.17.1",
     "format-json": "^1.0.3",
     "lodash": "^4.17.2",
     "native-base": "2.3.1",
@@ -31,6 +32,7 @@
     "react-native": "0.47.2",
     "react-native-config": "^0.6.0",
     "react-native-drawer": "^2.3.0",
+    "react-native-loading-spinner-overlay": "^0.5.2",
     "react-native-vector-icons": "^4.5.0",
     "react-navigation": "^1.0.0-beta.7",
     "react-redux": "^5.0.2",
