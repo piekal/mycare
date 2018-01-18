@@ -25,9 +25,6 @@ app.use(bodyParser.json());
 
 // check auth header and decode if exist
 app.use(function(req,res,next){
-
-  console.error(req.headers);
-  
   if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {
     jsonwebtoken.verify(req.headers.authorization.split(' ')[1], 'RESTFULAPIs', function(err,decode) {
       if (err) req.user = undefined;
@@ -45,6 +42,9 @@ app.use(function(req,res,next){
 
 // init routes
 userRoute(app);
+
+// root
+app.use('/', express.static('public'));
 
 // start server
 app.listen(port);
