@@ -1,0 +1,202 @@
+openapi: 3.0.0
+# Added by API Auto Mocking Plugin
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://www.mycare-api/api/1.0.0
+info:
+  version: "1.0.0"
+  title: MyCare
+  description: >-
+    This is API spec for MyCare v1.0.0
+security:
+  - implicit:
+      - read
+      - write
+tags:
+  - name: User
+    description: user related endpoint
+  - name: Blue Button
+    description: CMS Blue Button endpoints 
+      
+paths:
+  /user:
+    post:
+      tags:
+        - User
+      summary: Create user account/send confirmation email
+      description: >-
+        Create user account
+      responses:
+        '200':
+          description: OK
+    get:
+      tags:
+        - User
+      summary: Get user info/verification status
+      description: >-
+        Create user account
+      responses:
+        '200':
+          description: OK
+  /user/confirmation:
+    post:
+      tags:
+        - User
+      summary:  confirm email
+      description: >-
+        verify phone number
+      security: []
+      responses:
+        '200':
+          description: OK                    
+  /user/phone:
+    post:
+      tags:
+        - User
+      summary: add phone number (assume one phone)
+      description: >-
+        Add verification phone number
+      security: []
+      responses:
+        '200':
+          description: OK      
+  /user/phone/confirmation:
+    post:
+      tags:
+        - User
+      summary:  confirm phone number
+      description: >-
+        verify phone number
+      security: []
+      responses:
+        '200':
+          description: OK
+  /user/sign_in:
+    post:
+      tags:
+        - User
+      summary: sign in 
+      description: >-
+        Sign user in and generate token
+      security: []
+      responses:
+        '200':
+          description: OK
+  /user/sign_out:
+    get:
+      tags:
+        - User
+      summary: sign out
+      description: >-
+        Sign user out
+      security: []
+      responses:
+        '200':
+          description: OK        
+  /user/password:
+    post:
+      tags:
+        - User
+      summary: Send password reset confirmation email
+      description: >-
+        Add verification phone number
+      security: []
+      responses:
+        '200':
+          description: OK
+    put:
+      tags:
+        - User
+      summary: Update password
+      description: >-
+        Verify code
+      security: []
+      responses:
+        '200':
+          description: OK  
+    get:
+      tags:
+        - User
+      summary: Password reset page
+      description: >-
+        Verify code
+      security: []
+      responses:
+        '200':
+          description: OK
+  /user/profile:
+    post:
+      tags:
+        - User
+      summary: create or update user profile
+      description: >-
+        Create or update user profile
+      security: []
+      responses:
+        '200':
+          description: OK
+    get:
+      tags:
+        - User
+      summary: get user profile
+      description: >-
+        Get user profile
+      security: []
+      responses:
+        '200':
+          description: OK
+  /bb/provider/callback:
+    get:
+      tags:
+        - Blue Button
+      summary: Callback url after BB authentication
+      description: >-
+        Obtain token and start pulling data
+      security: []
+      responses:
+        '200':
+          description: OK  
+  /bb/status:
+    get:
+      tags:
+        - Blue Button
+      summary: Get status
+      description: >-
+        Get status of bb ETL
+      security: []
+      responses:
+        '200':
+          description: OK  
+  /bb/claim:
+    get:
+      tags:
+        - Blue Button
+      summary: Get timeline from eob
+      description: >-
+        Get timeline from eob
+      security: []
+      responses:
+        '200':
+          description: OK
+  /bb/claim/{claim_id}:
+    get:
+      tags:
+        - Blue Button
+      summary: Get claim details
+      description: >-
+        Get claim details
+      security: []
+      responses:
+        '200':
+          description: OK
+components:
+  schemas: {}
+  securitySchemes:
+    implicit:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: 'http://example.com/oauth/auth'
+          scopes:
+            write: allows modifying resources
+            read: allows reading resources
