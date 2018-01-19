@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, Alert, BackHandler } from 'react-native';
+import { View, Alert, BackHandler, AsyncStorage } from 'react-native';
 import { Images, Metrics, Colors } from "../Themes";
 import { Container, Header, Content, Form, Item, Input, Label, Text, Button, Icon, Thumbnail, Left } from 'native-base';
 import SigninScreenStyles from './Styles/SigninScreenStyles';
-import { NavigationActions } from 'react-navigation'
+import { NavigationActions } from 'react-navigation';
+import * as axios from 'axios';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 class PasswordSigninScreen extends React.Component {
     constructor(props) {
@@ -12,16 +14,54 @@ class PasswordSigninScreen extends React.Component {
         this.state = {
             password: '',
             passwordDirty: false,
-            user: { fullName: 'Larry Jones'}
+            user: { fullName: 'Larry Jones' }
         };
+
+        this.signIn = this.signIn.bind(this);
     }
 
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', () => {
-          this.props.navigation.goBack();
-          return true
+            this.props.navigation.goBack();
+            return true
         })
-      }
+    }
+
+    signIn() {
+        let email = this.props.signInEmail;
+        let password = this.state.password;
+
+        this.setState({ showSpinner: true });
+
+        axios.post('https://www.mycare-api.com/api/v1/user/sign_in', {
+            email: email,
+            password: password
+        })
+            .then((response) => {
+                this.setState({ showSpinner: false });
+
+                if (response.data.token) {
+                    // store token in asyncStorage
+                    AsyncStorage.multiSet([
+                        ["userId", response.data.userId],
+                        ["token", response.data.token]
+
+                    ]).then(() => {
+                        this.props.navigation.navigate('ProfileScreen');
+                    });
+                } 
+            })
+            .catch((err) => {
+                this.setState({ showSpinner: false });
+                
+                if (err.response.status === 401) {
+                    this.props.navigation.navigate('EmailSignin');                    
+                    Alert.alert(err.response.message);
+                } else {
+                    Alert.alert('A network error occured');
+                }
+            });
+    }
 
     get passwordIsValid() {
         return this.state.password.trim().length > 5;
@@ -55,7 +95,7 @@ class PasswordSigninScreen extends React.Component {
             <View style={{ flex: 6, justifyContent: 'space-between', paddingVertical: 70 }}>
                 <View style={[{ alignItems: 'center' }]}>
                     <Thumbnail large source={Images.ignite} />
-                    <Text uppercase={true} style={{fontSize: 10.5, lineHeight: 16, fontWeight: '700'}}>{this.state.user.fullName}</Text>
+                    <Text uppercase={true} style={{ fontSize: 10.5, lineHeight: 16, fontWeight: '700' }}>{this.state.user.fullName}</Text>
                 </View>
                 <Item style={[SigninScreenStyles.inputField, this.passwordIsValid && SigninScreenStyles.inputValid, this.passwordIsInvalid && SigninScreenStyles.inputInvalid]} stackedLabel>
                     <Label style={[SigninScreenStyles.floatingLabel, this.passwordIsValid && SigninScreenStyles.labelValid,
@@ -75,8 +115,8 @@ class PasswordSigninScreen extends React.Component {
         </Button>);
 
         let formValidBtn = (
-            <Button rounded onPress={() => {this.props.navigation.navigate('NavigationDrawer')}}
-            iconRight style={[SigninScreenStyles.button, SigninScreenStyles.buttonFormValid]}>
+            <Button rounded onPress={this.signIn}
+                iconRight style={[SigninScreenStyles.button, SigninScreenStyles.buttonFormValid]}>
                 {/* <Icon name='arrow-forward' /> */}
                 <Text style={{ color: '#FBFBFB', fontSize: 16, lineHeight: 20 }} uppercase={true}>Signin</Text>
             </Button>
@@ -87,7 +127,7 @@ class PasswordSigninScreen extends React.Component {
 
     render() {
         return (
-            <Container style={{backgroundColor: '#FBFBFB'}}>
+            <Container style={{ backgroundColor: '#FBFBFB' }}>
                 <Button onPress={() => this.props.navigation.dispatch(NavigationActions.back())} transparent>
                     <Icon name="ios-arrow-back" />
                 </Button>
@@ -95,6 +135,8 @@ class PasswordSigninScreen extends React.Component {
                     backgroundColor: '#FBFBFB', flexGrow: 1,
                     paddingHorizontal: 10, paddingTop: 30, paddingBottom: 60, justifyContent: 'space-between'
                 }}>
+                    <Spinner visible={this.state.showSpinner} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
+
                     <View style={{ flex: 1.5 }}>
                         {/* <Left><Icon name="arrow-back" /></Left> */}
                         <Text style={{ color: Colors.appBlue, fontSize: 24, lineHeight: 32, textAlign: 'center' }}>
@@ -106,9 +148,9 @@ class PasswordSigninScreen extends React.Component {
 
                     <View style={{ flex: 2.5, justifyContent: 'space-between' }}>
                         <Item style={{ alignItems: 'center', justifyContent: 'center', borderBottomColor: '#FBFBFB', flex: 0.5 }}>
-                        {this.renderSigninButton()}
+                            {this.renderSigninButton()}
                         </Item>
-                        
+
                         <View style={{ flex: 0.5, marginTop: 15, borderBottomColor: '#FBFBFB', alignItems: 'center', justifyContent: 'center' }}>
                             <Text>Dont have an Account?
                             <Text onPress={() => { this.props.navigation.navigate('Signup') }} style={{ color: '#1C58B5', fontSize: 14, lineHeight: 20, fontWeight: '700' }}> SIGN-UP</Text></Text>

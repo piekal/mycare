@@ -39,6 +39,14 @@ export default StyleSheet.create({
     width: 150,
     justifyContent: 'center'
   },
+
+  skipBtn: {
+    alignSelf: 'center',
+    marginTop: 10,
+    width: 150,
+    justifyContent: 'center'
+  },
+
   footerText: {
     color: '#333333',
     fontSize: 14,

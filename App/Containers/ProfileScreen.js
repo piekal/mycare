@@ -28,15 +28,13 @@ class ProfileScreen extends Component {
     this.state = {
       dataSource: providers
     }
-
-
-
   }
+
   componentDidMount() {
     BackHandler.addEventListener('hardwareBackPress', () => {
       this.props.navigation.goBack();
       return true
-    })
+    });
   }
 
   connectToProviders() {

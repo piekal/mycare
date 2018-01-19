@@ -73,7 +73,8 @@ class EmailSigninScreen extends React.Component {
         </Button>);
 
         let formValidBtn = (
-            <Button rounded iconRight style={[SigninScreenStyles.buttonFormValid]} onPress={() => { this.props.navigation.navigate('PasswordSignin') }}>
+            <Button rounded iconRight style={[SigninScreenStyles.buttonFormValid]} 
+                onPress={() => { this.props.navigation.navigate('PasswordSignin', { signInEmail: this.state.email }) }}>
                 {/* <Icon name='arrow-forward' /> */}
                 <Text style={{ color: '#FBFBFB', fontSize: 16, lineHeight: 20 }} uppercase={true}>Next</Text>
             </Button>
