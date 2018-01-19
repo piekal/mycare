@@ -28,7 +28,7 @@ class PasswordSigninScreen extends React.Component {
     }
 
     signIn() {
-        let email = this.props.signInEmail;
+        let email = this.props.navigation.state.params.signInEmail;
         let password = this.state.password;
 
         this.setState({ showSpinner: true });
@@ -47,7 +47,7 @@ class PasswordSigninScreen extends React.Component {
                         ["token", response.data.token]
 
                     ]).then(() => {
-                        this.props.navigation.navigate('ProfileScreen');
+                        this.props.navigation.navigate('NavigationDrawer');
                     });
                 } 
             })
@@ -56,9 +56,9 @@ class PasswordSigninScreen extends React.Component {
                 
                 if (err.response.status === 401) {
                     this.props.navigation.navigate('EmailSignin');                    
-                    Alert.alert(err.response.message);
+                    alert(JSON.stringify(err));
                 } else {
-                    Alert.alert('A network error occured');
+                    alert('A network error occured');
                 }
             });
     }

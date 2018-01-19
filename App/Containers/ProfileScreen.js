@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { BackHandler } from 'react-native'
-import { Content, Container, Header, Left, Right, Body, View, Button, Text, Title, Icon, List, ListItem, CheckBox, Input } from 'native-base'
+import { BackHandler, AsyncStorage } from 'react-native'
+import { Content, Container, Header, Left, Right, Body, View, Button, Text, Title, Icon, List, ListItem, CheckBox, Input, Spinner } from 'native-base'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
@@ -10,24 +10,40 @@ import styles from './Styles/ProfileScreenStyle'
 import { Image } from 'react-native';
 import { Images, Metrics, Colors } from "../Themes";
 
+import * as axios from 'axios';
+
+
 
 class ProfileScreen extends Component {
 
   constructor(props) {
     super(props)
 
-    const providers = [
-      { name: 'Cigna', connected: false },
-      { name: 'UnitedHealth', connected: false },
-      { name: 'BlueCross', connected: false },
-      { name: 'Providence', connected: true },
-      { name: 'CMS', connected: true }
-    ];
-
 
     this.state = {
-      dataSource: providers
+      fetching: true,
+      firstName: '',
+      lastName: '',
+      email: '',
+      dob: '',
+      race: '',
+      token: ''
     }
+  }
+
+  componentWillMount() {
+    AsyncStorage.multiGet(['userId', 'token']).then((data) => {
+      let userId = data[0][1];
+      let token = data[1][1];
+
+      token = `JWT ${token}`;
+
+      this.setState({
+        fetching: true
+      });
+
+      this.getUserData(userId, token);
+    });
   }
 
   componentDidMount() {
@@ -35,6 +51,7 @@ class ProfileScreen extends Component {
       this.props.navigation.goBack();
       return true
     });
+
   }
 
   connectToProviders() {
@@ -52,29 +69,45 @@ class ProfileScreen extends Component {
     )
   }
 
-  render() {
+  getUserData(userId, token) {
 
-    return (
-      <Container>
-        <Header style={{ backgroundColor: '#FFF' }}>
-          <Left>
-            <Button transparent onPress={() => this.props.navigation.navigate("DrawerOpen")} >
-              <Icon name="ios-menu" style={{ color: '#000' }} />
-            </Button>
+    var that = this;
 
-          </Left>
+    axios.get(`https://www.mycare-api.com/api/v1/user/${userId}/profile`, {
+      headers: {
+        'Authorization': token
+      }
+    }).then((response) => {
+      let userDetails = response.data;
 
-          <Body>
-            <Title style={{ color: Colors.coal }}>Profile</Title>
-          </Body>
+      that.setState({
+        fetching: false,
+        firstName: userDetails.firstName,
+        lastName: userDetails.lastName,
+        email: userDetails.email,
+      })
+    }).catch((err) => {
 
-          <Right />
+      if (err.response.status === 401) {
 
-        </Header>
+        this.props.navigation.navigate('EmailSignin');
+        alert(JSON.stringify(err));
 
-        <Content style={{ backgroundColor: '#E4E4E4' }} >
+      } else {
+        alert('A network error occured');
+      }
+    })
+  }
 
-          <Image resizeMode="contain" source={Images.userIcon} style={styles.profileImage} />
+  renderUserData() {
+    if (this.state.fetching) {
+      return (<Spinner color="#000000" />)
+    } else {
+      return (
+        <View>
+
+          {this.getUserImage()}
+
 
           <List style={{ backgroundColor: '#FFFFFF' }}>
 
@@ -83,7 +116,7 @@ class ProfileScreen extends Component {
                 <Text style={styles.textLabel}>NAME</Text>
               </Left>
 
-              <Text style={styles.textValue} >Larry Jones</Text>
+              <Text style={styles.textValue} >{`${this.state.firstName} ${this.state.lastName}`}</Text>
 
             </ListItem>
 
@@ -102,7 +135,7 @@ class ProfileScreen extends Component {
                 <Text style={styles.textLabel} >DOB</Text>
               </Left>
 
-              <Text style={styles.textValue} >09/29/1943</Text>
+              <Text style={styles.textValue} >{this.state.city}</Text>
             </ListItem>
 
             <ListItem>
@@ -110,7 +143,7 @@ class ProfileScreen extends Component {
                 <Text style={styles.textLabel} >RACE</Text>
               </Left>
 
-              <Text style={styles.textValue} >Hispanic</Text>
+              <Text style={styles.textValue} >{this.state.race}</Text>
             </ListItem>
 
             <ListItem itemDivider />
@@ -120,7 +153,7 @@ class ProfileScreen extends Component {
                 <Text style={styles.textLabel} >EMAIL</Text>
               </Left>
 
-              <Text style={styles.textValue} >l.jones@email.com</Text>
+              <Text style={styles.textValue} >{this.state.email}</Text>
             </ListItem>
 
             <ListItem>
@@ -148,15 +181,52 @@ class ProfileScreen extends Component {
 
 
           </List>
+        </View>
+      )
+
+    }
+  }
+
+  getUserImage() {
+    return (
+      <Image resizeMode="contain" source={Images.userIcon} style={styles.profileImage} />
+    )
+  }
+
+  render() {
+    return (
+      <Container>
+        <Header style={{ backgroundColor: '#FFF' }}>
+          <Left>
+            <Button transparent onPress={() => this.props.navigation.navigate("DrawerOpen")} >
+              <Icon name="ios-menu" style={{ color: '#000' }} />
+            </Button>
+
+          </Left>
+
+          <Body>
+            <Title style={{ color: Colors.coal }}>Profile</Title>
+          </Body>
+
+          <Right />
+
+        </Header>
+
+        <Content style={{ backgroundColor: '#E4E4E4' }} >
+
+          {this.renderUserData()}
+
         </Content>
 
       </Container>
     )
   }
+
 }
 
 const mapStateToProps = (state) => {
   return {
+    // fetching: state.fetching
   }
 }
 
