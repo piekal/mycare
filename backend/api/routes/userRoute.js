@@ -1,7 +1,9 @@
+
 'use strict';
 
 module.exports = function(router) {
   var userHandler = require('../controllers/userController');
+  var commonHandler = require('../controllers/commonController');
   var profileHandler = require('../controllers/profileController');
   
   router.route('/user')
@@ -11,6 +13,6 @@ module.exports = function(router) {
      .post(userHandler.sign_in);
   
   router.route('/user/:user_id/profile')
-     .get(userHandler.loginRequired, profileHandler.get_profile)
-     .post(userHandler.loginRequired, profileHandler.create_profile);  
+     .get(commonHandler.loginRequired, profileHandler.get_profile)
+     .post(commonHandler.loginRequired, profileHandler.create_profile);  
 };

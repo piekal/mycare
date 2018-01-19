@@ -12,6 +12,7 @@ var express = require('express'),
     User = require('./api/models/userModel'),
     Profile = require('./api/models/profileModel'),
     userRoute = require('./api/routes/userRoute'),
+    bbRoute = require('./api/routes/blueButtonRoute'),
     bodyParser = require('body-parser'),
     jsonwebtoken = require('jsonwebtoken');
 
@@ -43,6 +44,7 @@ app.use(function(req,res,next){
 
 // init routes
 userRoute(router);
+bbRoute(router);
 
 // root
 app.use('/', express.static('public'));
