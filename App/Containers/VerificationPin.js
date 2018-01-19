@@ -86,7 +86,7 @@ class VerificationPin extends Component {
 
             </View>
 
-            <Button rounded style={styles.verifyBtn} onPress={() => { this.props.navigation.navigate('ProfileScreen') }}>
+            <Button rounded style={styles.verifyBtn} onPress={() => { this.props.navigation.navigate('EmailSignin') }}>
               <Text>VERIFY</Text>
             </Button>
 

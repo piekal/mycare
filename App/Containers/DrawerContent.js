@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ScrollView, Image, BackHandler } from "react-native";
+import { ScrollView, Image, BackHandler, AsyncStorage } from "react-native";
 import { List, ListItem, Text, View, Content } from "native-base";
 
 import styles from "./Styles/DrawerContentStyles";
@@ -21,6 +21,14 @@ class DrawerContent extends Component {
 							</ListItem>
 						)}
 					/>
+					<List>
+						<ListItem
+							onPress={() => { AsyncStorage.removeItem('userId'); this.props.navigation.navigate("Welcome") }}>
+
+							<Text>Log Out</Text>
+
+						</ListItem>
+					</List>
 				</Content>
 			</View>
 		);
