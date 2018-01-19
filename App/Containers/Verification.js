@@ -106,13 +106,13 @@ class Verification extends Component {
 
           </View>
 
-          <Button rounded style={styles.nxtBtn} onPress={() => { this.props.navigation.navigate('VerificationPin') }}>
+          <Button rounded style={styles.nxtBtn} onPress={() => { this.props.navigation.navigate('EmailSignin') }}>
             <Text>NEXT</Text>
           </Button>
 
           <Text style={styles.footerText}>Carrier SMS charges may apply</Text>
          
-          <Button transparent style={styles.skipBtn} onPress={() => { this.props.navigation.navigate('ProfileScreen') }}>
+          <Button transparent style={styles.skipBtn} onPress={() => { this.props.navigation.navigate('EmailSignin') }}>
             <Text style={{ color:'#cccccc', fontSize:16 }}>SKIP</Text>
           </Button>
 
