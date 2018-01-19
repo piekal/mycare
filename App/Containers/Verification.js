@@ -111,7 +111,11 @@ class Verification extends Component {
           </Button>
 
           <Text style={styles.footerText}>Carrier SMS charges may apply</Text>
-
+          <View style={{ alignItems: 'center', marginTop:20 }} >
+           
+              <Text style={{ color:'#cccccc' }} onPress={() => { this.props.navigation.navigate('ProfileScreen') }}>SKIP</Text>
+        
+          </View>
         </Content>
 
       </Container>

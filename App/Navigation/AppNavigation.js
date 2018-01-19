@@ -32,7 +32,7 @@ const PrimaryNav = StackNavigator(
 
 	},
 	{
-		initialRouteName: "Welcome",
+		initialRouteName: "Verification",
 		headerMode: "none",
 	}
 );
