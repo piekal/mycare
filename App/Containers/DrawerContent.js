@@ -11,7 +11,7 @@ class DrawerContent extends Component {
 		const items = this.props.items;
 		return (
 			<View style={styles.container}>
-				<Image source={Images.logoDark} style={styles.logo} />
+				{/* <Image source={Images.logoDark} style={styles.logo} /> */}
 				<Content>
 					<List
 						dataArray={items}

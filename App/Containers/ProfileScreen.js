@@ -21,7 +21,7 @@ class ProfileScreen extends Component {
       { name: 'UnitedHealth', connected: false },
       { name: 'BlueCross', connected: false },
       { name: 'Providence', connected: true },
-      { name: 'CMS', connected: true}
+      { name: 'CMS', connected: true }
     ];
 
 
@@ -38,6 +38,22 @@ class ProfileScreen extends Component {
       return true
     })
   }
+
+  connectToProviders() {
+    return (
+      <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
+        <Button rounded style={styles.btn}>
+          <Text>Connect to CMS</Text>
+        </Button>
+
+        <Button rounded bordered style={[styles.btn, styles.btnOutline]}>
+          <Text style={styles.outlineBtnText}>Connect to other Providers</Text>
+        </Button>
+
+      </View>
+    )
+  }
+
   render() {
 
     return (
@@ -45,7 +61,7 @@ class ProfileScreen extends Component {
         <Header style={{ backgroundColor: '#FFF' }}>
           <Left>
             <Button transparent onPress={() => this.props.navigation.navigate("DrawerOpen")} >
-              <Icon name="ios-menu" style={{color: '#000'}} />
+              <Icon name="ios-menu" style={{ color: '#000' }} />
             </Button>
 
           </Left>
@@ -58,12 +74,12 @@ class ProfileScreen extends Component {
 
         </Header>
 
-        <Content style={{backgroundColor: '#E4E4E4'}} >
+        <Content style={{ backgroundColor: '#E4E4E4' }} >
 
           <Image resizeMode="contain" source={Images.userIcon} style={styles.profileImage} />
 
-          <List style={{backgroundColor: '#FFFFFF'}}>
-            
+          <List style={{ backgroundColor: '#FFFFFF' }}>
+
             <ListItem>
               <Left>
                 <Text style={styles.textLabel}>NAME</Text>
@@ -79,7 +95,7 @@ class ProfileScreen extends Component {
               </Left>
 
               <Button icon transparent primary>
-                <Icon name='ios-arrow-forward' style={{color: '#000'}} />
+                <Icon name='ios-arrow-forward' style={{ color: '#000' }} />
               </Button>
             </ListItem>
 
@@ -112,48 +128,23 @@ class ProfileScreen extends Component {
             <ListItem>
               <Left>
                 <Text style={styles.textLabel} >PASSWORD</Text>
-              </Left>   
+              </Left>
 
               <Right>
-              <Input
-                style={[styles.textValue, {flex: 1, width: 50}]}
-								value={"password"}
-								editable={false}
-								secureTextEntry
-								underlineColorAndroid="transparent"
-							/>
+                <Input
+                  style={[styles.textValue, { flex: 1, width: 50 }]}
+                  value={"password"}
+                  editable={false}
+                  secureTextEntry
+                  underlineColorAndroid="transparent"
+                />
               </Right>
             </ListItem>
 
             <ListItem itemDivider />
 
             <ListItem>
-              <List dataArray={this.state.dataSource} renderRow={
-                (provider) => {
-                  if (!provider.connected) {
-                    return (
-                      <ListItem style={{marginLeft: 0}} >
-                        <Left>
-                          <Text style={[styles.textValue, styles.font14]} >{provider.name}</Text>
-                        </Left>
-                        <Button bordered style={styles.btn}>
-                          <Text style={styles.btnText}>CONNECT</Text>
-                        </Button>
-                      </ListItem>)
-                  } else {
-                    return (
-                      <ListItem style={{marginLeft: 0}} >
-                        <Left>
-                          <Text style={[styles.textValue, styles.font14]}>{provider.name}</Text>
-                        </Left>
-
-                        <CheckBox checked={true} color={'#1FC26B'} />
-                      </ListItem>
-                    )
-                  }
-                }
-              }>
-              </List>
+              {this.connectToProviders()}
             </ListItem>
 
 

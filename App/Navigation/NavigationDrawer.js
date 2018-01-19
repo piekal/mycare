@@ -9,8 +9,6 @@ import DrawerContent from "../Containers/DrawerContent";
 import styles from "./Styles/NavigationStyles";
 
 const NavigationDrawer = DrawerNavigator({
-  		VerificationPin: { screen: VerificationPin },
-  		Verification: { screen: Verification },
   		ProfileScreen: { screen: ProfileScreen },
 	},
 	{

@@ -75,7 +75,7 @@ class PasswordSigninScreen extends React.Component {
         </Button>);
 
         let formValidBtn = (
-            <Button rounded onPress={() => {this.props.navigation.navigate('ProfileScreen')}}
+            <Button rounded onPress={() => {this.props.navigation.navigate('NavigationDrawer')}}
             iconRight style={[SigninScreenStyles.button, SigninScreenStyles.buttonFormValid]}>
                 {/* <Icon name='arrow-forward' /> */}
                 <Text style={{ color: '#FBFBFB', fontSize: 16, lineHeight: 20 }} uppercase={true}>Signin</Text>

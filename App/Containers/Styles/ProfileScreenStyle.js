@@ -25,10 +25,19 @@ export default StyleSheet.create({
     fontSize: 14
   },
   btn: {
-    height: 30,
-    borderColor: '#4B74FF'
+    height: 52,
+    width: 325,
+    alignSelf: 'center',
+    marginBottom: 25,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  btnText: {
-    color: '#4B74FF'
+  
+  btnOutline: {
+    borderColor: '#4B74FF',
+  },
+
+  outlineBtnText: {
+    color: '#4B74FF',
   }
 })
