@@ -5,12 +5,13 @@
  */
 var express = require('express'),
     app = express(),
+    router = express.Router(),
     port = process.env.PORT || 3000,
     mongoose = require('mongoose'),
     db = require('./dbConnection'),
     User = require('./api/models/userModel'),
     Profile = require('./api/models/profileModel'),
-    userRoute = require('./api/routes/user'),
+    userRoute = require('./api/routes/userRoute'),
     bodyParser = require('body-parser'),
     jsonwebtoken = require('jsonwebtoken');
 
@@ -41,10 +42,13 @@ app.use(function(req,res,next){
 // final steps
 
 // init routes
-userRoute(app);
+userRoute(router);
 
 // root
 app.use('/', express.static('public'));
+
+// base 
+app.use('/api/v1',router);
 
 // start server
 app.listen(port);
