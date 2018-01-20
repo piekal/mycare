@@ -11,14 +11,12 @@ var express = require('express'),
     db = require('./dbConnection'),
     User = require('./api/models/userModel'),
     ICD = require('./api/models/ICDModel'),
+    NPI = require('./api/models/NPIModel'),
     Profile = require('./api/models/profileModel'),
-	/* My Entires */
-	EOB = require('./api/models/EOBModel'),
-	EOBType = require('./api/models/EOBTypeModel'),
-	entry = require('./api/models/EntryModel'),
-	billable = require('./api/models/BillableModel'),
-	diagnosis = require('./api/models/diagnosisModel'),
-	
+    EOB = require('./api/models/EOBModel'),
+    EOBType = require('./api/models/EOBTypeModel'),
+    entry = require('./api/models/EntryModel'),
+    billable = require('./api/models/BillableModel'),    	
     userRoute = require('./api/routes/userRoute'),
     bbRoute = require('./api/routes/blueButtonRoute'),
     bodyParser = require('body-parser'),
@@ -70,6 +68,7 @@ if (argv.meta == 'LOAD') {
   
   var csv = require("fast-csv");
   var ICD = mongoose.model('ICD');
+  var NPI = mongoose.model('NPI');
 
 
   console.log("Saving ICD codes...");
@@ -85,16 +84,26 @@ if (argv.meta == 'LOAD') {
     console.log("ICD codes saved.");
   });
 
+  console.log("Saving NPI codes...");
 
   // load npi
   csv.fromPath("./public/npidata_20180108-20180114.csv", { headers : true }
   ).on("data", function(data){
     
     // save
-    (new ICD({ code:data.CODE, desc:data.DESC })).save();
+    (new NPI({
+      npi_code:data["NPI"],
+      type:data["Entity Type Code"],
+      org_name:data["Provider Organization Name (Legal Business Name)"],
+      provider_name_prefix:data["Provider Name Prefix Text"],
+      provider_first_name:data["Provider First Name"],
+      provider_middle_name:data["Provider Middle Name"],
+      provider_last_name:data["Provider Last Name (Legal Name)"],
+      provider_name_suffix:data["Provider Name Suffix Text"]
+    })).save();
     
   }).on("end", function(){
-    console.log("ICD codes saved.");
+    console.log("NPI codes saved.");
   });
 
 }
