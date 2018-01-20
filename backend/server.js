@@ -12,6 +12,13 @@ var express = require('express'),
     User = require('./api/models/userModel'),
     ICD = require('./api/models/ICDModel'),
     Profile = require('./api/models/profileModel'),
+	/* My Entires */
+	EOB = require('./api/models/EOBModel'),
+	EOBType = require('./api/models/EOBTypeModel'),
+	entry = require('./api/models/EntryModel'),
+	billable = require('./api/models/BillableModel'),
+	
+	
     userRoute = require('./api/routes/userRoute'),
     bbRoute = require('./api/routes/blueButtonRoute'),
     bodyParser = require('body-parser'),
