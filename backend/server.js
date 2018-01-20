@@ -10,6 +10,7 @@ var express = require('express'),
     mongoose = require('mongoose'),
     db = require('./dbConnection'),
     User = require('./api/models/userModel'),
+    ICD = require('./api/models/ICDModel'),
     Profile = require('./api/models/profileModel'),
     userRoute = require('./api/routes/userRoute'),
     bbRoute = require('./api/routes/blueButtonRoute'),
@@ -51,6 +52,45 @@ app.use('/', express.static('public'));
 
 // base 
 app.use('/api/v1',router);
+
+// npm run start -- --meta LOAD
+// load meta data
+var argv = require('minimist')(process.argv.slice(2));
+console.log(argv);
+if (argv.meta == 'LOAD') {
+
+  console.log('Loading meta');
+  
+  var csv = require("fast-csv");
+  var ICD = mongoose.model('ICD');
+
+
+  console.log("Saving ICD codes...");
+  
+  // load icd
+  csv.fromPath("./public/icd10cm_codes_2018.csv", { headers : true }
+  ).on("data", function(data){
+    
+    // save
+    (new ICD({ code:data.CODE, desc:data.DESC })).save();
+    
+  }).on("end", function(){
+    console.log("ICD codes saved.");
+  });
+
+
+  // load npi
+  csv.fromPath("./public/npidata_20180108-20180114.csv", { headers : true }
+  ).on("data", function(data){
+    
+    // save
+    (new ICD({ code:data.CODE, desc:data.DESC })).save();
+    
+  }).on("end", function(){
+    console.log("ICD codes saved.");
+  });
+
+}
 
 // start server
 app.listen(port);
