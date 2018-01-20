@@ -17,7 +17,7 @@ var express = require('express'),
 	EOBType = require('./api/models/EOBTypeModel'),
 	entry = require('./api/models/EntryModel'),
 	billable = require('./api/models/BillableModel'),
-	
+	diagnosis = require('./api/models/diagnosisModel'),
 	
     userRoute = require('./api/routes/userRoute'),
     bbRoute = require('./api/routes/blueButtonRoute'),

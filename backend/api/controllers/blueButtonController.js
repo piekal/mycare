@@ -7,7 +7,8 @@ var EOBType = mongoose.model('EOBType');
 var EOB = mongoose.model('EOB');
 var entry = mongoose.model('Entry');
 var billable = mongoose.model('Billable');
-
+var diagnosis = mongoose.model('Diagnosis');
+var ICDnum = mongoose.model('ICD');
 
 /*
  * handle provider callback
@@ -39,6 +40,9 @@ exports.provider_callback = function(req, res) {
   
   var eob = new EOB({ user_id:req.user, total: eobparse.total});
   
+ 	
+	
+  
   // save eob
   eob.save(function(err, eob) {
 	 var entryl = new entry({ url: eobparse.entry[0].fullUrl}); 
@@ -52,6 +56,23 @@ exports.provider_callback = function(req, res) {
 				});
 			bill.entry_id = entryl;
 			bill.save();
+			
+			var diag1 = new diagnosis({
+				sequence:eobparse.entry[0].resource.diagnosis[0].sequence,
+				icd_version:eobparse.entry[0].resource.diagnosis[0].diagnosisCodeableConcept.coding[0].system
+			});
+			diag1.entry_id = entryl;
+			
+			ICDnum.count().exec(function (err, count) {
+				console.error("ICD count : ",count);
+				var random = Math.floor(Math.random() * count);
+			    ICDnum.findOne().skip(random).exec(
+					function (err, result) {
+						console.error(result);
+						diag1.icd_code = result.code;
+						diag1.save();
+				});	
+			});
 		});
   });
 
@@ -73,7 +94,7 @@ exports.provider_callback = function(req, res) {
   
   //newType.save();
   //bill.save();
-  
+  return res.status(200).send();
 }
 
 /*
