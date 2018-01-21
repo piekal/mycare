@@ -1,4 +1,4 @@
-'user strict';
+'use strict';
 
 var mongoose = require('mongoose'),
     jwt = require('jsonwebtoken'),

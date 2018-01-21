@@ -4,10 +4,10 @@ var mongoose = require('mongoose');
 
 var BillableSchema = new mongoose.Schema({  
   entry_id: {type: mongoose.Schema.Types.ObjectId, ref: 'Entry'},
-  startDate:{
+  start_date:{
     type: String
   },
-  endDate:{
+  end_date:{
     type: String
   }
 }, {timestamps: true});
