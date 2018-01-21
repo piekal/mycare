@@ -1,0 +1,183 @@
+{
+	"variables": [],
+	"info": {
+		"name": "MyCare",
+		"_postman_id": "19513c0c-d912-f0c6-fa25-9591790a009a",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "EOB",
+			"request": {
+				"url": {
+					"raw": "https://sandbox.bluebutton.cms.gov/v1/fhir/ExplanationOfBenefit/?patient=20140000008324",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"bluebutton",
+						"cms",
+						"gov"
+					],
+					"path": [
+						"v1",
+						"fhir",
+						"ExplanationOfBenefit",
+						""
+					],
+					"query": [
+						{
+							"key": "patient",
+							"value": "20140000008324",
+							"equals": true
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer PETf15vD2vTvMj2c7lB2V0to3wAANG"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "patient",
+			"request": {
+				"url": "https://sandbox.bluebutton.cms.gov/protected/bluebutton/fhir/v1/Patient",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer nCQPMu9s009d3Bkrtw3j3n8rOWU209"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "MyCare Signup",
+			"request": {
+				"url": "{{url}}/api/v1/user",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer nCQPMu9s009d3Bkrtw3j3n8rOWU209"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\":\"mycare-user22@gmail.com\",\n  \"password\":\"Password#29\"\n}"
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "MyCare Signin",
+			"request": {
+				"url": "{{url}}/api/v1/user/sign_in",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\":\"mycare-user2@gmail.com\",\n  \"password\":\"Password#29\"\n}"
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "MyCare GET Profile",
+			"request": {
+				"url": "{{url}}/api/v1/user/5a6113bbef98f8109005d82c/profile",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15Y2FyZS11c2VyMkBnbWFpbC5jb20iLCJfaWQiOiI1YTYxMTNiYmVmOThmODEwOTAwNWQ4MmMiLCJpYXQiOjE1MTYzMTE2NTB9.UN1b6qYGD_0q7w52jUzPUgpIEtUNwEntdYM_MDhSRco"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "BB Callback",
+			"request": {
+				"url": "{{url}}/api/v1/bb/provider/callback",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15Y2FyZS11c2VyMkBnbWFpbC5jb20iLCJfaWQiOiI1YTYxMTNiYmVmOThmODEwOTAwNWQ4MmMiLCJpYXQiOjE1MTYzMTE2NTB9.UN1b6qYGD_0q7w52jUzPUgpIEtUNwEntdYM_MDhSRco"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "BB status",
+			"request": {
+				"url": "{{url}}/api/v1/bb/status",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15Y2FyZS11c2VyMkBnbWFpbC5jb20iLCJfaWQiOiI1YTYxMTNiYmVmOThmODEwOTAwNWQ4MmMiLCJpYXQiOjE1MTYzMTE2NTB9.UN1b6qYGD_0q7w52jUzPUgpIEtUNwEntdYM_MDhSRco"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": null
+			},
+			"response": []
+		}
+	]
+}

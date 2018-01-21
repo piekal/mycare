@@ -1,0 +1,2931 @@
+{
+    "resourceType": "Bundle",
+    "id": "6c75b827-7453-4850-b96b-ba2bf1c0520d",
+    "meta": {
+        "lastUpdated": "2018-01-18T08:35:06.330-05:00"
+    },
+    "type": "searchset",
+    "total": 140,
+    "link": [
+        {
+            "relation": "self",
+            "url": "https://sandbox.bluebutton.cms.gov/protected/bluebutton/fhir/v1/ExplanationOfBenefit/?_format=application%2Fjson%2Bfhir&patient=20140000008325"
+        }
+    ],
+    "entry": [
+        {
+            "fullUrl": "https://sandbox.bluebutton.cms.gov/protected/bluebutton/fhir/v1/ExplanationOfBenefit/carrier-22011027731",
+            "resource": {
+                "resourceType": "ExplanationOfBenefit",
+                "id": "carrier-22011027731",
+                "contained": [
+                    {
+                        "resourceType": "ReferralRequest",
+                        "id": "1",
+                        "status": "completed",
+                        "subject": {
+                            "reference": "Patient?identifier=CCW.BENE_ID|20140000008325"
+                        },
+                        "requester": {
+                            "agent": {
+                                "identifier": {
+                                    "system": "http://hl7.org/fhir/sid/us-npi",
+                                    "value": "999999999999"
+                                }
+                            }
+                        },
+                        "recipient": [
+                            {
+                                "identifier": {
+                                    "system": "http://hl7.org/fhir/sid/us-npi",
+                                    "value": "999999999999"
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "extension": [
+                    {
+                        "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/carr_num.txt",
+                        "valueCodeableConcept": {
+                            "coding": [
+                                {
+                                    "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/carr_num.txt",
+                                    "code": "99999"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/pmtdnlcd.txt",
+                        "valueCodeableConcept": {
+                            "coding": [
+                                {
+                                    "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/pmtdnlcd.txt",
+                                    "code": "1"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/asgmntcd.txt",
+                        "valueCodeableConcept": {
+                            "coding": [
+                                {
+                                    "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/asgmntcd.txt",
+                                    "code": "A"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/ccltrnum.txt",
+                        "valueCodeableConcept": {
+                            "coding": [
+                                {
+                                    "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/ccltrnum.txt",
+                                    "code": "99999999"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "identifier": [
+                    {
+                        "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/clm_id.txt",
+                        "value": "22011027731"
+                    },
+                    {
+                        "system": "http://bluebutton.cms.hhs.gov/identifier#claimGroup",
+                        "value": "52241843218"
+                    }
+                ],
+                "status": "active",
+                "type": {
+                    "extension": [
+                        {
+                            "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/ric_cd.txt",
+                            "valueCodeableConcept": {
+                                "coding": [
+                                    {
+                                        "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/ric_cd.txt",
+                                        "code": "O"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "coding": [
+                        {
+                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/clm_type.txt",
+                            "code": "71"
+                        }
+                    ]
+                },
+                "patient": {
+                    "reference": "Patient?identifier=CCW.BENE_ID|20140000008325"
+                },
+                "billablePeriod": {
+                    "start": "2015-04-01",
+                    "end": "2015-04-01"
+                },
+                "referral": {
+                    "reference": "#1"
+                },
+                "disposition": "Debit accepted",
+                "careTeam": [
+                    {
+                        "extension": [
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prv_type.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prv_type.txt",
+                                            "code": "1"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prtcptg.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prtcptg.txt",
+                                            "code": "2"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prv_type.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prv_type.txt",
+                                            "code": "1"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prtcptg.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prtcptg.txt",
+                                            "code": "2"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prv_type.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prv_type.txt",
+                                            "code": "1"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prtcptg.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prtcptg.txt",
+                                            "code": "2"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prv_type.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prv_type.txt",
+                                            "code": "1"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prtcptg.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prtcptg.txt",
+                                            "code": "2"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prv_type.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prv_type.txt",
+                                            "code": "1"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prtcptg.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prtcptg.txt",
+                                            "code": "2"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prv_type.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prv_type.txt",
+                                            "code": "1"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prtcptg.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prtcptg.txt",
+                                            "code": "2"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prv_type.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prv_type.txt",
+                                            "code": "1"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prtcptg.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prtcptg.txt",
+                                            "code": "2"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prv_type.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prv_type.txt",
+                                            "code": "1"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prtcptg.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prtcptg.txt",
+                                            "code": "2"
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "sequence": 2,
+                        "provider": {
+                            "identifier": {
+                                "system": "http://hl7.org/fhir/sid/us-npi",
+                                "value": "999999999999"
+                            }
+                        },
+                        "responsible": true,
+                        "role": {
+                            "coding": [
+                                {
+                                    "system": "http://hl7.org/fhir/claimcareteamrole",
+                                    "code": "primary"
+                                }
+                            ]
+                        },
+                        "qualification": {
+                            "coding": [
+                                {
+                                    "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/hcfaspcl.txt",
+                                    "code": "999"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "diagnosis": [
+                    {
+                        "sequence": 1,
+                        "diagnosisCodeableConcept": {
+                            "coding": [
+                                {
+                                    "system": "http://hl7.org/fhir/sid/unknown-icd-version/9",
+                                    "code": "38010"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "sequence": 2,
+                        "diagnosisCodeableConcept": {
+                            "coding": [
+                                {
+                                    "system": "http://hl7.org/fhir/sid/unknown-icd-version/9",
+                                    "code": "38918"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "sequence": 3,
+                        "diagnosisCodeableConcept": {
+                            "coding": [
+                                {
+                                    "system": "http://hl7.org/fhir/sid/unknown-icd-version/9",
+                                    "code": "9999999"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "insurance": {
+                    "coverage": {
+                        "reference": "Coverage/part-b-20140000008325"
+                    }
+                },
+                "item": [
+                    {
+                        "extension": [
+                            {
+                                "url": "http://hl7.org/fhir/ValueSet/v3-ActInvoiceGroupCode",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "http://hl7.org/fhir/ValueSet/v3-ActInvoiceGroupCode",
+                                            "code": "CSPINV"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/betos.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/betos.txt",
+                                            "code": "M1A"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/ded_sw.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/ded_sw.txt",
+                                            "code": "0"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_ind.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_ind.txt",
+                                            "code": "3"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_cnt.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_cnt.txt",
+                                            "code": "1"
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "sequence": 1,
+                        "careTeamLinkId": [
+                            2
+                        ],
+                        "diagnosisLinkId": [
+                            3
+                        ],
+                        "category": {
+                            "coding": [
+                                {
+                                    "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/typcsrvcb.txt",
+                                    "code": "1"
+                                }
+                            ]
+                        },
+                        "service": {
+                            "coding": [
+                                {
+                                    "system": "https://www.cms.gov/Medicare/Coding/MedHCPCSGenInfo/index.html",
+                                    "version": "5",
+                                    "code": "99203"
+                                }
+                            ]
+                        },
+                        "modifier": [
+                            {
+                                "coding": [
+                                    {
+                                        "system": "https://www.cms.gov/Medicare/Coding/MedHCPCSGenInfo/index.html",
+                                        "version": "5",
+                                        "code": "99999"
+                                    }
+                                ]
+                            }
+                        ],
+                        "servicedPeriod": {
+                            "start": "2015-04-01",
+                            "end": "2015-04-01"
+                        },
+                        "locationCodeableConcept": {
+                            "extension": [
+                                {
+                                    "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prvstate.txt",
+                                    "valueCodeableConcept": {
+                                        "coding": [
+                                            {
+                                                "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prvstate.txt",
+                                                "code": "99"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/provzip.txt",
+                                    "valueCodeableConcept": {
+                                        "coding": [
+                                            {
+                                                "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/provzip.txt",
+                                                "code": "999999999"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/lclty_cd.txt",
+                                    "valueCodeableConcept": {
+                                        "coding": [
+                                            {
+                                                "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/lclty_cd.txt",
+                                                "code": "99"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "coding": [
+                                {
+                                    "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/plcsrvc.txt",
+                                    "code": "99"
+                                }
+                            ]
+                        },
+                        "quantity": {
+                            "value": 1
+                        },
+                        "adjudication": [
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Carrier Line Reduced Payment Physician Assistant Code"
+                                        }
+                                    ]
+                                },
+                                "reason": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/astnt_cd.txt",
+                                            "code": "0"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "extension": [
+                                    {
+                                        "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/pmtindsw.txt",
+                                        "valueCodeableConcept": {
+                                            "coding": [
+                                                {
+                                                    "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/pmtindsw.txt",
+                                                    "code": "0"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "NCH Payment Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Payment Amount to Beneficiary"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Provider Payment Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Beneficiary Deductible Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 100,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Primary Payer Paid Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Coinsurance Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Submitted Charge Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 200,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Allowed Charge Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 100,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Line Processing Indicator Code"
+                                        }
+                                    ]
+                                },
+                                "reason": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prcngind.txt",
+                                            "code": "A"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "extension": [
+                            {
+                                "url": "http://hl7.org/fhir/ValueSet/v3-ActInvoiceGroupCode",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "http://hl7.org/fhir/ValueSet/v3-ActInvoiceGroupCode",
+                                            "code": "CSPINV"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/betos.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/betos.txt",
+                                            "code": "Z2"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/ded_sw.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/ded_sw.txt",
+                                            "code": "0"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_ind.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_ind.txt",
+                                            "code": "3"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_cnt.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_cnt.txt",
+                                            "code": "1"
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "sequence": 2,
+                        "careTeamLinkId": [
+                            2
+                        ],
+                        "diagnosisLinkId": [
+                            3
+                        ],
+                        "category": {
+                            "coding": [
+                                {
+                                    "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/typcsrvcb.txt",
+                                    "code": "1"
+                                }
+                            ]
+                        },
+                        "service": {
+                            "coding": [
+                                {
+                                    "system": "https://www.cms.gov/Medicare/Coding/MedHCPCSGenInfo/index.html",
+                                    "version": "5",
+                                    "code": "1036F"
+                                }
+                            ]
+                        },
+                        "servicedPeriod": {
+                            "start": "2015-04-01",
+                            "end": "2015-04-01"
+                        },
+                        "locationCodeableConcept": {
+                            "extension": [
+                                {
+                                    "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prvstate.txt",
+                                    "valueCodeableConcept": {
+                                        "coding": [
+                                            {
+                                                "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prvstate.txt",
+                                                "code": "99"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/provzip.txt",
+                                    "valueCodeableConcept": {
+                                        "coding": [
+                                            {
+                                                "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/provzip.txt",
+                                                "code": "999999999"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/lclty_cd.txt",
+                                    "valueCodeableConcept": {
+                                        "coding": [
+                                            {
+                                                "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/lclty_cd.txt",
+                                                "code": "99"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "coding": [
+                                {
+                                    "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/plcsrvc.txt",
+                                    "code": "99"
+                                }
+                            ]
+                        },
+                        "quantity": {
+                            "value": 1
+                        },
+                        "adjudication": [
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Carrier Line Reduced Payment Physician Assistant Code"
+                                        }
+                                    ]
+                                },
+                                "reason": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/astnt_cd.txt",
+                                            "code": "0"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "extension": [
+                                    {
+                                        "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/pmtindsw.txt",
+                                        "valueCodeableConcept": {
+                                            "coding": [
+                                                {
+                                                    "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/pmtindsw.txt",
+                                                    "code": "0"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "NCH Payment Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Payment Amount to Beneficiary"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Provider Payment Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Beneficiary Deductible Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Primary Payer Paid Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Coinsurance Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Submitted Charge Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Allowed Charge Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Line Processing Indicator Code"
+                                        }
+                                    ]
+                                },
+                                "reason": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prcngind.txt",
+                                            "code": "O"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "extension": [
+                            {
+                                "url": "http://hl7.org/fhir/ValueSet/v3-ActInvoiceGroupCode",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "http://hl7.org/fhir/ValueSet/v3-ActInvoiceGroupCode",
+                                            "code": "CSPINV"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/betos.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/betos.txt",
+                                            "code": "M5D"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/ded_sw.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/ded_sw.txt",
+                                            "code": "0"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_ind.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_ind.txt",
+                                            "code": "3"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_cnt.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_cnt.txt",
+                                            "code": "1"
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "sequence": 3,
+                        "careTeamLinkId": [
+                            2
+                        ],
+                        "diagnosisLinkId": [
+                            3
+                        ],
+                        "category": {
+                            "coding": [
+                                {
+                                    "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/typcsrvcb.txt",
+                                    "code": "1"
+                                }
+                            ]
+                        },
+                        "service": {
+                            "coding": [
+                                {
+                                    "system": "https://www.cms.gov/Medicare/Coding/MedHCPCSGenInfo/index.html",
+                                    "version": "5",
+                                    "code": "G8427"
+                                }
+                            ]
+                        },
+                        "servicedPeriod": {
+                            "start": "2015-04-01",
+                            "end": "2015-04-01"
+                        },
+                        "locationCodeableConcept": {
+                            "extension": [
+                                {
+                                    "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prvstate.txt",
+                                    "valueCodeableConcept": {
+                                        "coding": [
+                                            {
+                                                "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prvstate.txt",
+                                                "code": "99"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/provzip.txt",
+                                    "valueCodeableConcept": {
+                                        "coding": [
+                                            {
+                                                "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/provzip.txt",
+                                                "code": "999999999"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/lclty_cd.txt",
+                                    "valueCodeableConcept": {
+                                        "coding": [
+                                            {
+                                                "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/lclty_cd.txt",
+                                                "code": "99"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "coding": [
+                                {
+                                    "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/plcsrvc.txt",
+                                    "code": "99"
+                                }
+                            ]
+                        },
+                        "quantity": {
+                            "value": 1
+                        },
+                        "adjudication": [
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Carrier Line Reduced Payment Physician Assistant Code"
+                                        }
+                                    ]
+                                },
+                                "reason": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/astnt_cd.txt",
+                                            "code": "0"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "extension": [
+                                    {
+                                        "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/pmtindsw.txt",
+                                        "valueCodeableConcept": {
+                                            "coding": [
+                                                {
+                                                    "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/pmtindsw.txt",
+                                                    "code": "0"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "NCH Payment Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Payment Amount to Beneficiary"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Provider Payment Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Beneficiary Deductible Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Primary Payer Paid Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Coinsurance Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Submitted Charge Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Allowed Charge Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Line Processing Indicator Code"
+                                        }
+                                    ]
+                                },
+                                "reason": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prcngind.txt",
+                                            "code": "O"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "extension": [
+                            {
+                                "url": "http://hl7.org/fhir/ValueSet/v3-ActInvoiceGroupCode",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "http://hl7.org/fhir/ValueSet/v3-ActInvoiceGroupCode",
+                                            "code": "CSPINV"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/betos.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/betos.txt",
+                                            "code": "M5D"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/ded_sw.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/ded_sw.txt",
+                                            "code": "0"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_ind.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_ind.txt",
+                                            "code": "3"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_cnt.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_cnt.txt",
+                                            "code": "1"
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "sequence": 4,
+                        "careTeamLinkId": [
+                            2
+                        ],
+                        "diagnosisLinkId": [
+                            3
+                        ],
+                        "category": {
+                            "coding": [
+                                {
+                                    "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/typcsrvcb.txt",
+                                    "code": "1"
+                                }
+                            ]
+                        },
+                        "service": {
+                            "coding": [
+                                {
+                                    "system": "https://www.cms.gov/Medicare/Coding/MedHCPCSGenInfo/index.html",
+                                    "version": "5",
+                                    "code": "G8420"
+                                }
+                            ]
+                        },
+                        "servicedPeriod": {
+                            "start": "2015-04-01",
+                            "end": "2015-04-01"
+                        },
+                        "locationCodeableConcept": {
+                            "extension": [
+                                {
+                                    "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prvstate.txt",
+                                    "valueCodeableConcept": {
+                                        "coding": [
+                                            {
+                                                "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prvstate.txt",
+                                                "code": "99"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/provzip.txt",
+                                    "valueCodeableConcept": {
+                                        "coding": [
+                                            {
+                                                "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/provzip.txt",
+                                                "code": "999999999"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/lclty_cd.txt",
+                                    "valueCodeableConcept": {
+                                        "coding": [
+                                            {
+                                                "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/lclty_cd.txt",
+                                                "code": "99"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "coding": [
+                                {
+                                    "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/plcsrvc.txt",
+                                    "code": "99"
+                                }
+                            ]
+                        },
+                        "quantity": {
+                            "value": 1
+                        },
+                        "adjudication": [
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Carrier Line Reduced Payment Physician Assistant Code"
+                                        }
+                                    ]
+                                },
+                                "reason": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/astnt_cd.txt",
+                                            "code": "0"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "extension": [
+                                    {
+                                        "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/pmtindsw.txt",
+                                        "valueCodeableConcept": {
+                                            "coding": [
+                                                {
+                                                    "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/pmtindsw.txt",
+                                                    "code": "0"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "NCH Payment Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Payment Amount to Beneficiary"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Provider Payment Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Beneficiary Deductible Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Primary Payer Paid Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Coinsurance Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Submitted Charge Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Allowed Charge Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Line Processing Indicator Code"
+                                        }
+                                    ]
+                                },
+                                "reason": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prcngind.txt",
+                                            "code": "O"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "extension": [
+                            {
+                                "url": "http://hl7.org/fhir/ValueSet/v3-ActInvoiceGroupCode",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "http://hl7.org/fhir/ValueSet/v3-ActInvoiceGroupCode",
+                                            "code": "CSPINV"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/betos.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/betos.txt",
+                                            "code": "Z2"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/ded_sw.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/ded_sw.txt",
+                                            "code": "0"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_ind.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_ind.txt",
+                                            "code": "3"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_cnt.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_cnt.txt",
+                                            "code": "1"
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "sequence": 5,
+                        "careTeamLinkId": [
+                            2
+                        ],
+                        "diagnosisLinkId": [
+                            3
+                        ],
+                        "category": {
+                            "coding": [
+                                {
+                                    "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/typcsrvcb.txt",
+                                    "code": "1"
+                                }
+                            ]
+                        },
+                        "service": {
+                            "coding": [
+                                {
+                                    "system": "https://www.cms.gov/Medicare/Coding/MedHCPCSGenInfo/index.html",
+                                    "version": "5",
+                                    "code": "4040F"
+                                }
+                            ]
+                        },
+                        "modifier": [
+                            {
+                                "coding": [
+                                    {
+                                        "system": "https://www.cms.gov/Medicare/Coding/MedHCPCSGenInfo/index.html",
+                                        "version": "5",
+                                        "code": "99999"
+                                    }
+                                ]
+                            }
+                        ],
+                        "servicedPeriod": {
+                            "start": "2015-04-01",
+                            "end": "2015-04-01"
+                        },
+                        "locationCodeableConcept": {
+                            "extension": [
+                                {
+                                    "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prvstate.txt",
+                                    "valueCodeableConcept": {
+                                        "coding": [
+                                            {
+                                                "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prvstate.txt",
+                                                "code": "99"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/provzip.txt",
+                                    "valueCodeableConcept": {
+                                        "coding": [
+                                            {
+                                                "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/provzip.txt",
+                                                "code": "999999999"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/lclty_cd.txt",
+                                    "valueCodeableConcept": {
+                                        "coding": [
+                                            {
+                                                "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/lclty_cd.txt",
+                                                "code": "99"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "coding": [
+                                {
+                                    "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/plcsrvc.txt",
+                                    "code": "99"
+                                }
+                            ]
+                        },
+                        "quantity": {
+                            "value": 1
+                        },
+                        "adjudication": [
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Carrier Line Reduced Payment Physician Assistant Code"
+                                        }
+                                    ]
+                                },
+                                "reason": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/astnt_cd.txt",
+                                            "code": "0"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "extension": [
+                                    {
+                                        "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/pmtindsw.txt",
+                                        "valueCodeableConcept": {
+                                            "coding": [
+                                                {
+                                                    "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/pmtindsw.txt",
+                                                    "code": "0"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "NCH Payment Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Payment Amount to Beneficiary"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Provider Payment Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Beneficiary Deductible Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Primary Payer Paid Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Coinsurance Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Submitted Charge Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Allowed Charge Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Line Processing Indicator Code"
+                                        }
+                                    ]
+                                },
+                                "reason": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prcngind.txt",
+                                            "code": "O"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "extension": [
+                            {
+                                "url": "http://hl7.org/fhir/ValueSet/v3-ActInvoiceGroupCode",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "http://hl7.org/fhir/ValueSet/v3-ActInvoiceGroupCode",
+                                            "code": "CSPINV"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/betos.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/betos.txt",
+                                            "code": "Z2"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/ded_sw.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/ded_sw.txt",
+                                            "code": "0"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_ind.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_ind.txt",
+                                            "code": "3"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_cnt.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_cnt.txt",
+                                            "code": "1"
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "sequence": 6,
+                        "careTeamLinkId": [
+                            2
+                        ],
+                        "diagnosisLinkId": [
+                            3
+                        ],
+                        "category": {
+                            "coding": [
+                                {
+                                    "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/typcsrvcb.txt",
+                                    "code": "1"
+                                }
+                            ]
+                        },
+                        "service": {
+                            "coding": [
+                                {
+                                    "system": "https://www.cms.gov/Medicare/Coding/MedHCPCSGenInfo/index.html",
+                                    "version": "5",
+                                    "code": "4132F"
+                                }
+                            ]
+                        },
+                        "servicedPeriod": {
+                            "start": "2015-04-01",
+                            "end": "2015-04-01"
+                        },
+                        "locationCodeableConcept": {
+                            "extension": [
+                                {
+                                    "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prvstate.txt",
+                                    "valueCodeableConcept": {
+                                        "coding": [
+                                            {
+                                                "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prvstate.txt",
+                                                "code": "99"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/provzip.txt",
+                                    "valueCodeableConcept": {
+                                        "coding": [
+                                            {
+                                                "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/provzip.txt",
+                                                "code": "999999999"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/lclty_cd.txt",
+                                    "valueCodeableConcept": {
+                                        "coding": [
+                                            {
+                                                "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/lclty_cd.txt",
+                                                "code": "99"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "coding": [
+                                {
+                                    "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/plcsrvc.txt",
+                                    "code": "99"
+                                }
+                            ]
+                        },
+                        "quantity": {
+                            "value": 1
+                        },
+                        "adjudication": [
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Carrier Line Reduced Payment Physician Assistant Code"
+                                        }
+                                    ]
+                                },
+                                "reason": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/astnt_cd.txt",
+                                            "code": "0"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "extension": [
+                                    {
+                                        "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/pmtindsw.txt",
+                                        "valueCodeableConcept": {
+                                            "coding": [
+                                                {
+                                                    "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/pmtindsw.txt",
+                                                    "code": "0"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "NCH Payment Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Payment Amount to Beneficiary"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Provider Payment Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Beneficiary Deductible Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Primary Payer Paid Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Coinsurance Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Submitted Charge Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Allowed Charge Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Line Processing Indicator Code"
+                                        }
+                                    ]
+                                },
+                                "reason": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prcngind.txt",
+                                            "code": "O"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "extension": [
+                            {
+                                "url": "http://hl7.org/fhir/ValueSet/v3-ActInvoiceGroupCode",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "http://hl7.org/fhir/ValueSet/v3-ActInvoiceGroupCode",
+                                            "code": "CSPINV"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/betos.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/betos.txt",
+                                            "code": "Z2"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/ded_sw.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/ded_sw.txt",
+                                            "code": "0"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_ind.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_ind.txt",
+                                            "code": "3"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_cnt.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_cnt.txt",
+                                            "code": "1"
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "sequence": 7,
+                        "careTeamLinkId": [
+                            2
+                        ],
+                        "diagnosisLinkId": [
+                            3
+                        ],
+                        "category": {
+                            "coding": [
+                                {
+                                    "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/typcsrvcb.txt",
+                                    "code": "1"
+                                }
+                            ]
+                        },
+                        "service": {
+                            "coding": [
+                                {
+                                    "system": "https://www.cms.gov/Medicare/Coding/MedHCPCSGenInfo/index.html",
+                                    "version": "5",
+                                    "code": "4130F"
+                                }
+                            ]
+                        },
+                        "servicedPeriod": {
+                            "start": "2015-04-01",
+                            "end": "2015-04-01"
+                        },
+                        "locationCodeableConcept": {
+                            "extension": [
+                                {
+                                    "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prvstate.txt",
+                                    "valueCodeableConcept": {
+                                        "coding": [
+                                            {
+                                                "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prvstate.txt",
+                                                "code": "99"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/provzip.txt",
+                                    "valueCodeableConcept": {
+                                        "coding": [
+                                            {
+                                                "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/provzip.txt",
+                                                "code": "999999999"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/lclty_cd.txt",
+                                    "valueCodeableConcept": {
+                                        "coding": [
+                                            {
+                                                "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/lclty_cd.txt",
+                                                "code": "99"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "coding": [
+                                {
+                                    "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/plcsrvc.txt",
+                                    "code": "99"
+                                }
+                            ]
+                        },
+                        "quantity": {
+                            "value": 1
+                        },
+                        "adjudication": [
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Carrier Line Reduced Payment Physician Assistant Code"
+                                        }
+                                    ]
+                                },
+                                "reason": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/astnt_cd.txt",
+                                            "code": "0"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "extension": [
+                                    {
+                                        "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/pmtindsw.txt",
+                                        "valueCodeableConcept": {
+                                            "coding": [
+                                                {
+                                                    "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/pmtindsw.txt",
+                                                    "code": "0"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "NCH Payment Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Payment Amount to Beneficiary"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Provider Payment Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Beneficiary Deductible Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Primary Payer Paid Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Coinsurance Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Submitted Charge Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Allowed Charge Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Line Processing Indicator Code"
+                                        }
+                                    ]
+                                },
+                                "reason": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prcngind.txt",
+                                            "code": "O"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "extension": [
+                            {
+                                "url": "http://hl7.org/fhir/ValueSet/v3-ActInvoiceGroupCode",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "http://hl7.org/fhir/ValueSet/v3-ActInvoiceGroupCode",
+                                            "code": "CSPINV"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/betos.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/betos.txt",
+                                            "code": "M5D"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/ded_sw.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/ded_sw.txt",
+                                            "code": "0"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_ind.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_ind.txt",
+                                            "code": "3"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_cnt.txt",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/mtus_cnt.txt",
+                                            "code": "1"
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "sequence": 8,
+                        "careTeamLinkId": [
+                            2
+                        ],
+                        "diagnosisLinkId": [
+                            3
+                        ],
+                        "category": {
+                            "coding": [
+                                {
+                                    "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/typcsrvcb.txt",
+                                    "code": "1"
+                                }
+                            ]
+                        },
+                        "service": {
+                            "coding": [
+                                {
+                                    "system": "https://www.cms.gov/Medicare/Coding/MedHCPCSGenInfo/index.html",
+                                    "version": "5",
+                                    "code": "92504"
+                                }
+                            ]
+                        },
+                        "servicedPeriod": {
+                            "start": "2015-04-01",
+                            "end": "2015-04-01"
+                        },
+                        "locationCodeableConcept": {
+                            "extension": [
+                                {
+                                    "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prvstate.txt",
+                                    "valueCodeableConcept": {
+                                        "coding": [
+                                            {
+                                                "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prvstate.txt",
+                                                "code": "99"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/provzip.txt",
+                                    "valueCodeableConcept": {
+                                        "coding": [
+                                            {
+                                                "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/provzip.txt",
+                                                "code": "999999999"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/lclty_cd.txt",
+                                    "valueCodeableConcept": {
+                                        "coding": [
+                                            {
+                                                "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/lclty_cd.txt",
+                                                "code": "99"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "coding": [
+                                {
+                                    "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/plcsrvc.txt",
+                                    "code": "99"
+                                }
+                            ]
+                        },
+                        "quantity": {
+                            "value": 1
+                        },
+                        "adjudication": [
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Carrier Line Reduced Payment Physician Assistant Code"
+                                        }
+                                    ]
+                                },
+                                "reason": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/astnt_cd.txt",
+                                            "code": "0"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "extension": [
+                                    {
+                                        "url": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/pmtindsw.txt",
+                                        "valueCodeableConcept": {
+                                            "coding": [
+                                                {
+                                                    "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/pmtindsw.txt",
+                                                    "code": "0"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "NCH Payment Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Payment Amount to Beneficiary"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Provider Payment Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Beneficiary Deductible Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 30,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Primary Payer Paid Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Coinsurance Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 0,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Submitted Charge Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 80,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Allowed Charge Amount"
+                                        }
+                                    ]
+                                },
+                                "amount": {
+                                    "value": 30,
+                                    "system": "urn:std:iso:4217",
+                                    "code": "USD"
+                                }
+                            },
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "CMS Adjudications",
+                                            "code": "Line Processing Indicator Code"
+                                        }
+                                    ]
+                                },
+                                "reason": {
+                                    "coding": [
+                                        {
+                                            "system": "https://www.ccwdata.org/cs/groups/public/documents/datadictionary/prcngind.txt",
+                                            "code": "A"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "payment": {
+                    "amount": {
+                        "value": 0,
+                        "system": "USD"
+                    }
+                },
+                "benefitBalance": [
+                    {
+                        "category": {
+                            "coding": [
+                                {
+                                    "system": "http://hl7.org/fhir/benefit-category",
+                                    "code": "medical"
+                                }
+                            ]
+                        },
+                        "financial": [
+                            {
+                                "type": {
+                                    "coding": [
+                                        {
+                                            "system": "http://bluebutton.cms.hhs.gov/coding#benefitBalanceType",
+                                            "code": "Provider Payment Amount"
+                                        }
+                                    ]
+                                },
+                                "allowedMoney": {
+                                    "value": 0,
+                                    "system": "USD"
+                                }
+                            },
+                            {
+                                "type": {
+                                    "coding": [
+                                        {
+                                            "system": "http://bluebutton.cms.hhs.gov/coding#benefitBalanceType",
+                                            "code": "Payment Amount to Beneficiary"
+                                        }
+                                    ]
+                                },
+                                "allowedMoney": {
+                                    "value": 0,
+                                    "system": "USD"
+                                }
+                            },
+                            {
+                                "type": {
+                                    "coding": [
+                                        {
+                                            "system": "http://bluebutton.cms.hhs.gov/coding#benefitBalanceType",
+                                            "code": "Submitted Charge Amount"
+                                        }
+                                    ]
+                                },
+                                "allowedMoney": {
+                                    "value": 300,
+                                    "system": "USD"
+                                }
+                            },
+                            {
+                                "type": {
+                                    "coding": [
+                                        {
+                                            "system": "http://bluebutton.cms.hhs.gov/coding#benefitBalanceType",
+                                            "code": "Allowed Charge Amount"
+                                        }
+                                    ]
+                                },
+                                "allowedMoney": {
+                                    "value": 150,
+                                    "system": "USD"
+                                }
+                            },
+                            {
+                                "type": {
+                                    "coding": [
+                                        {
+                                            "system": "http://bluebutton.cms.hhs.gov/coding#benefitBalanceType",
+                                            "code": "NCH Beneficiary Part B Deductible Amount"
+                                        }
+                                    ]
+                                },
+                                "allowedMoney": {
+                                    "value": 150,
+                                    "system": "USD"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+   ]
+}
