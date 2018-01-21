@@ -7,6 +7,7 @@ var diagnosisSchema = new mongoose.Schema({
   sequence: {type: String},
   icd_code: {type: String},
   icd_version: {type:String},
+  icd: {type: mongoose.Schema.Types.ObjectId, ref: 'ICD'},
 }, {timestamps: true});
 
 mongoose.model('Diagnosis', diagnosisSchema);

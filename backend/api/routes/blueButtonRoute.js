@@ -8,5 +8,11 @@ module.exports = function(router) {
     .get(commonHandler.loginRequired, bbHandler.provider_callback);
   
   router.route('/bb/status')
-    .get(commonHandler.loginRequired, bbHandler.status);   
+    .get(commonHandler.loginRequired, bbHandler.status);
+
+  router.route('/bb/timeline')
+    .get(commonHandler.loginRequired, bbHandler.timeline);   
+
+  router.route('/bb/purge')
+     .get(commonHandler.loginRequired, bbHandler.purge_eob);   
 };

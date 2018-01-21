@@ -8,8 +8,10 @@ var EOB = mongoose.model('EOB');
 var EOBStatus = mongoose.model('EOBStatus');
 var entry = mongoose.model('Entry');
 var billable = mongoose.model('Billable');
+var provider = mongoose.model('Provider');
 var diagnosis = mongoose.model('Diagnosis');
-var ICDnum = mongoose.model('ICD');
+var ICD = mongoose.model('ICD');
+var NPI = mongoose.model('NPI');
 var _ = require('lodash');
 var uuid = require('uuid');
 
@@ -79,7 +81,7 @@ function parseEOB(req,eobparse) {
       obj.status = "PARSING_EOB";
       obj.save();
     });
-          
+    
     // save eob
     eob.save(function(err, eob) {
 
@@ -87,7 +89,6 @@ function parseEOB(req,eobparse) {
       _.each(eobparse.entry, function(e,i) {
         //console.log("EOB url : ",e.fullUrl);
         var entryl = new entry({ url: e.fullUrl }); 
-        entryl.eob_id = eob;
 
         if (i == eobparse.total-1) {
           EOBStatus.findOne({
@@ -99,37 +100,68 @@ function parseEOB(req,eobparse) {
           });
         }
         
+        if (!eob) {
+          return;
+        }
+
+        entryl.eob_id = eob;
+        
         //save entry
         entryl.save(function(err, entryl) {
           if (entryl) {
-            var bill = new billable({
-	      start_date:e.resource.billablePeriod && e.resource.billablePeriod.start, 
-	      end_date:e.resource.billablePeriod && e.resource.billablePeriod.end
-            });
-            bill.entry_id = entryl;
-            bill.save();
 
-            // loop diagonosis
-            _.each(e.resource.diagnosis, function(d,i) {
-              var diag1 = new diagnosis({
-	        sequence:d.sequence,
-	        icd_version:d.diagnosisCodeableConcept.coding[0].system
+            // save billdate
+            var startDate = e.resource.billablePeriod && e.resource.billablePeriod.start;
+            var endDate = e.resource.billablePeriod && e.resource.billablePeriod.end;
+
+            if (startDate && endDate) {
+              var bill = new billable({
+	        start_date:e.resource.billablePeriod && e.resource.billablePeriod.start, 
+	        end_date:e.resource.billablePeriod && e.resource.billablePeriod.end
+              });
+              
+              bill.entry_id = entryl;
+              bill.save();
+              
+              
+              // save diagonosis
+              _.each(e.resource.diagnosis, function(d,i) {
+                var diag1 = new diagnosis({
+	          sequence:d.sequence,
+	          icd_version:d.diagnosisCodeableConcept.coding[0].system
+                });
+
+                //console.error(entryl);
+                diag1.entry_id = entryl;
+                
+                ICD.count().exec(function (err, count) {
+	          //console.log("ICD count : ",count);
+	          var random = Math.floor(Math.random() * count);
+	          ICD.findOne().skip(random).exec(
+	            function (err, result) {
+	              //console.log(result);
+	              diag1.icd_code = result.code;
+                      diag1.icd=result;
+	              diag1.save();
+	            });	
+                });
               });
 
-              //console.error(entryl);
-              diag1.entry_id = entryl;
-              
-              ICDnum.count().exec(function (err, count) {
-	        //console.log("ICD count : ",count);
+              // save provider
+              var pr = new provider();
+              pr.entry_id = entryl;
+              NPI.count().exec(function (err, count) {
+	        //console.log("NPI count : ",count);
 	        var random = Math.floor(Math.random() * count);
-	        ICDnum.findOne().skip(random).exec(
+	        NPI.findOne().skip(random).exec(
 	          function (err, result) {
 	            //console.log(result);
-	            diag1.icd_code = result.code;
-	            diag1.save();
+	            pr.npi_code = result.npi_code;
+                    pr.npi = result;
+                    pr.save();
 	          });	
               });
-            })
+            }
           }
         });
       });
@@ -154,4 +186,113 @@ exports.status = function(req, res) {
       return res.status(200).send(obj.status);
     });
   });
+}
+
+exports.timeline = async function(req, res) {
+  console.log('GET /bb/timeline : ',req.params);
+  
+  EOBType.findOne({
+    name: "CMS_BLUE_BUTTON"
+  }).then(function(eobtype) {
+    
+    EOBStatus.findOne({
+      user_id:req.user,
+      eob_type:eobtype
+    },function(err,obj) {
+
+      // if EOB is ready
+      if (obj.status.indexOf("READY") > -1) {
+        var ret = [];
+        
+        EOB.findOne({
+          eob_type:eobtype,
+          user_id:req.user
+        },function(err,eob) {
+          //console.error(eob);
+
+          entry.find({
+            eob_id:eob
+          },function(err, entries) {
+            //console.error(entries);
+
+            var promises = entries.map(function(e) {
+              
+              return new Promise(function(resolve,reject) {
+                // create new timeline
+                var timeline = {};
+                timeline.entry_id = e._id;
+                
+                // add provider
+                var providerPromise = provider.findOne({
+                  entry_id:e              
+                }).populate('npi').exec(function(err,p){
+                  if (p && p.npi) {
+                    var n = p.npi;
+                    if (n.type == 1) {
+                      timeline.provider =
+                      n.provider_name_prefix + " " +
+                      n.provider_first_name + " "+
+                      n.provider_last_name + " "+
+                      n.provider_name_suffix;
+                    } else {
+                      timeline.provider = n.org_name;
+                    }
+                  }
+                });
+                
+                // add first diagnosis
+                var diagnosisPromise = diagnosis.findOne({
+                  entry_id:e
+                }).populate('icd').exec(function(err,d) {
+                  if (d && d.icd && d.sequence == 1) {
+                    timeline.first_icd_code = d.icd.code;
+                    timeline.first_icd_desc = d.icd.desc;
+                  }
+                  
+                });
+                
+                // add date
+                var billablePromise = billable.findOne({
+                  entry_id:e              
+                }).exec(function(err,b){
+                  if (b) {
+                    timeline.start_date = b.start_date;
+                    timeline.end_date = b.end_date;
+                    ret.push(timeline);
+                  }
+                });
+                                
+                
+                // resolve all
+                Promise.all([
+                  billablePromise,
+                  providerPromise,
+                  diagnosisPromise
+                ]).then(function() {
+                  resolve();
+                });
+              });
+            });
+
+            // when all promises are resolved
+            Promise.all(promises).then(function() {
+              return res.status(200).send(ret);
+            });
+          })
+        })          
+      } else {
+        return res.status(200).send("EOB NOT READY");
+      }
+    });
+  });
+
+}
+
+exports.purge_eob = function(req, res) {
+  EOB.remove({}).exec();
+  entry.remove({}).exec();
+  billable.remove({}).exec();
+  diagnosis.remove({}).exec();
+  provider.remove({}).exec();
+  return res.status(200).send("Purge complete");      
 }
