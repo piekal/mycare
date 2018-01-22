@@ -7,7 +7,7 @@ var express = require('express'),
     app = express(),
     router = express.Router(),
     port = process.env.PORT || 3000,
-    mongoose = require('mongoose'),
+    mongoose = require('mongoose'),    
     db = require('./dbConnection'),
     User = require('./api/models/userModel'),
     ICD = require('./api/models/ICDModel'),
@@ -17,13 +17,16 @@ var express = require('express'),
     EOBStatus = require('./api/models/EOBStatusModel'),
     EOBType = require('./api/models/EOBTypeModel'),
     entry = require('./api/models/entryModel'),
-    billable = require('./api/models/billableModel'),
+    billable = require('./api/models/billableDateModel'),
     provider = require('./api/models/providerModel'),
     diagonosis = require('./api/models/diagnosisModel'),    	
     userRoute = require('./api/routes/userRoute'),
     bbRoute = require('./api/routes/blueButtonRoute'),
     bodyParser = require('body-parser'),
     jsonwebtoken = require('jsonwebtoken');
+
+// required to remove deprecation warning
+mongoose.Promise = global.Promise;
 
 //----------------------
 // App Config
@@ -97,12 +100,12 @@ if (argv.meta == 'LOAD') {
     (new NPI({
       npi_code:data["NPI"],
       type:data["Entity Type Code"],
-      org_name:data["Provider Organization Name (Legal Business Name)"],
-      provider_name_prefix:data["Provider Name Prefix Text"],
-      provider_first_name:data["Provider First Name"],
-      provider_middle_name:data["Provider Middle Name"],
-      provider_last_name:data["Provider Last Name (Legal Name)"],
-      provider_name_suffix:data["Provider Name Suffix Text"]
+      org_name:data["Provider Organization Name (Legal Business Name)"].trim(),
+      provider_name_prefix:data["Provider Name Prefix Text"].trim(),
+      provider_first_name:data["Provider First Name"].trim(),
+      provider_middle_name:data["Provider Middle Name"].trim(),
+      provider_last_name:data["Provider Last Name (Legal Name)"].trim(),
+      provider_name_suffix:data["Provider Name Suffix Text"].trim()
     })).save();
     
   }).on("end", function(){
