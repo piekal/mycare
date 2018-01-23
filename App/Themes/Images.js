@@ -23,7 +23,12 @@ const images = {
 	closeButton: require("../Images/Icons/close-button.png"),
 	initProfileBg: require("../Images/select_image.png"),
 	userIcon: require("../Images/user_icon.png"),
-	myCare: require("../Images/myCare.png") 
+	myCare: require("../Images/myCare.png"), 
+	cost: require("../Images/cost.png"), 
+	diagnostic: require("../Images/diagnostic.png"), 
+	prescription: require("../Images/prescription.png"), 
+	procedures: require("../Images/procedures.png"), 
+	notes: require("../Images/notes.png"), 
 };
 
 export default images;

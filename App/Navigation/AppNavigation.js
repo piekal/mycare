@@ -13,7 +13,7 @@ import PasswordSignin from '../Containers/PasswordSigninScreen';
 import ProfileScreen from '../Containers/ProfileScreen';
 import VerificationPin from '../Containers/VerificationPin'
 import Verification from '../Containers/Verification'
-
+import ClaimsDataScreen from '../Containers/ClaimsDataScreen'
 
 
 const PrimaryNav = StackNavigator(
@@ -27,12 +27,13 @@ const PrimaryNav = StackNavigator(
 		PasswordSignin: { screen: PasswordSignin },
 		ProfileScreen: { screen: ProfileScreen },
 		VerificationPin: { screen: VerificationPin },
-		Verification: { screen: Verification }
+		Verification: { screen: Verification },
+		ClaimsDataScreen: { screen: ClaimsDataScreen },
 
 
 	},
 	{
-		initialRouteName: "Welcome",
+		initialRouteName: "ClaimsDataScreen",
 		headerMode: "none",
 	}
 );
