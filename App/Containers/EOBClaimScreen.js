@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Text, Icon, Left, Body, Right, Switch, Button, Title } from 'native-base';
 import { connect } from 'react-redux';
-import { BackHandler, AsyncStorage, View, StyleSheet, ToastAndroid } from 'react-native';
+import { BackHandler, AsyncStorage, View, StyleSheet, ToastAndroid , ListView} from 'react-native';
 import { Images, Metrics, Colors } from "../Themes";
 import * as _ from 'lodash';
 import * as axios from 'axios';
@@ -20,9 +20,17 @@ class EOBClaimScreen extends Component {
     constructor(props) {
         super(props);
 
+        var chatObjects = [];
+        
+        const rowHasChanged = (r1, r2) => r1 !== r2
+        
+            // DataSource configured
+        const ds = new ListView.DataSource({ rowHasChanged })
+
         this.state = {
-            isFetching: false,
-            claimsData: []
+            isFetching: true,
+            claimsData: [],
+            dataSource: ds.cloneWithRows(chatObjects),
         }
 
         const dataSet = dataCategories = [
@@ -65,9 +73,20 @@ class EOBClaimScreen extends Component {
             }
         }).then(response => {
             if (response.data) {
+
+                alert(JSON.stringify(response.data));
+                let  apiData= response.data;
+                
+                 const rowHasChanged = (r1, r2) => r1 !== r2
+             
+                 // DataSource configured
+                 const ds = new ListView.DataSource({ rowHasChanged })
+             
+                
                 this.setState({ 
                     isFetching: false,
-                    claimsData: response.data
+                    claimsData: response.data,
+                    dataSource: ds.cloneWithRows(apiData),
                  });
 
             }
@@ -160,7 +179,7 @@ class EOBClaimScreen extends Component {
                 </Header>
 
                 <Content style={{ backgroundColor: '#FBFBFB' }}>
-                    <Spinner visible={this.state.isFetching} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
+                  
                     <List>
                         {this.renderClaimsData()}
                     </List>
