@@ -3,6 +3,7 @@
 var mongoose = require('mongoose');
 var axios = require('axios');
 var fs = require('fs');
+var providerToken = mongoose.model('ProviderToken');
 var EOBType = mongoose.model('EOBType');
 var EOB = mongoose.model('EOB');
 var EOBStatus = mongoose.model('EOBStatus');
@@ -26,7 +27,17 @@ var eobStatusConstants = require('../constants/EOBStatusConstants');
 exports.provider_callback = function(req, res) {
   console.log('GET /bb/provider/callback : ',req.params);
 
-  // BB type 
+  /*
+   * exchange token at /o/token
+   */
+  // TODO
+  
+  //-----------------------------------------------
+  // assume token is found
+  var bbToken = 'PETf15vD2vTvMj2c7lB2V0to3wAANG';
+  //-----------------------------------------------
+  
+  // get BB type 
   EOBType.findOne({
     name: eobTypeConstants.CMS_BLUE_BUTTON
   }, function(err,eobtype) {
@@ -37,6 +48,18 @@ exports.provider_callback = function(req, res) {
 	messege:err
       });
     };
+
+    // upsert token
+    providerToken.findOneAndUpdate({
+      user_id:req.user,
+      eob_type:eobtype      
+    },{
+      token:bbToken
+    },{upsert:true, new:true }, function(err,t){
+      if(t) {
+	console.log('BB Token Saved');
+      }
+    });
     
     // upsert status
     EOBStatus.findOneAndUpdate({
@@ -44,17 +67,16 @@ exports.provider_callback = function(req, res) {
       eob_type:eobtype
     },{
       status:"LOADING_EOB"
-    },{upsert:true, new:true }, function(st){
+    },{upsert:true, new:true }, function(err,st){
       console.log('Fetching EOB...');
       res.status(200).send("Fetching EOB");
 
-      
       // call bb eob
       axios({
         method:'get',
         url:'https://sandbox.bluebutton.cms.gov/v1/fhir/ExplanationOfBenefit/?patient=20140000008324',
         headers: {
-          'Authorization': 'Bearer PETf15vD2vTvMj2c7lB2V0to3wAANG'
+          'Authorization': 'Bearer ' + bbToken
         },
         responseType:'json'
       }).then(function(resp) {
