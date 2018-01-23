@@ -1,19 +1,23 @@
 import React, { Component } from 'react'
-import { BackHandler, AsyncStorage } from 'react-native'
+import { BackHandler, AsyncStorage, StyleSheet } from 'react-native'
 import { Content, Container, Header, Left, Right, Body, View, Button, Text, Title, Icon, List, ListItem, CheckBox, Input, Spinner } from 'native-base'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 
 // Styles
-import styles from './Styles/ProfileScreenStyle'
+import styles from './Styles/ProfileScreenStyle';
+import { timeLineStyles } from './Styles/TimelineStyles';
 import { Image } from 'react-native';
 import { Images, Metrics, Colors } from "../Themes";
-import { timelineStatus } from '../Shared/Constants';
+// import { timelineStatus } from './Constants';
 
 import * as axios from 'axios';
 
-
+const timelineStatus = {
+  blueButtonConnected: 'connected',
+  blueButtonStorageKey: 'bb'
+}
 
 class ProfileScreen extends Component {
 
@@ -31,6 +35,49 @@ class ProfileScreen extends Component {
       token: '',
       connectedToCms: false
     }
+
+    this.mockData = [
+      {
+        "entry_id": "5a667435852fc30548e37b94",
+        "start_date": "2015-03-01",
+        "end_date": "2015-03-01",
+        "first_icd_code": "S50859D",
+        "first_icd_desc": "Superficial foreign body of unspecified forearm, subsequent encounter",
+        "provider": "SAYONARA BAEZ"
+      },
+      {
+        "entry_id": "5a667435852fc30548e37b92",
+        "start_date": "2015-07-01",
+        "end_date": "2015-07-01",
+        "provider": "JOHN LIGUSH",
+        "first_icd_code": "W5501XA",
+        "first_icd_desc": "Bitten by cat, initial encounter"
+      },
+      {
+        "entry_id": "5a667435852fc30548e37b90",
+        "start_date": "2014-07-01",
+        "end_date": "2014-07-01",
+        "first_icd_code": "S82013F",
+        "first_icd_desc": "Displaced osteochondral fracture of unspecified patella, subsequent encounter for open fracture type IIIA, IIIB, or IIIC with routine healing",
+        "provider": "CHARLENA HARRIS"
+      },
+      {
+        "entry_id": "5a667435852fc30548e37b99",
+        "start_date": "2015-03-01",
+        "end_date": "2015-03-01",
+        "provider": "RYAN CANNON",
+        "first_icd_code": "S75911S",
+        "first_icd_desc": "Laceration of unspecified blood vessel at hip and thigh level, right leg, sequela"
+      },
+      {
+        "entry_id": "5a667435852fc30548e37bf2",
+        "start_date": "2015-04-01",
+        "end_date": "2015-04-01",
+        "provider": "JENNIFER LAI",
+        "first_icd_code": "S63422A",
+        "first_icd_desc": "Traumatic rupture of palmar ligament of right middle finger at metacarpophalangeal and interphalangeal joint, initial encounter"
+      }
+    ];
   }
 
   componentWillMount() {
@@ -66,7 +113,7 @@ class ProfileScreen extends Component {
       return (
         <ListItem itemDivider>
           <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
-            <Button rounded style={styles.btn}>
+            <Button rounded style={styles.btn} onPress={() => { this.props.navigation.navigate('BlueButtonScreen') }}>
               <Text>Connect to CMS</Text>
             </Button>
 
@@ -95,15 +142,13 @@ class ProfileScreen extends Component {
                   <Text uppercase={true}>explanation of benefit</Text>
                 </Button>
               </View>
-
-
-              <View style={{ paddingVertical: 50 }}>
-                <Text>To much information</Text>
+              <View>
+              {/* {this.renderEOBTargets(this.mockData)} */}
               </View>
 
               <View>
-                <Button bordered rounded style={{width: 211, alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}>
-                  <Text  uppercase={true}>providers list</Text>
+                <Button bordered rounded style={{ width: 211, alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}>
+                  <Text uppercase={true}>providers list</Text>
                 </Button>
               </View>
             </View>
@@ -111,6 +156,35 @@ class ProfileScreen extends Component {
         </View>
       );
     }
+  }
+
+  renderEOBTargets(targetsList) {
+    return targetsList.map((target, index) => {
+      const topLineStyle = index === 0 ? [timeLineStyles.topLine, timeLineStyles.hiddenLine] : timeLineStyles.topLine;
+      const bottomLineStyle = index === targetsList.length ? [timeLineStyles.bottomLine, timeLineStyles.hiddenLine] : timeLineStyles.bottomLine;
+
+      return (
+        <View style={timeLineStyles.row} key={target.entry_id}>
+          <View style={timeLineStyles.timeline}>
+            <View style={timeLineStyles.line}>
+              <View style={topLineStyle} />
+              <View style={bottomLineStyle} />
+            </View>
+            <View style={timeLineStyles.dot} />
+          </View>
+
+          <View style={styles.content}>
+            <View style={{ paddingLeft: 0, borderBottomColor: '#A8A8A8' }}>
+              <Body>
+                <Text uppercase={true} style={{ padding: 0, fontSize: 14, color: Colors.appBlack }}>{target.provider}</Text>
+              </Body>
+              <Right>
+              </Right>
+            </View>
+          </View>
+        </View>
+      );
+    });
   }
 
   getUserData(userId, token) {
@@ -275,6 +349,7 @@ class ProfileScreen extends Component {
   }
 
 }
+
 
 const mapStateToProps = (state) => {
   return {

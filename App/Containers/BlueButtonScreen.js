@@ -3,7 +3,12 @@ import { View, StyleSheet, AsyncStorage, Alert, ToastAndroid } from 'react-nativ
 import { Container, Content, List, Text, Spinner } from 'native-base';
 import { connect } from 'react-redux';
 import * as axios from 'axios';
-import { timelineStatus } from '../Shared/constants';
+// import { timelineStatus } from './constants';
+
+const timelineStatus = {
+    blueButtonConnected: 'connected',
+    blueButtonStorageKey: 'bb'
+  }
 
 class BlueButtonScreen extends Component {
     constructor(props) {
