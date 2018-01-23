@@ -1,3 +1,4 @@
 export const timelineStatus = {
-    blueButtonConnected: 'connected'
+    blueButtonConnected: 'connected',
+    blueButtonStorageKey: 'bb'
 }

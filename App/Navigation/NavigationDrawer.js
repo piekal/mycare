@@ -13,8 +13,8 @@ const NavigationDrawer = DrawerNavigator({
 		  BlueButtonScreen: { screen: BlueButtonScreen }
 	},
 	{
-		// initialRouteName: "ProfileScreen",
-		initialRouteName: "BlueButtonScreen",
+		initialRouteName: "ProfileScreen",
+		// initialRouteName: "BlueButtonScreen",
 		contentComponent: props => <DrawerContent {...props} />,
 	}
 );

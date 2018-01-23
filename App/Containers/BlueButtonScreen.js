@@ -33,14 +33,14 @@ class BlueButtonScreen extends Component {
             if (response.data === 'EOB_READY') {
                 this.setState({isFetching: false});
 
-                AsyncStorage.setItem('bb', timelineStatus.blueButtonConnected);
+                AsyncStorage.setItem(timelineStatus.blueButtonStorageKey, timelineStatus.blueButtonConnected);
 
                 this.props.navigation.navigate('ProfileScreen');
             }
         })
         .catch(error => {
             this.setState({isFetching: false});
-            
+
             if(error.response.status === 401) {
                 ToastAndroid.show('Unauthorized! You dont have access', ToastAndroid.SHORT);
             } else {

@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 import styles from './Styles/ProfileScreenStyle'
 import { Image } from 'react-native';
 import { Images, Metrics, Colors } from "../Themes";
+import { timelineStatus } from '../Shared/Constants';
 
 import * as axios from 'axios';
 
@@ -27,14 +28,20 @@ class ProfileScreen extends Component {
       email: '',
       dob: '',
       race: '',
-      token: ''
+      token: '',
+      connectedToCms: false
     }
   }
 
   componentWillMount() {
-    AsyncStorage.multiGet(['userId', 'token']).then((data) => {
+    AsyncStorage.multiGet(['userId', 'token', timelineStatus.blueButtonStorageKey]).then((data) => {
       let userId = data[0][1];
       let token = data[1][1];
+      let bbConnectionStatus = data[2][1];
+
+      if (bbConnectionStatus && bbConnectionStatus === timelineStatus.blueButtonConnected) {
+        this.setState({ connectedToCms: true });
+      }
 
       token = `JWT ${token}`;
 
@@ -55,47 +62,92 @@ class ProfileScreen extends Component {
   }
 
   connectToProviders() {
-    return (
-      <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
-        <Button rounded style={styles.btn}>
-          <Text>Connect to CMS</Text>
-        </Button>
+    if (!this.state.connectedToCms) {
+      return (
+        <ListItem itemDivider>
+          <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
+            <Button rounded style={styles.btn}>
+              <Text>Connect to CMS</Text>
+            </Button>
 
-        <Button rounded bordered style={[styles.btn, styles.btnOutline]}>
-          <Text style={styles.outlineBtnText}>Connect to other Providers</Text>
-        </Button>
+            <Button rounded bordered style={[styles.btn, styles.btnOutline]}>
+              <Text style={styles.outlineBtnText}>Connect to other Providers</Text>
+            </Button>
 
-      </View>
-    )
+          </View>
+        </ListItem>
+      )
+    } else {
+      return (
+        <View>
+          <ListItem>
+            <Left>
+              <Text style={styles.textLabel} uppercase={true}>Blue Button</Text>
+            </Left>
+          </ListItem>
+
+          <ListItem itemDivider style={{ maxHeight: 2 }} />
+
+          <ListItem style={{ justifyContent: 'center', alignItems: 'center' }}>
+            <View>
+              <View>
+                <Button bordered rounded >
+                  <Text uppercase={true}>explanation of benefit</Text>
+                </Button>
+              </View>
+
+
+              <View style={{ paddingVertical: 50 }}>
+                <Text>To much information</Text>
+              </View>
+
+              <View>
+                <Button bordered rounded style={{width: 211, alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}>
+                  <Text  uppercase={true}>providers list</Text>
+                </Button>
+              </View>
+            </View>
+          </ListItem>
+        </View>
+      );
+    }
   }
 
   getUserData(userId, token) {
 
-    var that = this;
+    // var that = this;
 
-    axios.get(`https://www.mycare-api.com/api/v1/user/${userId}/profile`, {
-      headers: {
-        'Authorization': token
-      }
-    }).then((response) => {
-      let userDetails = response.data;
+    // axios.get(`https://www.mycare-api.com/api/v1/user/${userId}/profile`, {
+    //   headers: {
+    //     'Authorization': token
+    //   }
+    // }).then((response) => {
+    //   let userDetails = response.data;
 
-      that.setState({
-        fetching: false,
-        firstName: userDetails.firstName,
-        lastName: userDetails.lastName,
-        email: userDetails.email,
-      })
-    }).catch((err) => {
+    //   that.setState({
+    //     fetching: false,
+    //     firstName: userDetails.firstName,
+    //     lastName: userDetails.lastName,
+    //     email: userDetails.email,
+    //   })
+    // }).catch((err) => {
 
-      if (err.response.status === 401) {
+    //   if (err.response.status === 401) {
 
-        this.props.navigation.navigate('EmailSignin');
-        alert(JSON.stringify(err));
+    //     this.props.navigation.navigate('EmailSignin');
+    //     alert(JSON.stringify(err));
 
-      } else {
-        alert('A network error occured');
-      }
+    //   } else {
+    //     alert('A network error occured');
+    //   }
+    // })
+
+    // todo remove the following and uncomment the above
+    this.setState({
+      fetching: false,
+      firstName: 'Ayo',
+      lastName: 'Akin',
+      email: 'ayo@email.com'
     })
   }
 
@@ -174,11 +226,11 @@ class ProfileScreen extends Component {
 
             <ListItem itemDivider />
 
-            <ListItem>
+            {/* <ListItem>
               {this.connectToProviders()}
-            </ListItem>
+            </ListItem> */}
 
-
+            {this.connectToProviders()}
 
           </List>
         </View>
