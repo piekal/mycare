@@ -19,6 +19,7 @@ var express = require('express'),
     entry = require('./api/models/entryModel'),
     billable = require('./api/models/billableDateModel'),
     provider = require('./api/models/providerModel'),
+    providerToken = require('./api/models/providerTokenModel'),
     diagonosis = require('./api/models/diagnosisModel'),    	
     userRoute = require('./api/routes/userRoute'),
     bbRoute = require('./api/routes/blueButtonRoute'),
@@ -76,7 +77,6 @@ if (argv.meta == 'LOAD') {
   var ICD = mongoose.model('ICD');
   var NPI = mongoose.model('NPI');
 
-
   console.log("Saving ICD codes...");
   
   // load icd
@@ -111,7 +111,7 @@ if (argv.meta == 'LOAD') {
   }).on("end", function(){
     console.log("NPI codes saved.");
   });
-
+  
 }
 
 // start server

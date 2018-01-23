@@ -2,7 +2,7 @@ openapi: 3.0.0
 # Added by API Auto Mocking Plugin
 servers:
   - description: SwaggerHub API Auto Mocking
-    url: https://www.mycare-api/api/1.0.0
+    url: https://www.mycare-api/api/v1/
 info:
   version: "1.0.0"
   title: MyCare
@@ -23,18 +23,18 @@ paths:
     post:
       tags:
         - User
-      summary: Create user account/send confirmation email
+      summary: Create user account -> send confirmation email
       description: >-
-        Create user account
+        Create user account/send confirmation email
       responses:
         '200':
           description: OK
     get:
       tags:
         - User
-      summary: Get user info/verification status
+      summary: Get user info
       description: >-
-        Create user account
+        Get user info
       responses:
         '200':
           description: OK
@@ -42,9 +42,9 @@ paths:
     post:
       tags:
         - User
-      summary:  confirm email
+      summary:  confirm email (called after email link myapp://email_confirm#...)
       description: >-
-        verify phone number
+        link from email to confirm email address
       security: []
       responses:
         '200':
@@ -53,7 +53,7 @@ paths:
     post:
       tags:
         - User
-      summary: add phone number (assume one phone)
+      summary: add phone number (assume one phone) -> send code text message
       description: >-
         Add verification phone number
       security: []
@@ -64,7 +64,7 @@ paths:
     post:
       tags:
         - User
-      summary:  confirm phone number
+      summary:  confirm phone number with code (onboarding blocked until verified)
       description: >-
         verify phone number
       security: []
@@ -97,9 +97,9 @@ paths:
     post:
       tags:
         - User
-      summary: Send password reset confirmation email
+      summary: Send password reset email to given email
       description: >-
-        Add verification phone number
+        Enter emails and send password reset email
       security: []
       responses:
         '200':
@@ -107,23 +107,13 @@ paths:
     put:
       tags:
         - User
-      summary: Update password
+      summary: Update password (called after myapp://password_reset#...)
       description: >-
-        Verify code
+        Update password
       security: []
       responses:
         '200':
           description: OK  
-    get:
-      tags:
-        - User
-      summary: Password reset page
-      description: >-
-        Verify code
-      security: []
-      responses:
-        '200':
-          description: OK
   /user/profile:
     post:
       tags:
@@ -145,50 +135,139 @@ paths:
       responses:
         '200':
           description: OK
-  /bb/provider/callback:
+  /bb/callback:
     get:
       tags:
         - Blue Button
-      summary: Callback url after BB authentication
+      summary: callback for send token to backend - called after myapp://callback#token=... to store token and start fetching EOB.
       description: >-
         Obtain token and start pulling data
       security: []
       responses:
         '200':
           description: OK  
-  /bb/status:
+  /bb/eob:
     get:
       tags:
         - Blue Button
-      summary: Get status
+      summary: ping EOB ETL status for blue button. If EOB exists send summary with eob_id
       description: >-
-        Get status of bb ETL
+        Get user\'s blue button eob
       security: []
       responses:
         '200':
           description: OK  
-  /bb/claim:
+  /bb/eob/{eob_id}/entry:
     get:
       tags:
         - Blue Button
-      summary: Get timeline from eob
+      summary: Get list of entries of eob (timeline)
       description: >-
-        Get timeline from eob
+        Get list of entries of eob
       security: []
       responses:
         '200':
           description: OK
-  /bb/claim/{claim_id}:
+  /bb/eob/{eob_id}/entry/{entry_id}:
     get:
       tags:
         - Blue Button
-      summary: Get claim details
+      summary: Get entry summary (counts?)
       description: >-
-        Get claim details
+        Get entry summary (counts?)
       security: []
       responses:
         '200':
           description: OK
+  /bb/eob/{eob_id}/entry/{entry_id}/diagnosis:
+    get:
+      tags:
+        - Blue Button
+      summary: Get diagnosis list of entry
+      description: >-
+        Get diagnosis list of entry
+      security: []
+      responses:
+        '200':
+          description: OK
+  /bb/eob/{eob_id}/entry/{entry_id}/diagnosis/{diagnosis_id}:
+    get:
+      tags:
+        - Blue Button
+      summary: Get diagnosis detail
+      description: >-
+        Get diagnosis detail
+      security: []
+      responses:
+        '200':
+          description: OK
+  /bb/eob/{eob_id}/entry/{entry_id}/procedure:
+    get:
+      tags:
+        - Blue Button
+      summary: Get procedure list of entry
+      description: >-
+        Get procedure list of entry
+      security: []
+      responses:
+        '200':
+          description: OK
+  /bb/eob/{eob_id}/entry/{entry_id}/procedure/{procedure_id}:
+    get:
+      tags:
+        - Blue Button
+      summary: Get procedure details
+      description: >-
+        Get procedure details
+      security: []
+      responses:
+        '200':
+          description: OK
+  /bb/eob/{eob_id}/entry/{entry_id}/cost:
+    get:
+      tags:
+        - Blue Button
+      summary: Get payment summary
+      description: >-
+        Get payment summary
+      security: []
+      responses:
+        '200':
+          description: OK
+  /bb/eob/{eob_id}/entry/{entry_id}/prescription:
+    get:
+      tags:
+        - Blue Button
+      summary: Get prescription list
+      description: >-
+        Get prescription list
+      security: []
+      responses:
+        '200':
+          description: OK
+  /bb/eob/{eob_id}/entry/{entry_id}/prescription/{prescription_id}:
+    get:
+      tags:
+        - Blue Button
+      summary: Get prescription details
+      description: >-
+        Get prescription detail
+      security: []
+      responses:
+        '200':
+          description: OK
+  /bb/eob/{eob_id}/entry/{entry_id}/note:
+    get:
+      tags:
+        - Blue Button
+      summary: Get notes
+      description: >-
+        Get notes
+      security: []
+      responses:
+        '200':
+          description: OK
+
 components:
   schemas: {}
   securitySchemes:
