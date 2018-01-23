@@ -138,7 +138,8 @@ class ProfileScreen extends Component {
           <ListItem style={{ justifyContent: 'center', alignItems: 'center' }}>
             <View>
               <View>
-                <Button bordered rounded >
+                <Button onPress={() => {this.props.navigation.navigate('EOBClaimScreen')}}
+                 bordered rounded style={{ width: 230, alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}>
                   <Text uppercase={true}>explanation of benefit</Text>
                 </Button>
               </View>
@@ -146,8 +147,8 @@ class ProfileScreen extends Component {
               {/* {this.renderEOBTargets(this.mockData)} */}
               </View>
 
-              <View>
-                <Button bordered rounded style={{ width: 211, alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}>
+              <View style={{marginTop: 20}}>
+                <Button bordered rounded style={{ width: 230, alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}>
                   <Text uppercase={true}>providers list</Text>
                 </Button>
               </View>
