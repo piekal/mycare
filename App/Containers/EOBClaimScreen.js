@@ -334,7 +334,7 @@ class EOBClaimScreen extends Component {
                                 <Text numberOfLines={1} style={{ fontSize: 14, color: Colors.appBlack }} uppercase={false}>{category.first_icd_desc}</Text>
                             </Body>
                             <Right>
-                                <Text note uppercase={true}>
+                                <Text note uppercase={true} numberOfLines={1}>
                                     {month}
                                 </Text>
                             </Right>
