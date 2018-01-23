@@ -32,8 +32,8 @@ const PrimaryNav = StackNavigator(
 
 	},
 	{
-		// initialRouteName: "Welcome",
-		initialRouteName: "NavigationDrawer",
+		initialRouteName: "Welcome",
+		// initialRouteName: "NavigationDrawer",
 		headerMode: "none",
 	}
 );
