@@ -12,7 +12,7 @@ import EmailSignin from '../Containers/EmailSigninScreen';
 import PasswordSignin from '../Containers/PasswordSigninScreen';
 import ProfileScreen from '../Containers/ProfileScreen';
 import VerificationPin from '../Containers/VerificationPin'
-import Verification from '../Containers/Verification'
+import Verification from '../Containers/Verification';
 
 
 
@@ -32,7 +32,8 @@ const PrimaryNav = StackNavigator(
 
 	},
 	{
-		initialRouteName: "Welcome",
+		// initialRouteName: "Welcome",
+		initialRouteName: "NavigationDrawer",
 		headerMode: "none",
 	}
 );
