@@ -10,60 +10,94 @@ var mongoose = require('mongoose'),
  * Creates user and profile
  */
 exports.register = function(req, res){
-  console.log('Registering User : ',req.body);
+  console.log('POST /user : ',req.body.email);
+
+  // create new user
   var newUser = new User(req.body);
-  
   newUser.hash_password = bcrypt.hashSync(req.body.password, 10);
   newUser.save(function(err, user) {
+
     if (err) {
-      console.error('Registration failed : ',err);
-      return res.status(400).send({
+      console.error('User save failed : ',err);
+      return res.status(500).send({
         message: err
       });
+    }
+
+    // create new profile 
+    var newProfile = new Profile({
+      user: newUser._id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email
+    });
+
+    // save profile
+    newProfile.save(function(err,profile) {
+      if (err){
+	console.error('Profile save failed : ',err);
+	return res.status(500).send({
+	  messege:err
+	});
+      } 
+    });
 
     // if new user is created
-    } else {
-      console.log('Registration success');
-
-      // make user token is empty
-      user.hash_password = undefined;      
-      
-      // create new profile 
-      var newProfile = new Profile({
-        user: newUser._id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email
-      });
-      newProfile.save(function(err) {});
-      user.profile = newProfile;      
-      return res.json({
-        userId:user._id
-      });
-    }
+    console.log('Registration success');
+    
+    // return user Id
+    return res.json({
+      userId:user._id
+    });   
   });
 }
 
+/*
+ * Sign in user
+ */
 exports.sign_in = function(req, res){
-  console.log('Sign in User : ',req.body);
+  console.log('POST /sign_in : ',req.body);
+
+  // find user
   User.findOne({
     email: req.body.email
   }, function(err, user) {
-    if (err) throw err;
+
+    if (err) {
+      console.error('Find user failed : ',err);
+      return res.status(500).send({
+	messege:err
+      });
+    };
+
+    // if no user
     if (!user) {
       console.error('Authentication failed. User not found.');
-      res.status(401).json({ message: 'Authentication failed. User not found.' });
-    } else if (user) {
-      if (!user.comparePassword(req.body.password)) {
-        console.error('Authentication failed. Wrong password.');
-        res.status(401).json({ message: 'Authentication failed. Wrong password.' });
-      } else {
-        console.log('Sign in User Success');
-        return res.json({
-          token: jwt.sign({ email: user.email, fullName: user.fullName, _id: user._id}, 'RESTFULAPIs'),
-          userId:user._id
-        });
-      }
+      return res.status(401).json({
+	message: 'Authentication failed. User not found.'
+      });
     }
+
+    // check password
+    if (!user.comparePassword(req.body.password)) {
+      console.error('Authentication failed. Wrong password.');
+      res.status(401).json({
+	message: 'Authentication failed. Wrong password.'
+      });      
+    } else {
+      console.log('Sign in User Success');
+      return res.json({
+
+	// create token
+	token: jwt.sign({
+	  email: user.email,
+	  fullName: user.fullName,
+	  _id: user._id
+	}, 'RESTFULAPIs'),
+
+	// send user id
+	userId:user._id
+      });
+    }    
   });
 }

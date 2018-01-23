@@ -1,0 +1,1 @@
+exports.CMS_BLUE_BUTTON = "CMS_BLUE_BUTTON";

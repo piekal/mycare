@@ -1,7 +1,6 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-    bcrypt = require('bcrypt');
+var mongoose = require('mongoose');
 
 var ProfileSchema = new mongoose.Schema({
   user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
@@ -16,10 +15,5 @@ var ProfileSchema = new mongoose.Schema({
   },
   user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 }, {timestamps: true});
-
-
-ProfileSchema.methods.comparePassword = function(password) {
-  return bcrypt.compareSync(password, this.hash_password)
-}
 
 mongoose.model('Profile', ProfileSchema);

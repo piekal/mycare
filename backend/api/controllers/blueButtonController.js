@@ -14,33 +14,42 @@ var ICD = mongoose.model('ICD');
 var NPI = mongoose.model('NPI');
 var _ = require('lodash');
 var uuid = require('uuid');
+var EOBHelper = require('../helpers/EOBHelper');
+var eobTypeConstants = require('../constants/EOBTypeConstants');
+var eobStatusConstants = require('../constants/EOBStatusConstants');
 
 /*
+ * GET /bb/provider/callback
+ *
  * handle provider callback
  */
 exports.provider_callback = function(req, res) {
   console.log('GET /bb/provider/callback : ',req.params);
-  return res.status(200).send();
-}
 
-
-/*
- * handle provider callback
- */
-exports.provider_callback = function(req, res) {
-  console.log('GET /bb/provider/callback : ',req.params);
-
-  // BB 
+  // BB type 
   EOBType.findOne({
-    name: "CMS_BLUE_BUTTON"
-  }).then(function(res) {
-    // save status
+    name: eobTypeConstants.CMS_BLUE_BUTTON
+  }, function(err,eobtype) {
+    
+    if (err || !eobtype) {
+      console.error('EOBType not found : ',err);
+      return res.status(500).send({
+	messege:err
+      });
+    };
+    
+    // upsert status
     EOBStatus.findOneAndUpdate({
       user_id:req.user,
-      eob_type:res
+      eob_type:eobtype
     },{
       status:"LOADING_EOB"
-    },{upsert:true, new:true },function(){
+    },{upsert:true, new:true }, function(st){
+      console.log('Fetching EOB...');
+      res.status(200).send("Fetching EOB");
+
+      
+      // call bb eob
       axios({
         method:'get',
         url:'https://sandbox.bluebutton.cms.gov/v1/fhir/ExplanationOfBenefit/?patient=20140000008324',
@@ -48,126 +57,14 @@ exports.provider_callback = function(req, res) {
           'Authorization': 'Bearer PETf15vD2vTvMj2c7lB2V0to3wAANG'
         },
         responseType:'json'
-      }).then(function(response) {
-        //  var eobparse= JSON.parse(fs.readFileSync('../shared/SampleEOB.json'));
-        var eobparse = response.data;
-        parseEOB(req,eobparse);    
+      }).then(function(resp) {
+	console.log('Parsing EOB...');
+        EOBHelper.parseEOB(req,resp.data);	
       });
     });
   });
-  return res.status(200).send();
 }
 
-/*
- * Parse EOB
- */
-function parseEOB(req,eobparse) {    
-  
-  console.log("Start Parse EOB");
-  var eob = new EOB({ user_id:req.user, total: eobparse.total});
-  
-  // find eob type
-  EOBType.findOne({
-    name: "CMS_BLUE_BUTTON"
-  }).then(function(res) {
-    //console.log(res);
-    eob.eob_type = res;
-
-    // update status
-    EOBStatus.findOne({
-      user_id:req.user,
-      eob_type:res
-    },function(err,obj) {
-      obj.status = "PARSING_EOB";
-      obj.save();
-    });
-    
-    // save eob
-    eob.save(function(err, eob) {
-
-      // loop entries
-      _.each(eobparse.entry, function(e,i) {
-        //console.log("EOB url : ",e.fullUrl);
-        var entryl = new entry({ url: e.fullUrl }); 
-
-        if (i == eobparse.total-1) {
-          EOBStatus.findOne({
-            user_id:req.user,
-            eob_type:res
-          },function(err,obj) {
-            obj.status = "EOB_READY";
-            obj.save();
-          });
-        }
-        
-        if (!eob) {
-          return;
-        }
-
-        entryl.eob_id = eob;
-        
-        //save entry
-        entryl.save(function(err, entryl) {
-          if (entryl) {
-
-            // save billdate
-            var startDate = e.resource.billablePeriod && e.resource.billablePeriod.start;
-            var endDate = e.resource.billablePeriod && e.resource.billablePeriod.end;
-
-            if (startDate && endDate) {
-              var bill = new billable({
-	        start_date:e.resource.billablePeriod && e.resource.billablePeriod.start, 
-	        end_date:e.resource.billablePeriod && e.resource.billablePeriod.end
-              });
-              
-              bill.entry_id = entryl;
-              bill.save();
-              
-              
-              // save diagonosis
-              _.each(e.resource.diagnosis, function(d,i) {
-                var diag1 = new diagnosis({
-	          sequence:d.sequence,
-	          icd_version:d.diagnosisCodeableConcept.coding[0].system
-                });
-
-                //console.error(entryl);
-                diag1.entry_id = entryl;
-                
-                ICD.count().exec(function (err, count) {
-	          //console.log("ICD count : ",count);
-	          var random = Math.floor(Math.random() * count);
-	          ICD.findOne().skip(random).exec(
-	            function (err, result) {
-	              //console.log(result);
-	              diag1.icd_code = result.code;
-                      diag1.icd=result;
-	              diag1.save();
-	            });	
-                });
-              });
-
-              // save provider
-              var pr = new provider();
-              pr.entry_id = entryl;
-              NPI.count().exec(function (err, count) {
-	        //console.log("NPI count : ",count);
-	        var random = Math.floor(Math.random() * count);
-	        NPI.findOne().skip(random).exec(
-	          function (err, result) {
-	            //console.log(result);
-	            pr.npi_code = result.npi_code;
-                    pr.npi = result;
-                    pr.save();
-	          });	
-              });
-            }
-          }
-        });
-      });
-    });
-  });  
-}
 
 /*
  * send status
@@ -229,13 +126,18 @@ exports.timeline = async function(req, res) {
                   if (p && p.npi) {
                     var n = p.npi;
                     if (n.type == 1) {
-                      timeline.provider =
-                      n.provider_name_prefix + " " +
-                      n.provider_first_name + " "+
-                      n.provider_last_name + " "+
-                      n.provider_name_suffix;
+		      var prefix = n.provider_name_prefix.trim.length > 0 ?
+			  n.provider_name_prefix.trim() + " " : "";
+		      var suffix = n.provider_name_suffix.trim.length > 0 ?
+			  " " +n.provider_name_suffix.trim() : "";		      
+		      
+		      timeline.provider =
+			prefix +
+			n.provider_first_name.trim() + " "+
+			n.provider_last_name.trim() +
+			suffix;
                     } else {
-                      timeline.provider = n.org_name;
+                      timeline.provider = n.org_name.trim();
                     }
                   }
                 });
@@ -286,6 +188,15 @@ exports.timeline = async function(req, res) {
     });
   });
 
+}
+
+exports.get_diagnosis = function(req, res) {
+  console.error(req.params);  
+  diagnosis.find({
+    entry_id:req.params.entry_id
+  }).populate('icd').exec(function(err, ds) {
+    return res.json(ds);
+  }); 
 }
 
 exports.purge_eob = function(req, res) {
