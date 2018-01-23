@@ -16,6 +16,8 @@ Array.prototype.groupBy = function (prop) {
     }, {});
 }
 
+
+
 class EOBClaimScreen extends Component {
     constructor(props) {
         super(props);
@@ -33,25 +35,8 @@ class EOBClaimScreen extends Component {
             dataSource: ds.cloneWithRows(chatObjects),
         }
 
-        const dataSet = dataCategories = [
-            { name: 'DIAGNOSTIC', providerName: 'Sanai Hospital', summary: 'last data goes here so stay tuned for more stuffs', month: 'June' },
-            { name: 'PROCEDURES', providerName: 'Doctors Office', summary: 'Went for retrospective accessment', month: 'May' },
-            { name: 'COST', providerName: 'Bob Sawyer', summary: 'Lanial crane checkup', month: 'April' },
-            { name: 'PRESCRIPTION', providerName: 'Combinatiions', summary: 'Examinaion of falopian tube', month: 'March' },
-            { name: 'NOTES', providerName: 'Some Time', summary: 'Scan accessment', month: 'january' }
-        ];
-
         this.months = [ "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December" ];
-
-        this.mockData = {
-            '2017': dataSet,
-            '2016': dataSet,
-            '2015': [],
-            '2014': dataSet,
-            '2013': [],
-            '2012': []
-        }
     }
 
     componentWillMount() {
@@ -73,16 +58,7 @@ class EOBClaimScreen extends Component {
             }
         }).then(response => {
             if (response.data) {
-
-                alert(JSON.stringify(response.data));
-                let  apiData= response.data;
-                
-                 const rowHasChanged = (r1, r2) => r1 !== r2
-             
-                 // DataSource configured
-                 const ds = new ListView.DataSource({ rowHasChanged })
-             
-                
+                //console.log('successfull');
                 this.setState({ 
                     isFetching: false,
                     claimsData: response.data,
@@ -126,9 +102,9 @@ class EOBClaimScreen extends Component {
 
         return dataCategories.map((category, index) => {
             const topLineStyle = index === 0 ? [styles.topLine, styles.hiddenLine] : styles.topLine;
-            const bottomLineStyle = index === 4 ? [styles.bottomLine, styles.hiddenLine] : styles.bottomLine;
+            const bottomLineStyle = index === (dataCategories.length - 1) ? [styles.bottomLine, styles.hiddenLine] : styles.bottomLine;
             let date = new Date(category.start_date);
-            let month = this.month[date.getMonth()];
+            let month = this.months[date.getMonth()];
 
             return (
                 <View style={styles.row} key={category.name}>
@@ -148,7 +124,7 @@ class EOBClaimScreen extends Component {
                                 <Text numberOfLines={1} style={{ fontSize: 14, color: Colors.appBlack }} uppercase={false}>{category.first_icd_desc}</Text>
                             </Body>
                             <Right>
-                                <Text note uppercase={true}>
+                                <Text note uppercase={true} numberOfLines={1}>
                                     {month}
                                 </Text>
                             </Right>
@@ -179,7 +155,7 @@ class EOBClaimScreen extends Component {
                 </Header>
 
                 <Content style={{ backgroundColor: '#FBFBFB' }}>
-                  
+                <Spinner visible={this.state.isFetching} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
                     <List>
                         {this.renderClaimsData()}
                     </List>

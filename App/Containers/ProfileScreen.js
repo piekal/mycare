@@ -138,7 +138,8 @@ class ProfileScreen extends Component {
           <ListItem style={{ justifyContent: 'center', alignItems: 'center' }}>
             <View>
               <View>
-                <Button bordered rounded >
+                <Button onPress={() => {this.props.navigation.navigate('EOBClaimScreen')}}
+                 bordered rounded style={{ width: 230, alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}>
                   <Text uppercase={true}>explanation of benefit</Text>
                 </Button>
               </View>
@@ -146,8 +147,8 @@ class ProfileScreen extends Component {
               {/* {this.renderEOBTargets(this.mockData)} */}
               </View>
 
-              <View>
-                <Button bordered rounded style={{ width: 211, alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}>
+              <View style={{marginTop: 20}}>
+                <Button bordered rounded style={{ width: 230, alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}>
                   <Text uppercase={true}>providers list</Text>
                 </Button>
               </View>
@@ -189,40 +190,40 @@ class ProfileScreen extends Component {
 
   getUserData(userId, token) {
 
-    // var that = this;
+    var that = this;
 
-    // axios.get(`https://www.mycare-api.com/api/v1/user/${userId}/profile`, {
-    //   headers: {
-    //     'Authorization': token
-    //   }
-    // }).then((response) => {
-    //   let userDetails = response.data;
+    axios.get(`https://www.mycare-api.com/api/v1/user/${userId}/profile`, {
+      headers: {
+        'Authorization': token
+      }
+    }).then((response) => {
+      let userDetails = response.data;
 
-    //   that.setState({
-    //     fetching: false,
-    //     firstName: userDetails.firstName,
-    //     lastName: userDetails.lastName,
-    //     email: userDetails.email,
-    //   })
-    // }).catch((err) => {
+      that.setState({
+        fetching: false,
+        firstName: userDetails.firstName,
+        lastName: userDetails.lastName,
+        email: userDetails.email,
+      })
+    }).catch((err) => {
 
-    //   if (err.response.status === 401) {
+      if (err.response.status === 401) {
 
-    //     this.props.navigation.navigate('EmailSignin');
-    //     alert(JSON.stringify(err));
+        this.props.navigation.navigate('EmailSignin');
+        alert(JSON.stringify(err));
 
-    //   } else {
-    //     alert('A network error occured');
-    //   }
-    // })
+      } else {
+        alert('A network error occured');
+      }
+    })
 
     // todo remove the following and uncomment the above
-    this.setState({
-      fetching: false,
-      firstName: 'Ayo',
-      lastName: 'Akin',
-      email: 'ayo@email.com'
-    })
+    // this.setState({
+    //   fetching: false,
+    //   firstName: 'Ayo',
+    //   lastName: 'Akin',
+    //   email: 'ayo@email.com'
+    // })
   }
 
   renderUserData() {
