@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Text, Icon, Left, Body, Right, Switch, Button, Title } from 'native-base';
 import { connect } from 'react-redux';
-import { BackHandler, AsyncStorage, View, StyleSheet, ToastAndroid , ListView} from 'react-native';
+import { BackHandler, AsyncStorage, View, StyleSheet, ToastAndroid } from 'react-native';
 import { Images, Metrics, Colors } from "../Themes";
 import * as _ from 'lodash';
 import * as axios from 'axios';
@@ -22,17 +22,9 @@ class EOBClaimScreen extends Component {
     constructor(props) {
         super(props);
 
-        var chatObjects = [];
-        
-        const rowHasChanged = (r1, r2) => r1 !== r2
-        
-            // DataSource configured
-        const ds = new ListView.DataSource({ rowHasChanged })
-
         this.state = {
-            isFetching: true,
-            claimsData: [],
-            dataSource: ds.cloneWithRows(chatObjects),
+            isFetching: false,
+            claimsData: []
         }
 
         this.months = [ "January", "February", "March", "April", "May", "June",
@@ -58,11 +50,10 @@ class EOBClaimScreen extends Component {
             }
         }).then(response => {
             if (response.data) {
-                //console.log('successfull');
+                console.log('successfull');
                 this.setState({ 
                     isFetching: false,
-                    claimsData: response.data,
-                    dataSource: ds.cloneWithRows(apiData),
+                    claimsData: response.data
                  });
 
             }
@@ -155,7 +146,7 @@ class EOBClaimScreen extends Component {
                 </Header>
 
                 <Content style={{ backgroundColor: '#FBFBFB' }}>
-                <Spinner visible={this.state.isFetching} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
+                    <Spinner visible={this.state.isFetching} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
                     <List>
                         {this.renderClaimsData()}
                     </List>
