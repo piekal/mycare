@@ -13,6 +13,8 @@ import PasswordSignin from '../Containers/PasswordSigninScreen';
 import ProfileScreen from '../Containers/ProfileScreen';
 import VerificationPin from '../Containers/VerificationPin'
 import Verification from '../Containers/Verification';
+import BlueButtonScreen from '../Containers/BlueButtonScreen';
+import EOBClaimScreen from '../Containers/EOBClaimScreen';
 
 
 
@@ -27,11 +29,12 @@ const PrimaryNav = StackNavigator(
 		PasswordSignin: { screen: PasswordSignin },
 		ProfileScreen: { screen: ProfileScreen },
 		VerificationPin: { screen: VerificationPin },
-		Verification: { screen: Verification }
+		Verification: { screen: Verification },
+		BlueButtonScreen: { screen: BlueButtonScreen },
+		EOBClaimScreen: { screen: EOBClaimScreen }
 	},
 	{
-		// initialRouteName: "Welcome",
-		initialRouteName: "NavigationDrawer",
+		initialRouteName: "Welcome",
 		headerMode: "none",
 	}
 );

@@ -10,14 +10,10 @@ import EOBClaimScreen from '../Containers/EOBClaimScreen';
 import styles from "./Styles/NavigationStyles";
 
 const NavigationDrawer = DrawerNavigator({
-		  ProfileScreen: { screen: ProfileScreen },
-		  BlueButtonScreen: { screen: BlueButtonScreen },
-		  EOBClaimScreen: { screen: EOBClaimScreen }
+		  Profile: { screen: ProfileScreen }
 	},
 	{
-		initialRouteName: "EOBClaimScreen",
-		// initialRouteName: "ProfileScreen",
-		// initialRouteName: "BlueButtonScreen",
+		initialRouteName: "Profile",
 		contentComponent: props => <DrawerContent {...props} />,
 	}
 );

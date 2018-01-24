@@ -1,11 +1,7 @@
 import React, { Component } from 'react'
-import { BackHandler, AsyncStorage, StyleSheet } from 'react-native'
+import { AsyncStorage, StyleSheet } from 'react-native'
 import { Content, Container, Header, Left, Right, Body, View, Button, Text, Title, Icon, List, ListItem, CheckBox, Input, Spinner } from 'native-base'
 import { connect } from 'react-redux'
-// Add Actions - replace 'Your' with whatever your reducer is called :)
-// import YourActions from '../Redux/YourRedux'
-
-// Styles
 import styles from './Styles/ProfileScreenStyle';
 import { timeLineStyles } from './Styles/TimelineStyles';
 import { Image } from 'react-native';
@@ -35,49 +31,6 @@ class ProfileScreen extends Component {
       token: '',
       connectedToCms: false
     }
-
-    this.mockData = [
-      {
-        "entry_id": "5a667435852fc30548e37b94",
-        "start_date": "2015-03-01",
-        "end_date": "2015-03-01",
-        "first_icd_code": "S50859D",
-        "first_icd_desc": "Superficial foreign body of unspecified forearm, subsequent encounter",
-        "provider": "SAYONARA BAEZ"
-      },
-      {
-        "entry_id": "5a667435852fc30548e37b92",
-        "start_date": "2015-07-01",
-        "end_date": "2015-07-01",
-        "provider": "JOHN LIGUSH",
-        "first_icd_code": "W5501XA",
-        "first_icd_desc": "Bitten by cat, initial encounter"
-      },
-      {
-        "entry_id": "5a667435852fc30548e37b90",
-        "start_date": "2014-07-01",
-        "end_date": "2014-07-01",
-        "first_icd_code": "S82013F",
-        "first_icd_desc": "Displaced osteochondral fracture of unspecified patella, subsequent encounter for open fracture type IIIA, IIIB, or IIIC with routine healing",
-        "provider": "CHARLENA HARRIS"
-      },
-      {
-        "entry_id": "5a667435852fc30548e37b99",
-        "start_date": "2015-03-01",
-        "end_date": "2015-03-01",
-        "provider": "RYAN CANNON",
-        "first_icd_code": "S75911S",
-        "first_icd_desc": "Laceration of unspecified blood vessel at hip and thigh level, right leg, sequela"
-      },
-      {
-        "entry_id": "5a667435852fc30548e37bf2",
-        "start_date": "2015-04-01",
-        "end_date": "2015-04-01",
-        "provider": "JENNIFER LAI",
-        "first_icd_code": "S63422A",
-        "first_icd_desc": "Traumatic rupture of palmar ligament of right middle finger at metacarpophalangeal and interphalangeal joint, initial encounter"
-      }
-    ];
   }
 
   componentWillMount() {
@@ -98,14 +51,6 @@ class ProfileScreen extends Component {
 
       this.getUserData(userId, token);
     });
-  }
-
-  componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', () => {
-      this.props.navigation.goBack();
-      return true
-    });
-
   }
 
   connectToProviders() {
@@ -144,7 +89,6 @@ class ProfileScreen extends Component {
                 </Button>
               </View>
               <View>
-              {/* {this.renderEOBTargets(this.mockData)} */}
               </View>
 
               <View style={{marginTop: 20}}>
@@ -216,14 +160,6 @@ class ProfileScreen extends Component {
         alert('A network error occured');
       }
     })
-
-    // todo remove the following and uncomment the above
-    // this.setState({
-    //   fetching: false,
-    //   firstName: 'Ayo',
-    //   lastName: 'Akin',
-    //   email: 'ayo@email.com'
-    // })
   }
 
   renderUserData() {
@@ -300,10 +236,6 @@ class ProfileScreen extends Component {
             </ListItem>
 
             <ListItem itemDivider />
-
-            {/* <ListItem>
-              {this.connectToProviders()}
-            </ListItem> */}
 
             {this.connectToProviders()}
 

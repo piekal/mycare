@@ -30,232 +30,20 @@ class EOBClaimScreen extends Component {
 
         this.months = ["January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"];
-
-        this.claimsData = [
-            {
-                "entry_id": "5a677d8e69fe7727942d305e",
-                "start_date": "2015-03-01",
-                "end_date": "2015-03-01",
-                "provider": "JESSICA DENTON",
-                "first_icd_code": "S72032P",
-                "first_icd_desc": "Displaced midcervical fracture of left femur, subsequent encounter for closed fracture with malunion"
-            },
-            {
-                "entry_id": "5a677d8e69fe7727942d305c",
-                "start_date": "2013-07-01",
-                "end_date": "2015-07-01",
-                "first_icd_code": "S82202G",
-                "first_icd_desc": "Unspecified fracture of shaft of left tibia, subsequent encounter for closed fracture with delayed healing",
-                "provider": "FRESENIUS MEDICAL CARE MILFORD, LLC"
-            },
-            {
-                "entry_id": "5a677d8e69fe7727942d3062",
-                "start_date": "2013-03-01",
-                "end_date": "2014-03-01",
-                "first_icd_code": "F3178",
-                "first_icd_desc": "Bipolar disorder, in full remission, most recent episode mixed",
-                "provider": "RYAN HEILMAN"
-            },
-            {
-                "entry_id": "5a677d8e69fe7727942d3050",
-                "start_date": "2014-05-01",
-                "end_date": "2014-05-01",
-                "first_icd_code": "S61509A",
-                "first_icd_desc": "Unspecified open wound of unspecified wrist, initial encounter",
-                "provider": "BH-SD RX, LLC"
-            },
-            {
-                "entry_id": "5a677d8e69fe7727942d304d",
-                "start_date": "2013-04-01",
-                "end_date": "2015-04-01",
-                "first_icd_code": "S76892A",
-                "first_icd_desc": "Other injury of other specified muscles, fascia and tendons at thigh level, left thigh, initial encounter",
-                "provider": "ALLISON MCCULLOUGH"
-            },
-            {
-                "entry_id": "5a677d8e69fe7727942d3057",
-                "start_date": "2015-12-01",
-                "end_date": "2015-12-01",
-                "first_icd_code": "T3442XD",
-                "first_icd_desc": "Frostbite with tissue necrosis of left arm, subsequent encounter",
-                "provider": "JOHN SUTTER"
-            },
-            {
-                "entry_id": "5a677d8e69fe7727942d3051",
-                "start_date": "2013-03-01",
-                "end_date": "2015-03-01",
-                "first_icd_code": "S92102A",
-                "first_icd_desc": "Unspecified fracture of left talus, initial encounter for closed fracture",
-                "provider": "SUNNYWOOD ACUPUNCTURE P.C."
-            },
-            {
-                "entry_id": "5a677d8e69fe7727942d3058",
-                "start_date": "2015-07-01",
-                "end_date": "2015-07-01",
-                "first_icd_code": "S62334K",
-                "first_icd_desc": "Displaced fracture of neck of fourth metacarpal bone, right hand, subsequent encounter for fracture with nonunion",
-                "provider": "DEDICATED PENNSYLVANIA HOLDING, LLC"
-            },
-            {
-                "entry_id": "5a677d8e69fe7727942d305b",
-                "start_date": "2016-03-01",
-                "end_date": "2015-03-01",
-                "provider": "JOELLE ROTMAN",
-                "first_icd_code": "T7805XS",
-                "first_icd_desc": "Anaphylactic reaction due to tree nuts and seeds, sequela"
-            },
-            {
-                "entry_id": "5a677d8e69fe7727942d3059",
-                "start_date": "2015-07-01",
-                "end_date": "2015-07-01",
-                "provider": "MARCELA COVARRUBIAS",
-                "first_icd_code": "R29723",
-                "first_icd_desc": "NIHSS score 23"
-            },
-            {
-                "entry_id": "5a677d8e69fe7727942d305a",
-                "start_date": "2016-07-01",
-                "end_date": "2014-07-01",
-                "first_icd_code": "Y37291D",
-                "first_icd_desc": "Military operations involving other explosions and fragments, civilian, subsequent encounter",
-                "provider": "TAMPA ACTIVE HEALTH LLC"
-            },
-            {
-                "entry_id": "5a677d8e69fe7727942d3063",
-                "start_date": "2015-03-01",
-                "end_date": "2015-03-01",
-                "provider": "KATHLEEN BALINT",
-                "first_icd_code": "T621X1D",
-                "first_icd_desc": "Toxic effect of ingested berries, accidental (unintentional), subsequent encounter"
-            },
-            {
-                "entry_id": "5a677d8e69fe7727942d30bc",
-                "start_date": "2015-04-01",
-                "end_date": "2015-04-01",
-                "provider": "JANELLA UWADIA",
-                "first_icd_code": "M62029",
-                "first_icd_desc": "Separation of muscle (nontraumatic), unspecified upper arm"
-            },
-            {
-                "entry_id": "5a677d8e69fe7727942d3054",
-                "start_date": "2016-06-01",
-                "end_date": "2014-06-01",
-                "provider": "JENNIFER EVANS",
-                "first_icd_code": "S00429S",
-                "first_icd_desc": "Blister (nonthermal) of unspecified ear, sequela"
-            },
-            {
-                "entry_id": "5a677d8e69fe7727942d305d",
-                "start_date": "2015-05-01",
-                "end_date": "2015-05-01",
-                "provider": "CHELSEA STAVER",
-                "first_icd_code": "S45212A",
-                "first_icd_desc": "Laceration of axillary or brachial vein, left side, initial encounter"
-            },
-            {
-                "entry_id": "5a677d8e69fe7727942d3055",
-                "start_date": "2015-12-01",
-                "end_date": "2015-12-01",
-                "first_icd_code": "S93311S",
-                "first_icd_desc": "Subluxation of tarsal joint of right foot, sequela",
-                "provider": ""
-            },
-            {
-                "entry_id": "5a677d8e69fe7727942d304f",
-                "start_date": "2014-05-01",
-                "end_date": "2014-05-01",
-                "provider": "KATHRYN ABEBE",
-                "first_icd_code": "S52515R",
-                "first_icd_desc": "Nondisplaced fracture of left radial styloid process, subsequent encounter for open fracture type IIIA, IIIB, or IIIC with malunion"
-            },
-            {
-                "entry_id": "5a677d8e69fe7727942d3065",
-                "start_date": "2015-05-01",
-                "end_date": "2015-05-01",
-                "provider": "DAVID GRUNOW",
-                "first_icd_code": "S82035S",
-                "first_icd_desc": "Nondisplaced transverse fracture of left patella, sequela"
-            },
-            {
-                "entry_id": "5a677d8e69fe7727942d3061",
-                "start_date": "2015-09-01",
-                "end_date": "2015-09-01",
-                "first_icd_code": "S62348A",
-                "first_icd_desc": "Nondisplaced fracture of base of other metacarpal bone, initial encounter for closed fracture",
-                "provider": "ANDREA HOGSTAD"
-            },
-            {
-                "entry_id": "5a677d8e69fe7727942d3064",
-                "start_date": "2014-03-01",
-                "end_date": "2014-03-01",
-                "provider": "BAOQIONG LIU",
-                "first_icd_code": "S6422XA",
-                "first_icd_desc": "Injury of radial nerve at wrist and hand level of left arm, initial encounter"
-            },
-            {
-                "entry_id": "5a677d8e69fe7727942d3060",
-                "start_date": "2014-10-01",
-                "end_date": "2014-10-01",
-                "provider": "MICHELLE ZYGIELBAUM",
-                "first_icd_code": "S62628S",
-                "first_icd_desc": "Displaced fracture of medial phalanx of other finger, sequela"
-            },
-            {
-                "entry_id": "5a677d8e69fe7727942d304e",
-                "start_date": "2015-06-01",
-                "end_date": "2015-06-01",
-                "first_icd_code": "M05862",
-                "first_icd_desc": "Other rheumatoid arthritis with rheumatoid factor of left knee",
-                "provider": "JUSTIN LITTLEDIKE"
-            },
-            {
-                "entry_id": "5a677d8e69fe7727942d3056",
-                "start_date": "2014-06-01",
-                "end_date": "2014-06-01",
-                "provider": "STEPHANIE PAWLENKO",
-                "first_icd_code": "S66509A",
-                "first_icd_desc": "Unspecified injury of intrinsic muscle, fascia and tendon of unspecified finger at wrist and hand level, initial encounter"
-            },
-            {
-                "entry_id": "5a677d8e69fe7727942d3053",
-                "start_date": "2015-03-01",
-                "end_date": "2015-03-01",
-                "provider": "KAITLYN DANNIBALE",
-                "first_icd_code": "T82520D",
-                "first_icd_desc": "Displacement of surgically created arteriovenous fistula, subsequent encounter"
-            },
-            {
-                "entry_id": "5a677d8e69fe7727942d30bb",
-                "start_date": "2015-04-01",
-                "end_date": "2015-04-01",
-                "first_icd_code": "N99115",
-                "first_icd_desc": "Postprocedural fossa navicularis urethral stricture",
-                "provider": "LILIAM ALEA GARCIA"
-            },
-            {
-                "entry_id": "5a677d8e69fe7727942d305f",
-                "start_date": "2014-12-01",
-                "end_date": "2014-12-01",
-                "first_icd_code": "W2104XA",
-                "first_icd_desc": "Struck by golf ball, initial encounter",
-                "provider": "JORDAN LO"
-            },
-            {
-                "entry_id": "5a677d8e69fe7727942d3052",
-                "start_date": "2015-07-01",
-                "end_date": "2015-07-01",
-                "first_icd_code": "S60041S",
-                "first_icd_desc": "Contusion of right ring finger without damage to nail, sequela",
-                "provider": "JEFFERSON WHINERY"
-            }
-        ]
     }
 
     componentWillMount() {
         let jwtoken = `JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15Y2FyZS11c2VyMkBnbWFpbC5jb20iLCJfaWQiOiI1YTYxMTNiYmVmOThmODEwOTAwNWQ4MmMiLCJpYXQiOjE1MTYzMTE2NTB9.UN1b6qYGD_0q7w52jUzPUgpIEtUNwEntdYM_MDhSRco`;
         let postmanToken = 'b8642fc3-ad6b-4da6-cfc4-5e424ad2c0cc';
 
-        // this.getTimeLineData(jwtoken, postmanToken);
+        this.getTimeLineData(jwtoken, postmanToken);
+    }
+
+    componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', () => {
+            this.props.navigation.goBack();
+            return true
+        });
     }
 
     getTimeLineData(jwtoken, postmanToken) {
@@ -290,8 +78,7 @@ class EOBClaimScreen extends Component {
     }
 
     renderClaimsData() {
-        // let timeLineData = this.state.claimsData.groupByYear('start_date');
-        let timeLineData = this.claimsData.groupByYear('start_date');
+        let timeLineData = this.state.claimsData.groupByYear('start_date');
 
         let claimsData = [];
 
@@ -357,7 +144,7 @@ class EOBClaimScreen extends Component {
             <Container>
                 <Header style={{ backgroundColor: '#FFF' }}>
                     <Left style={{ flex: 2 }}>
-                        <Button transparent onPress={() => this.props.navigation.navigate("DrawerOpen")} >
+                        <Button transparent onPress={() => this.props.navigation.goBack()} >
                             <Icon name="arrow-back" style={{ color: '#000' }} />
                         </Button>
 
