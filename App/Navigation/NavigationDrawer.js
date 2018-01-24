@@ -1,5 +1,6 @@
 import React from "react";
 import { DrawerNavigator } from "react-navigation";
+import ClaimsDataScreen from '../Containers/ClaimsDataScreen'
 import VerificationPin from '../Containers/VerificationPin'
 import Verification from '../Containers/Verification'
 import ProfileScreen from '../Containers/ProfileScreen'
@@ -10,7 +11,8 @@ import EOBClaimScreen from '../Containers/EOBClaimScreen';
 import styles from "./Styles/NavigationStyles";
 
 const NavigationDrawer = DrawerNavigator({
-		  Profile: { screen: ProfileScreen }
+		  Profile: { screen: ProfileScreen },
+		  ClaimsDataScreen: { screen: ClaimsDataScreen }
 	},
 	{
 		initialRouteName: "Profile",

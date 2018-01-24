@@ -15,7 +15,7 @@ import VerificationPin from '../Containers/VerificationPin'
 import Verification from '../Containers/Verification';
 import BlueButtonScreen from '../Containers/BlueButtonScreen';
 import EOBClaimScreen from '../Containers/EOBClaimScreen';
-
+import ClaimsDataScreen from '../Containers/ClaimsDataScreen'
 
 
 const PrimaryNav = StackNavigator(
@@ -31,10 +31,11 @@ const PrimaryNav = StackNavigator(
 		VerificationPin: { screen: VerificationPin },
 		Verification: { screen: Verification },
 		BlueButtonScreen: { screen: BlueButtonScreen },
-		EOBClaimScreen: { screen: EOBClaimScreen }
+		EOBClaimScreen: { screen: EOBClaimScreen },
+		ClaimsDataScreen: { screen: ClaimsDataScreen },
 	},
 	{
-		initialRouteName: "Welcome",
+		initialRouteName: "ClaimsDataScreen",
 		headerMode: "none",
 	}
 );
