@@ -28,12 +28,10 @@ const PrimaryNav = StackNavigator(
 		ProfileScreen: { screen: ProfileScreen },
 		VerificationPin: { screen: VerificationPin },
 		Verification: { screen: Verification }
-
-
 	},
 	{
-		initialRouteName: "Welcome",
-		// initialRouteName: "NavigationDrawer",
+		// initialRouteName: "Welcome",
+		initialRouteName: "NavigationDrawer",
 		headerMode: "none",
 	}
 );

@@ -15,8 +15,8 @@ const NavigationDrawer = DrawerNavigator({
 		  EOBClaimScreen: { screen: EOBClaimScreen }
 	},
 	{
-		// initialRouteName: "EOBClaimScreen",
-		initialRouteName: "ProfileScreen",
+		initialRouteName: "EOBClaimScreen",
+		// initialRouteName: "ProfileScreen",
 		// initialRouteName: "BlueButtonScreen",
 		contentComponent: props => <DrawerContent {...props} />,
 	}
