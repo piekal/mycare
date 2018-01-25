@@ -35,7 +35,7 @@ const PrimaryNav = StackNavigator(
 		ClaimsDataScreen: { screen: ClaimsDataScreen },
 	},
 	{
-		initialRouteName: "ClaimsDataScreen",
+		initialRouteName: "Welcome",
 		headerMode: "none",
 	}
 );
