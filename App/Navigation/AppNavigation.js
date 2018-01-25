@@ -11,11 +11,14 @@ import Signup from '../Containers/SignupScreen';
 import EmailSignin from '../Containers/EmailSigninScreen';
 import PasswordSignin from '../Containers/PasswordSigninScreen';
 import ProfileScreen from '../Containers/ProfileScreen';
-import VerificationPin from '../Containers/VerificationPin'
+import VerificationPin from '../Containers/VerificationPin';
 import Verification from '../Containers/Verification';
 import BlueButtonScreen from '../Containers/BlueButtonScreen';
 import EOBClaimScreen from '../Containers/EOBClaimScreen';
 import ClaimsDataScreen from '../Containers/ClaimsDataScreen'
+import ProviderListScreen from '../Containers/ProviderListScreen';
+import NoteListScreen from '../Containers/NoteListScreen';
+import UploadScreen from '../Containers/UploadScreen'
 
 
 const PrimaryNav = StackNavigator(
@@ -33,10 +36,14 @@ const PrimaryNav = StackNavigator(
 		BlueButtonScreen: { screen: BlueButtonScreen },
 		EOBClaimScreen: { screen: EOBClaimScreen },
 		ClaimsDataScreen: { screen: ClaimsDataScreen },
+		ProviderListScreen: { screen: ProviderListScreen },
+		NoteListScreen: { screen: NoteListScreen },
+		UploadScreen: { screen: UploadScreen },
 	},
 	{
-		initialRouteName: "Welcome",
-		headerMode: "none",
+		initialRouteName: "NoteListScreen",
+		// initialRouteName: "NavigationDrawer",
+		headerMode: "none"
 	}
 );
 
