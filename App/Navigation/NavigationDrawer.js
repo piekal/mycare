@@ -1,5 +1,8 @@
 import React from "react";
 import { DrawerNavigator } from "react-navigation";
+import UploadScreen from '../Containers/UploadScreen'
+import NoteListScreen from '../Containers/NoteListScreen'
+import ProviderListScreen from '../Containers/ProviderListScreen'
 import VerificationPin from '../Containers/VerificationPin'
 import Verification from '../Containers/Verification'
 import ProfileScreen from '../Containers/ProfileScreen'
@@ -10,9 +13,12 @@ import EOBClaimScreen from '../Containers/EOBClaimScreen';
 import styles from "./Styles/NavigationStyles";
 
 const NavigationDrawer = DrawerNavigator({
-		  ProfileScreen: { screen: ProfileScreen },
-		  BlueButtonScreen: { screen: BlueButtonScreen },
-		  EOBClaimScreen: { screen: EOBClaimScreen }
+  		UploadScreen: { screen: UploadScreen },
+  		NoteListScreen: { screen: NoteListScreen },
+  		ProviderListScreen: { screen: ProviderListScreen },
+		ProfileScreen: { screen: ProfileScreen },
+		BlueButtonScreen: { screen: BlueButtonScreen },
+		EOBClaimScreen: { screen: EOBClaimScreen }
 	},
 	{
 		// initialRouteName: "EOBClaimScreen",
