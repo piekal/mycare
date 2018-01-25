@@ -7,11 +7,12 @@ import * as _ from 'lodash';
 import * as axios from 'axios';
 import Spinner from 'react-native-loading-spinner-overlay';
 
-Array.prototype.groupBy = function (prop) {
+Array.prototype.groupByYear = function (prop) {
     return this.reduce(function (groups, item) {
-        var val = item[prop];
-        groups[val] = groups[val] || [];
-        groups[val].push(item);
+        let dateString = item[prop];
+        let year = dateString.substr(0, 4);
+        groups[year] = groups[year] || [];
+        groups[year].push(item);
         return groups;
     }, {});
 }
@@ -27,8 +28,8 @@ class EOBClaimScreen extends Component {
             claimsData: []
         }
 
-        this.months = [ "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December" ];
+        this.months = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"];
     }
 
     componentWillMount() {
@@ -36,6 +37,13 @@ class EOBClaimScreen extends Component {
         let postmanToken = 'b8642fc3-ad6b-4da6-cfc4-5e424ad2c0cc';
 
         this.getTimeLineData(jwtoken, postmanToken);
+    }
+
+    componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', () => {
+            this.props.navigation.goBack();
+            return true
+        });
     }
 
     getTimeLineData(jwtoken, postmanToken) {
@@ -51,10 +59,10 @@ class EOBClaimScreen extends Component {
         }).then(response => {
             if (response.data) {
                 console.log('successfull');
-                this.setState({ 
+                this.setState({
                     isFetching: false,
                     claimsData: response.data
-                 });
+                });
 
             }
         })
@@ -70,15 +78,15 @@ class EOBClaimScreen extends Component {
     }
 
     renderClaimsData() {
-        let timeLineData = this.state.claimsData.groupBy('start_date');
+        let timeLineData = this.state.claimsData.groupByYear('start_date');
 
         let claimsData = [];
 
         Object.keys(timeLineData).reverse().forEach(start_date => {
             let date = new Date(start_date);
-            let year =  date.getFullYear();
+            let year = date.getFullYear();
             claimsData.push(
-                <View>
+                <View key={year}>
                     <ListItem itemDivider style={{ borderBottomColor: '#A8A8A8', borderTopColor: '#A8A8A8', borderBottomWidth: 1, borderTopWidth: 1 }}>
                         <Text>{year}</Text>
                     </ListItem>
@@ -90,6 +98,7 @@ class EOBClaimScreen extends Component {
         return claimsData;
     }
     renderData(dataCategories) {
+        dataCategories = _.orderBy(dataCategories, ['start_date'], ['asc'])
 
         return dataCategories.map((category, index) => {
             const topLineStyle = index === 0 ? [styles.topLine, styles.hiddenLine] : styles.topLine;
@@ -98,7 +107,7 @@ class EOBClaimScreen extends Component {
             let month = this.months[date.getMonth()];
 
             return (
-                <View style={styles.row} key={category.name}>
+                <View style={styles.row} key={category.entry_id}>
                     <View style={styles.timeline}>
                         <View style={styles.line}>
                             <View style={topLineStyle} />
@@ -110,14 +119,18 @@ class EOBClaimScreen extends Component {
                     <View style={styles.content}>
                         <ListItem style={{ paddingLeft: 0, borderBottomColor: '#A8A8A8' }}>
                             <Body>
-                                <Text uppercase={true} style={{ padding: 0, fontSize: 14, color: Colors.appBlack }}>{category.first_icd_code}</Text>
-                                <Text numberOfLines={1} uppercase={false} style={{ fontSize: 18, color: Colors.appBlack }}>{category.provider}</Text>
-                                <Text numberOfLines={1} style={{ fontSize: 14, color: Colors.appBlack }} uppercase={false}>{category.first_icd_desc}</Text>
+                                <Text uppercase={true} style={{ padding: 0, fontWeight: '600', fontSize: 10, color: '#333333' }}>{category.first_icd_code}</Text>
+                                <Text numberOfLines={1} uppercase={false} style={{ fontSize: 14, lineHeight: 16, fontWeight: '600', color: '#333333' }}>
+                                    {category.provider}
+                                </Text>
+                                <Text numberOfLines={1} style={{ fontSize: 12, lineHeight: 16, fontWeight: 'normal', color: '#333333' }} uppercase={false}>{category.first_icd_desc}
+                                </Text>
                             </Body>
                             <Right>
-                                <Text note uppercase={true} numberOfLines={1}>
+                                <Text note uppercase={true} numberOfLines={1} style={{ fontSize: 10, fontWeight: 'bold', lineHeight: 16, color: '#6E6B6B', marginTop: -24 }}>
                                     {month}
                                 </Text>
+
                             </Right>
                         </ListItem>
                     </View>
@@ -130,18 +143,22 @@ class EOBClaimScreen extends Component {
         return (
             <Container>
                 <Header style={{ backgroundColor: '#FFF' }}>
-                    <Left>
-                        <Button transparent onPress={() => this.props.navigation.navigate("DrawerOpen")} >
-                            <Icon name="ios-menu" style={{ color: '#000' }} />
+                    <Left style={{ flex: 2 }}>
+                        <Button transparent onPress={() => this.props.navigation.goBack()} >
+                            <Icon name="arrow-back" style={{ color: '#000' }} />
                         </Button>
 
                     </Left>
 
-                    <Body>
-                        <Title style={{ color: Colors.coal }}>Claims Data</Title>
+                    <Body style={{ justifyContent: 'center', alignItems: 'center', flex: 6 }}>
+                        <Title style={{ color: Colors.coal, textAlign: 'center', alignSelf: 'center' }}>Claims Data</Title>
                     </Body>
 
-                    <Right />
+                    <Right style={{ flex: 2 }}>
+                        <Button transparent>
+                            <Icon name="md-add" style={{ color: '#000' }} />
+                        </Button>
+                    </Right>
 
                 </Header>
 

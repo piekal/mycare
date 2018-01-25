@@ -39,8 +39,13 @@ class BlueButtonScreen extends Component {
                 this.setState({isFetching: false});
 
                 AsyncStorage.setItem(timelineStatus.blueButtonStorageKey, timelineStatus.blueButtonConnected);
+                let self = this;
 
-                this.props.navigation.navigate('ProfileScreen');
+                setTimeout(function() {
+                    self.props.navigation.navigate('ProfileScreen');
+                }, 5000);
+
+                // this.props.navigation.navigate('ProfileScreen');
             }
         })
         .catch(error => {

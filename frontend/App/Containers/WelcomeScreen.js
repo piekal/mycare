@@ -1,13 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View } from 'react-native';
+import { View , Image} from 'react-native';
 import Colors from '../Themes/Colors';
 import { Container, Content, Text, Button, Icon } from 'native-base';
+import { Images } from '../Themes';
+import styles from './Styles/MainStyles';
 
 class WelcomeScreen extends React.PureComponent {
     render() {
         return (
+            <Image source={Images.background } style={styles.backgroundImage} style={{ flex: 1,width: null, height: null,}}>
             <Container>
+                
                 <Content contentContainerStyle={{ flexDirection: 'column',
                 alignItems: 'center', paddingVertical: 120, paddingHorizontal: 0,
                 justifyContent: 'space-between', backgroundColor: '#FBFBFB', flex: 1 }}>
@@ -29,6 +33,7 @@ class WelcomeScreen extends React.PureComponent {
                 </View>
                 </Content>
             </Container>
+            </Image>
         )
     }
 }

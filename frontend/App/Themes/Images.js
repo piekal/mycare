@@ -8,7 +8,8 @@ const images = {
 	ignite: require("../Images/ignite_logo.png"),
 	igniteClear: require("../Images/ignite-logo-transparent.png"),
 	tileBg: require("../Images/tile_bg.png"),
-	background: require("../Images/BG.png"),
+	background: require("../Images/bg-test.png"),
+	//bg: require("../Images/app-bg.png"),
 	buttonBackground: require("../Images/button-bg.png"),
 	api: require("../Images/Icons/icon-api-testing.png"),
 	components: require("../Images/Icons/icon-components.png"),
@@ -23,7 +24,12 @@ const images = {
 	closeButton: require("../Images/Icons/close-button.png"),
 	initProfileBg: require("../Images/select_image.png"),
 	userIcon: require("../Images/user_icon.png"),
-	myCare: require("../Images/myCare.png") 
+	myCare: require("../Images/myCare.png"), 
+	cost: require("../Images/cost.png"), 
+	diagnostic: require("../Images/diagnostic.png"), 
+	prescription: require("../Images/prescription.png"), 
+	procedures: require("../Images/procedures.png"), 
+	notes: require("../Images/notes.png"), 
 };
 
 export default images;
