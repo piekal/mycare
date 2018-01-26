@@ -9,17 +9,18 @@ import { connect } from 'react-redux'
 import styles from './Styles/ProviderListScreenStyle'
 import { Images, Metrics, Colors } from "../Themes";
 
-class ProviderListScreen extends Component {
+class PayerListScreen extends Component {
 
   constructor(props) {
     super(props)
 
-    const providers = [
+    var providers = [
       // { name: 'Cigna', connected: false },
       // { name: 'UnitedHealth', connected: false },
       // { name: 'BlueCross', connected: false },
       // { name: 'Providence', connected: true },
-      { name: 'CMS', connected: false }
+      { name: 'CMS', connected: false },
+      { name: 'EPIC', connected: true }      
     ];
 
 
@@ -31,13 +32,15 @@ class ProviderListScreen extends Component {
   }
 
   componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', () => {
-      this.props.navigation.goBack();
-      return true
-    })
   }
 
   connect() {
+    this.setState({
+      dataSoure: [
+        { name: 'CMS', connected: true },
+        { name: 'EPIC', connected: true }      
+      ]
+    });
     this.props.navigation.navigate('BlueButtonScreen');
   }
 
@@ -72,10 +75,13 @@ class ProviderListScreen extends Component {
 
         <Header style={{ backgroundColor: Colors.snow }}>
           <Left>
-            <Button onPress={() => this.props.navigation.dispatch(NavigationActions.back())} transparent>
-              {/*<Icon name="ios-arrow-back" style={{ color: "#000" }} />*/}
+          <Button transparent onPress={() => 
+            this.props.navigation.navigate("DrawerOpen")} >
+              <Icon name="ios-menu" style={{ color: '#000' }} />
             </Button>
+
           </Left>
+
           <Body>
             <Title style={{ color: "#000" }} >Payers</Title>
           </Body>
@@ -112,4 +118,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProviderListScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(PayerListScreen)

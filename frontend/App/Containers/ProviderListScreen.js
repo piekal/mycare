@@ -3,6 +3,9 @@ import { Platform, AsyncStorage, StyleSheet, Linking, Alert } from 'react-native
 import { AppState, BackHandler } from 'react-native'
 import { Content, Container, Header, Left, Right, Body, Button, Text, Title, Icon, List, ListItem, CheckBox } from 'native-base'
 import { connect } from 'react-redux'
+import * as axios from 'axios'
+import querystring from 'query-string'
+
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 
@@ -37,12 +40,6 @@ class ProviderListScreen extends React.PureComponent {
   }
 
   componentDidMount() {
-    console.log("provider did mount");
-    BackHandler.addEventListener('hardwareBackPress', () => {
-      this.props.navigation.goBack();
-      return true
-    });
-
     AppState.addEventListener('change', this._handleAppStateChange);
 
   }
@@ -58,7 +55,19 @@ class ProviderListScreen extends React.PureComponent {
       console.log('App has come to the foreground!');
       if (Platform.OS === 'android') {
         Linking.getInitialURL().then(url => {
-          this.navigate(url);
+          
+          var code = querystring.parse(url)['mycare://careevolution/callback?code'];
+          
+          axios.get('https://www.mycare-api.com/api/v1/npi/9999999999/callback?code='+code, {
+            headers: {
+              'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15Y2FyZUBteWNhcmUuY29tIiwiX2lkIjoiNWE2YWFjMjFiNDIwN2QwMDA0ODA5MTljIiwiaWF0IjoxNTE2OTg1MTU1fQ.Oi01pEkbxX_pbvfjd4U6g0BvuvqQxNsrunCuvxcl4O4',
+              'content-type': 'application/json'
+            }      
+          }).then((resp) => {
+            this.props.navigation.navigate('EOBClaimScreen');
+          }).catch((err) => {
+          });    
+          
         });
       }      
     }
@@ -72,7 +81,6 @@ class ProviderListScreen extends React.PureComponent {
     // const id = route && route.match(/\/([^\/]+)\/?$/)[1];
     // const routeName = route && route.split('/')[0];
 
-    console.log(url);
   }
 
 
@@ -114,11 +122,14 @@ class ProviderListScreen extends React.PureComponent {
       <Container>
 
         <Header style={{ backgroundColor: Colors.snow }}>
+
           <Left>
-            <Button onPress={() => this.props.navigation.goBack()} transparent>
-              <Icon name="ios-arrow-back" style={{ color: "#000" }} />
+            <Button transparent onPress={() => this.props.navigation.navigate("DrawerOpen")} >
+              <Icon name="ios-menu" style={{ color: '#000' }} />
             </Button>
+
           </Left>
+
           <Body>
             <Title style={{ color: "#000" }}>Providers</Title>
           </Body>
