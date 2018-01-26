@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BackHandler, Image, NavigationActions } from 'react-native'
+import { BackHandler, Image, NavigationActions, Alert, TouchableOpacity } from 'react-native'
 import { Content, Container, Header, Left, Right, Body, View, Button, Text, Title, Icon, List, ListItem } from 'native-base'
 import Collapsible from 'react-native-collapsible';
 import Accordion from 'react-native-collapsible/Accordion'
@@ -14,38 +14,6 @@ import styles from './Styles/ClaimsDataScreenStyle'
 import { Images, Metrics, Colors } from "../Themes";
 
 const PANELS = [
-  {
-    get header() {
-      return (
-
-        <View style={[styles.headerContainer, { flex: 1 }]}>
-
-          <View style={styles.headerLeft}>
-
-            <Image source={Images.diagnostic} />
-            <Text style={{ paddingLeft: 10 }}>DIAGNOSTICS</Text>
-
-          </View>
-
-          <View>
-            <Icon name='ios-arrow-forward' style={{ color: '#000' }} />
-          </View>
-
-        </View>
-
-      )
-    },
-    get content() {
-      return (
-
-        <View>
-          <Text>DIAGNOSTICS</Text>
-        </View>
-
-      )
-    }
-
-  },
   {
     get header() {
       return (
@@ -130,12 +98,12 @@ const PANELS = [
 
               <View style={styles.center}>
                 <Text style={styles.font14}>BILL STATUS</Text>
-                <Text style={[styles.boldText, {fontSize: 22}]}>90%</Text>
+                <Text style={[styles.boldText, { fontSize: 22 }]}>90%</Text>
               </View>
 
               <View style={styles.center}>
-                <Text style={[ styles.font14]}>TRANSACTION STATUS</Text>
-                <Progress.Bar progress={0.75} width={100} color={'#20B06A'} style={{marginTop: 20, marginBottom: 15}}/>
+                <Text style={[styles.font14]}>TRANSACTION STATUS</Text>
+                <Progress.Bar progress={0.75} width={100} color={'#20B06A'} style={{ marginTop: 20, marginBottom: 15 }} />
               </View>
 
             </View>
@@ -231,7 +199,7 @@ class ClaimsDataScreen extends Component {
 
 
     this.state = {
-      activeSection: 2,
+      activeSection: 0,
     }
   }
 
@@ -272,30 +240,47 @@ class ClaimsDataScreen extends Component {
     return (
       <Container>
 
-        <Header style={{backgroundColor: Colors.snow}}>
+        <Header style={{ backgroundColor: Colors.snow }}>
 
           <Left>
             <Button onPress={() => this.props.navigation.dispatch(NavigationActions.back())} transparent>
-              <Icon name="ios-arrow-back" style={{color : '#000'}}/>
+              <Icon name="ios-arrow-back" style={{ color: '#000' }} />
             </Button>
           </Left>
 
           <Body>
-            <Title style={{color : '#000'}}>ClaimsData</Title>
+            <Title style={{ color: '#000' }}>ClaimsData</Title>
           </Body>
 
           <Right>
-            <Icon name='ios-search'/>
+            <Icon name='ios-search' />
           </Right>
 
         </Header>
 
         <Content>
+          {/* Todo remote the following view after the demo or retain as required */}
+          <View style={[styles.headerContainer, { flex: 1 }]}>
+            <TouchableOpacity style={[styles.headerContainer, { flex: 1}]} onPress={() => { this.props.navigation.navigate('DiagnosticScreen'); }}>
+            <View style={styles.headerLeft}>
+
+              <Image source={Images.diagnostic} />
+              <Text style={{ paddingLeft: 10 }}>DIAGNOSTICS</Text>
+
+            </View>
+
+            <View>
+              <Icon name='ios-arrow-forward' style={{ color: '#000' }} />
+            </View>
+            </TouchableOpacity>
+
+          </View>
 
           <Accordion
             sections={PANELS}
             onChange={activeSection => this.setState({ activeSection })}
-            activeSection={this.state.activeSection}
+            // activeSection={this.state.activeSection}
+            disabled={true}
             renderHeader={this.renderPanelHeader}
             renderContent={this.renderPanelContent}
           />

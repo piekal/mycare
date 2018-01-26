@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
     inputValid: {
-        borderBottomColor: '#1C58B5'
+        borderBottomColor: '#218EC4'
     },
 
     inputInvalid: {
@@ -10,7 +10,7 @@ export default StyleSheet.create({
     },
 
     labelValid: {
-        color: '#1C58B5',
+        color: '#218EC4',
     },
 
     labelInvalid: {
@@ -31,7 +31,7 @@ export default StyleSheet.create({
         justifyContent: 'center'
     },
     buttonFormValid: {
-        backgroundColor: '#1C58B5',
+        backgroundColor: '#218EC4',
         height: 42,
         width: 160,
         alignItems: 'center',

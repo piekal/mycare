@@ -1,4 +1,6 @@
 import { StyleSheet } from 'react-native';
+import  Colors  from "../../Themes/Colors";
+
 
 export default StyleSheet.create({
     inputField : {
@@ -20,7 +22,7 @@ export default StyleSheet.create({
     },
 
     labelValid: {
-        color: '#1C58B5',
+        color: Colors.appBlue,
     },
 
     labelInvalid: {
@@ -42,7 +44,7 @@ export default StyleSheet.create({
         justifyContent: 'center'
     },
     buttonFormValid: {
-        backgroundColor: '#1C58B5',
+        backgroundColor: Colors.appBlue,
         height: 42,
         width: 160,
         alignItems: 'center',

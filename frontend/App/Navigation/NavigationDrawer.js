@@ -15,10 +15,10 @@ import styles from "./Styles/NavigationStyles";
 
 const NavigationDrawer = DrawerNavigator({
 	Profile: { screen: ProfileScreen },
-	ClaimsDataScreen: { screen: ClaimsDataScreen },
-	UploadScreen: { screen: UploadScreen },
-	NoteListScreen: { screen: NoteListScreen, key: 'Note List' },
-	ProviderListScreen: { screen: ProviderListScreen },
+	// ClaimsDataScreen: { screen: ClaimsDataScreen },
+	// UploadScreen: { screen: UploadScreen },
+	// NoteListScreen: { screen: NoteListScreen, key: 'Note List' },
+	// ProviderListScreen: { screen: ProviderListScreen },
 	// ProfileScreen: { screen: ProfileScreen },
 	// BlueButtonScreen: { screen: BlueButtonScreen },
 	// EOBClaimScreen: { screen: EOBClaimScreen }

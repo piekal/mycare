@@ -4,6 +4,7 @@ import { View, Alert, BackHandler } from 'react-native';
 import { Images, Metrics, Colors } from "../Themes";
 import { Container, Header, Content, Form, Item, Input, Label, Text, Button, Icon, Thumbnail } from 'native-base';
 import SigninScreenStyles from './Styles/SigninScreenStyles';
+import BackgroundImage from '../Components/BackgroundImage';
 
 class EmailSigninScreen extends React.Component {
     constructor(props) {
@@ -16,10 +17,10 @@ class EmailSigninScreen extends React.Component {
 
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', () => {
-          this.props.navigation.goBack();
-          return true
+            this.props.navigation.goBack();
+            return true
         })
-      }
+    }
 
     get emailIsvalid() {
         let pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -52,16 +53,26 @@ class EmailSigninScreen extends React.Component {
     renderEmailForm() {
         return (
             <View style={{ flex: 6, justifyContent: 'space-between', paddingVertical: 70 }}>
+
+
                 <View style={[{ alignItems: 'center' }]}>
                     <Thumbnail large source={Images.ignite} />
                 </View>
+
+
                 <Item style={[SigninScreenStyles.inputField, this.emailIsvalid && SigninScreenStyles.inputValid, this.emailIsInvalid && SigninScreenStyles.inputInvalid]} stackedLabel>
                     <Label style={[SigninScreenStyles.floatingLabel, this.emailIsvalid && SigninScreenStyles.labelValid,
-                    this.emailIsInvalid && SigninScreenStyles.labelInvalid, { alignSelf: 'center' }]}>Email / Phone No.</Label>
+                    this.emailIsInvalid && SigninScreenStyles.labelInvalid, { alignSelf: 'center' }]}>
+                        Email / Phone No.
+                    </Label>
                     <Input placeholderTextColor="#A8A8A8" style={[SigninScreenStyles.textInput]}
-                         onChangeText={(text) => this.setState({ email: text, emailDirty: true })} value={this.state.email} />
+                        onChangeText={(text) => this.setState({ email: text, emailDirty: true })} value={this.state.email} />
                 </Item>
+
+
                 {this.showEmailErrorMsg()}
+
+
             </View>
         );
     }
@@ -73,7 +84,7 @@ class EmailSigninScreen extends React.Component {
         </Button>);
 
         let formValidBtn = (
-            <Button rounded iconRight style={[SigninScreenStyles.buttonFormValid]} 
+            <Button rounded iconRight style={[SigninScreenStyles.buttonFormValid]}
                 onPress={() => { this.props.navigation.navigate('PasswordSignin', { signInEmail: this.state.email }) }}>
                 {/* <Icon name='arrow-forward' /> */}
                 <Text style={{ color: '#FBFBFB', fontSize: 16, lineHeight: 20 }} uppercase={true}>Next</Text>
@@ -86,29 +97,31 @@ class EmailSigninScreen extends React.Component {
     render() {
         return (
             <Container >
-                <Content contentContainerStyle={{
-                    backgroundColor: '#FBFBFB', flexGrow: 1,
-                    paddingHorizontal: 10, paddingVertical: 60, justifyContent: 'space-between'
-                }}>
-                    <View style={{ flex: 1.5 }}>
-                        <Text style={{ color: Colors.appBlue, fontSize: 24, lineHeight: 32, textAlign: 'center' }}>
-                            my<Text style={{ fontWeight: 'bold', color: Colors.appBlue, fontSize: 24, lineHeight: 32 }}>Care.</Text>
-                        </Text>
-                        {/* <Text style={{ color: "blue", fontSize: 32, fontWeight: 'bold', textAlign: 'center' }}>myCare</Text> */}
-                    </View>
-                    {this.renderEmailForm()}{/*note form has Flex: 6*/}
-
-                    <View style={{ flex: 2.5, justifyContent: 'space-between' }}>
-                        <Item style={{ alignItems: 'center', justifyContent: 'center', borderBottomColor: '#FBFBFB', flex: 0.5 }}>
-                            {this.renderContinueButton()}
-                        </Item>
-
-                        <View style={{ flex: 0.5, marginTop: 15, borderBottomColor: '#FBFBFB', alignItems: 'center', justifyContent: 'center' }}>
-                            <Text>Dont have an Account?
-                            <Text onPress={() => { this.props.navigation.navigate('Signup') }} style={{ color: '#1C58B5', fontSize: 14, lineHeight: 20, fontWeight: '700' }}> SIGN-UP</Text></Text>
+                <BackgroundImage>
+                    <Content contentContainerStyle={{
+                        flexGrow: 1,
+                        paddingHorizontal: 10, paddingVertical: 60, justifyContent: 'space-between'
+                    }}>
+                        <View style={{ flex: 1.5 }}>
+                            <Text style={{ color: Colors.appBlue, fontSize: 24, lineHeight: 32, textAlign: 'center' }}>
+                                my<Text style={{ fontWeight: 'bold', color: Colors.appBlue, fontSize: 24, lineHeight: 32 }}>Care.</Text>
+                            </Text>
                         </View>
-                    </View>
-                </Content>
+
+                        {this.renderEmailForm()}{/*note form has Flex: 6*/}
+
+                        <View style={{ flex: 2.5, justifyContent: 'space-between' }}>
+                            <Item style={{ alignItems: 'center', justifyContent: 'center', borderBottomColor: '#FBFBFB', flex: 0.5 }}>
+                                {this.renderContinueButton()}
+                            </Item>
+
+                            <View style={{ flex: 0.5, marginTop: 15, borderBottomColor: '#FBFBFB', alignItems: 'center', justifyContent: 'center' }}>
+                                <Text>Dont have an Account?
+                            <Text onPress={() => { this.props.navigation.navigate('Signup') }} style={{ color: Colors.appBlue, fontSize: 14, lineHeight: 20, fontWeight: '700' }}> SIGN-UP</Text></Text>
+                            </View>
+                        </View>
+                    </Content>
+                </BackgroundImage>
             </Container>
         )
     }

@@ -45,7 +45,7 @@ class ProviderListScreen extends Component {
           <Left>
             <Text style={[styles.bold, styles.font16]} >{provider.name}</Text>
           </Left>
-          <Button bordered rounded style={styles.btn}>
+          <Button bordered rounded style={[styles.btn, styles.btnOutline]}>
             <Text style={styles.btnText}>CONNECT</Text>
           </Button>
         </ListItem>)
@@ -56,7 +56,7 @@ class ProviderListScreen extends Component {
             <Text style={[styles.bold, styles.font16]}>{provider.name}</Text>
           </Left>
 
-          <Button rounded style={styles.btn}>
+          <Button rounded style={[styles.btn, styles.btnFill]}>
             <Text style={styles.btnConnectedTxt}>CONNECTED</Text>
           </Button>
         </ListItem>
@@ -69,7 +69,7 @@ class ProviderListScreen extends Component {
 
         <Header style={{ backgroundColor: Colors.snow }}>
           <Left>
-            <Button onPress={() => this.props.navigation.dispatch(NavigationActions.back())} transparent>
+            <Button onPress={() => this.props.navigation.goBack()} transparent>
               <Icon name="ios-arrow-back" style={{ color: "#000" }} />
             </Button>
           </Left>
@@ -78,7 +78,7 @@ class ProviderListScreen extends Component {
           </Body>
           <Right>
             <Button transparent>
-              <Text style={{ color: "#000" }}>DONE</Text>
+              <Text style={{ color: Colors.appBlue }}>DONE</Text>
             </Button>
           </Right>
 

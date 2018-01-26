@@ -15,7 +15,7 @@ export default StyleSheet.create({
     paddingBottom: 20
   },
   themeColor: {
-    color:'#1C58B5'
+    color:Colors.appBlue
   },
 
   logoText: {
@@ -31,6 +31,7 @@ export default StyleSheet.create({
     alignSelf: 'center',
     marginTop: 80,
     width: 150,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: Colors.appBlue
   }
 })

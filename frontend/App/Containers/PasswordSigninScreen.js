@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, Alert, BackHandler, AsyncStorage } from 'react-native';
+import { View, Alert, BackHandler, AsyncStorage, ToastAndroid } from 'react-native';
 import { Images, Metrics, Colors } from "../Themes";
 import { Container, Header, Content, Form, Item, Input, Label, Text, Button, Icon, Thumbnail, Left } from 'native-base';
 import SigninScreenStyles from './Styles/SigninScreenStyles';
 import { NavigationActions } from 'react-navigation';
 import * as axios from 'axios';
 import Spinner from 'react-native-loading-spinner-overlay';
+import BackgroundImage from '../Components/BackgroundImage';
 
 class PasswordSigninScreen extends React.Component {
     constructor(props) {
@@ -49,16 +50,18 @@ class PasswordSigninScreen extends React.Component {
                     ]).then(() => {
                         this.props.navigation.navigate('NavigationDrawer');
                     });
-                } 
+                }
             })
             .catch((err) => {
                 this.setState({ showSpinner: false });
-                
+
                 if (err.response.status === 401) {
-                    this.props.navigation.navigate('EmailSignin');                    
-                    alert(JSON.stringify(err));
+                    this.props.navigation.navigate('EmailSignin');
+                    // alert(JSON.stringify(err));
+                    ToastAndroid.show('Invalid Username or password', ToastAndroid.SHORT);
                 } else {
-                    alert('A network error occured');
+                    ToastAndroid.show('A network error occured', ToastAndroid.SHORT);
+                    // alert('A network error occured');
                 }
             });
     }
@@ -128,35 +131,37 @@ class PasswordSigninScreen extends React.Component {
     render() {
         return (
             <Container style={{ backgroundColor: '#FBFBFB' }}>
-                <Button onPress={() => this.props.navigation.dispatch(NavigationActions.back())} transparent>
-                    <Icon name="ios-arrow-back" />
-                </Button>
-                <Content contentContainerStyle={{
-                    backgroundColor: '#FBFBFB', flexGrow: 1,
-                    paddingHorizontal: 10, paddingTop: 30, paddingBottom: 60, justifyContent: 'space-between'
-                }}>
-                    <Spinner visible={this.state.showSpinner} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
+                <BackgroundImage>
+                    <Button onPress={() => this.props.navigation.dispatch(NavigationActions.back())} transparent>
+                        <Icon name="ios-arrow-back" style={{color: Colors.appBlue}} />
+                    </Button>
+                    <Content contentContainerStyle={{
+                        flexGrow: 1,
+                        paddingHorizontal: 10, paddingTop: 30, paddingBottom: 60, justifyContent: 'space-between'
+                    }}>
+                        <Spinner visible={this.state.showSpinner} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
 
-                    <View style={{ flex: 1.5 }}>
-                        {/* <Left><Icon name="arrow-back" /></Left> */}
-                        <Text style={{ color: Colors.appBlue, fontSize: 24, lineHeight: 32, textAlign: 'center' }}>
-                            my<Text style={{ fontWeight: 'bold', color: Colors.appBlue, fontSize: 24, lineHeight: 32 }}>Care.</Text>
-                        </Text>
-                        {/* <Text style={{ color: "blue", fontSize: 32, fontWeight: 'bold', textAlign: 'center' }}>myCare</Text> */}
-                    </View>
-                    {this.renderpasswordForm()}
-
-                    <View style={{ flex: 2.5, justifyContent: 'space-between' }}>
-                        <Item style={{ alignItems: 'center', justifyContent: 'center', borderBottomColor: '#FBFBFB', flex: 0.5 }}>
-                            {this.renderSigninButton()}
-                        </Item>
-
-                        <View style={{ flex: 0.5, marginTop: 15, borderBottomColor: '#FBFBFB', alignItems: 'center', justifyContent: 'center' }}>
-                            <Text>Dont have an Account?
-                            <Text onPress={() => { this.props.navigation.navigate('Signup') }} style={{ color: '#1C58B5', fontSize: 14, lineHeight: 20, fontWeight: '700' }}> SIGN-UP</Text></Text>
+                        <View style={{ flex: 1.5 }}>
+                            {/* <Left><Icon name="arrow-back" /></Left> */}
+                            <Text style={{ color: Colors.appBlue, fontSize: 24, lineHeight: 32, textAlign: 'center' }}>
+                                my<Text style={{ fontWeight: 'bold', color: Colors.appBlue, fontSize: 24, lineHeight: 32 }}>Care.</Text>
+                            </Text>
+                            {/* <Text style={{ color: "blue", fontSize: 32, fontWeight: 'bold', textAlign: 'center' }}>myCare</Text> */}
                         </View>
-                    </View>
-                </Content>
+                        {this.renderpasswordForm()}
+
+                        <View style={{ flex: 2.5, justifyContent: 'space-between' }}>
+                            <Item style={{ alignItems: 'center', justifyContent: 'center', borderBottomColor: '#FBFBFB', flex: 0.5 }}>
+                                {this.renderSigninButton()}
+                            </Item>
+
+                            <View style={{ flex: 0.5, marginTop: 15, borderBottomColor: '#FBFBFB', alignItems: 'center', justifyContent: 'center' }}>
+                                <Text>Dont have an Account?
+                            <Text onPress={() => { this.props.navigation.navigate('Signup') }} style={{ color: Colors.appBlue, fontSize: 14, lineHeight: 20, fontWeight: '700' }}> SIGN-UP</Text></Text>
+                            </View>
+                        </View>
+                    </Content>
+                </BackgroundImage>
             </Container>
         )
     }

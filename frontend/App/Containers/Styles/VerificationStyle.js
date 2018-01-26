@@ -5,7 +5,6 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     marginTop: Metrics.navBarHeight,
-    backgroundColor: Colors.background
   },
   logoContainer: {
     flex: 1,
@@ -16,7 +15,7 @@ export default StyleSheet.create({
   },
 
   themeColor: {
-    color:'#1C58B5'
+    color: Colors.appBlue
   },
 
   logoText: {
@@ -37,7 +36,8 @@ export default StyleSheet.create({
     alignSelf: 'center',
     marginTop: 80,
     width: 150,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: Colors.appBlue
   },
 
   skipBtn: {

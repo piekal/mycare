@@ -18,7 +18,9 @@ import EOBClaimScreen from '../Containers/EOBClaimScreen';
 import ClaimsDataScreen from '../Containers/ClaimsDataScreen'
 import ProviderListScreen from '../Containers/ProviderListScreen';
 import NoteListScreen from '../Containers/NoteListScreen';
-import UploadScreen from '../Containers/UploadScreen'
+import UploadScreen from '../Containers/UploadScreen';
+import EditProfileScreen from '../Containers/EditProfileScreen';
+import DiagnosticScreen from '../Containers/DiagnosticsScreen';
 
 
 const PrimaryNav = StackNavigator(
@@ -39,10 +41,12 @@ const PrimaryNav = StackNavigator(
 		ProviderListScreen: { screen: ProviderListScreen },
 		NoteListScreen: { screen: NoteListScreen },
 		UploadScreen: { screen: UploadScreen },
+		EditProfileScreen: { screen: EditProfileScreen },
+		DiagnosticScreen: { screen: DiagnosticScreen }
 	},
 	{
-		 initialRouteName: "Welcome",
-		//initialRouteName: "NavigationDrawer",
+		initialRouteName: "Welcome",
+		// initialRouteName: "NavigationDrawer",
 		headerMode: "none"
 	}
 );

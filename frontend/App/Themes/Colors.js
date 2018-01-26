@@ -22,7 +22,7 @@ const colors = {
   border: '#483F53',
   banner: '#5F3E63',
   text: '#E0D7E5',
-  appBlue: '#1C58B5'
+  appBlue: '#218EC4'
 }
 
 export default colors
