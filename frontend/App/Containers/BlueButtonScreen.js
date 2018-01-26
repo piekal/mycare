@@ -42,7 +42,7 @@ class BlueButtonScreen extends Component {
                 let self = this;
 
                 setTimeout(function() {
-                    self.props.navigation.navigate('ProfileScreen');
+                    self.props.navigation.navigate('ProviderListScreen');
                 }, 5000);
 
                 // this.props.navigation.navigate('ProfileScreen');

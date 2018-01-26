@@ -17,6 +17,7 @@ import BlueButtonScreen from '../Containers/BlueButtonScreen';
 import EOBClaimScreen from '../Containers/EOBClaimScreen';
 import ClaimsDataScreen from '../Containers/ClaimsDataScreen'
 import ProviderListScreen from '../Containers/ProviderListScreen';
+import PayerListScreen from '../Containers/PayerListScreen';
 import NoteListScreen from '../Containers/NoteListScreen';
 import UploadScreen from '../Containers/UploadScreen';
 import EditProfileScreen from '../Containers/EditProfileScreen';
@@ -37,7 +38,8 @@ const PrimaryNav = StackNavigator(
 		Verification: { screen: Verification },
 		BlueButtonScreen: { screen: BlueButtonScreen },
 		EOBClaimScreen: { screen: EOBClaimScreen },
-		ClaimsDataScreen: { screen: ClaimsDataScreen },
+	        ClaimsDataScreen: { screen: ClaimsDataScreen },
+                PayerListScreen: { screen: PayerListScreen },
 		ProviderListScreen: { screen: ProviderListScreen },
 		NoteListScreen: { screen: NoteListScreen },
 		UploadScreen: { screen: UploadScreen },
