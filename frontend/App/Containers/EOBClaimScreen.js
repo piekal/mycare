@@ -29,7 +29,8 @@ class EOBClaimScreen extends Component {
         }
 
         this.months = ["January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"];
+                       "July", "August", "September", "October", "November", "December"];
+      
     }
 
     componentWillMount() {
@@ -77,6 +78,7 @@ class EOBClaimScreen extends Component {
             });
     }
 
+
     renderClaimsData() {
         let timeLineData = this.state.claimsData.groupByYear('start_date');
 
@@ -107,7 +109,7 @@ class EOBClaimScreen extends Component {
             let month = this.months[date.getMonth()];
 
             return (
-                <View style={styles.row} key={category.entry_id}>
+                <View onPress={() => this.props.navigation.navigate("ClaimsDataScreen")} style={styles.row} key={category.entry_id}>
                     <View style={styles.timeline}>
                         <View style={styles.line}>
                             <View style={topLineStyle} />
@@ -116,9 +118,9 @@ class EOBClaimScreen extends Component {
                         <View style={styles.dot} />
                     </View>
 
-                    <View style={styles.content}>
-                        <ListItem style={{ paddingLeft: 0, borderBottomColor: '#A8A8A8' }}>
-                            <Body>
+                    <View onPress={() => this.props.navigation.navigate("ClaimsDataScreen")} style={styles.content}>
+                        <ListItem onPress={() => this.props.navigation.navigate("ClaimsDataScreen")} style={{ paddingLeft: 0, borderBottomColor: '#A8A8A8' }}>
+                            <Body onPress={() => this.props.navigation.navigate("ClaimsDataScreen")}>
                                 <Text uppercase={true} style={{ padding: 0, fontWeight: '600', fontSize: 10, color: '#333333' }}>{category.first_icd_code}</Text>
                                 <Text numberOfLines={1} uppercase={false} style={{ fontSize: 14, lineHeight: 16, fontWeight: '600', color: '#333333' }}>
                                     {category.provider}
@@ -142,14 +144,13 @@ class EOBClaimScreen extends Component {
     render() {
         return (
             <Container>
-                <Header style={{ backgroundColor: '#FFF' }}>
-                    <Left style={{ flex: 2 }}>
-                        <Button transparent onPress={() => this.props.navigation.goBack()} >
-                            <Icon name="arrow-back" style={{ color: '#000' }} />
-                        </Button>
-
-                    </Left>
-
+              <Header style={{ backgroundColor: '#FFF' }}>
+                <Left>
+                  <Button transparent onPress={() => this.props.navigation.navigate("DrawerOpen")} >
+                    <Icon name="ios-menu" style={{ color: '#000' }} />
+                  </Button>
+                  
+                </Left>
                     <Body style={{ justifyContent: 'center', alignItems: 'center', flex: 6 }}>
                         <Title style={{ color: Colors.coal, textAlign: 'center', alignSelf: 'center' }}>Claims Data</Title>
                     </Body>

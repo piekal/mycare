@@ -15,7 +15,7 @@ class BlueButtonScreen extends Component {
         super(props);
 
         this.state = {
-            isFetching: true
+            isFetching: false
         };
     }
 
@@ -69,7 +69,7 @@ class BlueButtonScreen extends Component {
         return (
             <Container>
                 <Content contentContainerStyle={{ justifyContent: 'center', alignItems: 'center', flex: 1 }} style={{ backgroundColor: '#FBFBFB' }}>
-                    <Text style={styles.textStyle}>BLUE BUTTON</Text>
+                    <Text style={styles.textStyle}>CMS BLUE BUTTON</Text>
                     <Text style={styles.textStyle}>ENDPOINT</Text>
                     {this.renderSpinner()}
                 </Content>

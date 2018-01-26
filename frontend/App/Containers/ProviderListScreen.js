@@ -13,7 +13,7 @@ import querystring from 'query-string'
 import styles from './Styles/ProviderListScreenStyle'
 import { Images, Metrics, Colors } from "../Themes";
 
-class ProviderListScreen extends React.PureComponent {
+class ProviderListScreen extends Component {
 
   constructor(props) {
     super(props)
@@ -23,7 +23,7 @@ class ProviderListScreen extends React.PureComponent {
       // { name: 'UnitedHealth', connected: false },
       // { name: 'BlueCross', connected: false },
       // { name: 'Providence', connected: true },
-      { name: 'CareEvolution', connected: false }
+      { name: 'Dr. James Corden', connected: false }
     ];
 
 
@@ -100,7 +100,7 @@ class ProviderListScreen extends React.PureComponent {
             <Text style={[styles.bold, styles.font16]} >{provider.name}</Text>
           </Left>
           <Button bordered rounded style={[styles.btn, styles.btnOutline]}>
-            <Text style={styles.btnText}>CONNECT</Text>
+            <Text onPress={this.redirectToBrowser} style={styles.btnText}>CONNECT</Text>
           </Button>
         </ListItem>)
     } else {
@@ -133,11 +133,6 @@ class ProviderListScreen extends React.PureComponent {
           <Body>
             <Title style={{ color: "#000" }}>Providers</Title>
           </Body>
-          <Right>
-            <Button transparent>
-              <Text style={{ color: Colors.appBlue }}>DONE</Text>
-            </Button>
-          </Right>
 
         </Header>
 

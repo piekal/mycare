@@ -34,7 +34,7 @@ const PrimaryNav = StackNavigator(
 		EmailSignin: { screen: EmailSignin },
 		PasswordSignin: { screen: PasswordSignin },
 		ProfileScreen: { screen: ProfileScreen },
-		VerificationPin: { screen: VerificationPin },
+	        VerificationPin: { screen: VerificationPin },
 		Verification: { screen: Verification },
 		BlueButtonScreen: { screen: BlueButtonScreen },
 		EOBClaimScreen: { screen: EOBClaimScreen },

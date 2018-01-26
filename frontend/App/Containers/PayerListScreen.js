@@ -20,7 +20,8 @@ class PayerListScreen extends Component {
       // { name: 'BlueCross', connected: false },
       // { name: 'Providence', connected: true },
       { name: 'CMS', connected: false },
-      { name: 'EPIC', connected: true }      
+      { name: 'CIGNA', connected: true },      
+      { name: 'HUMANA', connected: true }      
     ];
 
 
@@ -35,12 +36,6 @@ class PayerListScreen extends Component {
   }
 
   connect() {
-    this.setState({
-      dataSoure: [
-        { name: 'CMS', connected: true },
-        { name: 'EPIC', connected: true }      
-      ]
-    });
     this.props.navigation.navigate('BlueButtonScreen');
   }
 

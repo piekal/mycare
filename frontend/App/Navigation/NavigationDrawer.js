@@ -21,9 +21,9 @@ const NavigationDrawer = DrawerNavigator({
 	NoteListScreen: { screen: NoteListScreen, key: 'Note List' },
         ProviderListScreen: { screen: ProviderListScreen },
   	PayerListScreen: { screen: PayerListScreen },
-	// ProfileScreen: { screen: ProfileScreen },
-	// BlueButtonScreen: { screen: BlueButtonScreen },
-	// EOBClaimScreen: { screen: EOBClaimScreen }
+	ProfileScreen: { screen: ProfileScreen },
+	BlueButtonScreen: { screen: BlueButtonScreen },
+	EOBClaimScreen: { screen: EOBClaimScreen }
 },
 	{
 		initialRouteName: "PayerListScreen",
