@@ -23,6 +23,7 @@ var express = require('express'),
     diagonosis = require('./api/models/diagnosisModel'),    	
     userRoute = require('./api/routes/userRoute'),
     bbRoute = require('./api/routes/blueButtonRoute'),
+    npiRoute = require('./api/routes/NPIRoute'),
     bodyParser = require('body-parser'),
     jsonwebtoken = require('jsonwebtoken');
 
@@ -58,6 +59,7 @@ app.use(function(req,res,next){
 // init routes
 userRoute(router);
 bbRoute(router);
+npiRoute(router);
 
 // root
 app.use('/', express.static('public'));
@@ -80,39 +82,52 @@ if (argv.meta == 'LOAD') {
   console.log("Saving ICD codes...");
   
   // load icd
-  csv.fromPath("./public/icd10cm_codes_2018.csv", { headers : true }
-  ).on("data", function(data){
+  // csv.fromPath("./public/icd10cm_codes_2018.csv", { headers : true }
+  // ).on("data", function(data){
     
-    // save
-    (new ICD({ code:data.CODE, desc:data.DESC })).save();
+  //   // save
+  //   (new ICD({ code:data.CODE, desc:data.DESC })).save();
     
-  }).on("end", function(){
-    console.log("ICD codes saved.");
-  });
+  // }).on("end", function(){
+  //   console.log("ICD codes saved.");
+  // });
 
   console.log("Saving NPI codes...");
 
   // load npi
-  csv.fromPath("./public/npidata_20180108-20180114.csv", { headers : true }
-  ).on("data", function(data){
+  // csv.fromPath("./public/npidata_20180108-20180114.csv", { headers : true }
+  // ).on("data", function(data){
     
-    // save
-    (new NPI({
-      npi_code:data["NPI"],
-      type:data["Entity Type Code"],
-      org_name:data["Provider Organization Name (Legal Business Name)"].trim(),
-      provider_name_prefix:data["Provider Name Prefix Text"].trim(),
-      provider_first_name:data["Provider First Name"].trim(),
-      provider_middle_name:data["Provider Middle Name"].trim(),
-      provider_last_name:data["Provider Last Name (Legal Name)"].trim(),
-      provider_name_suffix:data["Provider Name Suffix Text"].trim()
-    })).save();
-    
-  }).on("end", function(){
-    console.log("NPI codes saved.");
-  });
+  //   // save
+  //   (new NPI({
+  //     npi_code:data["NPI"],
+  //     type:data["Entity Type Code"],
+  //     org_name:data["Provider Organization Name (Legal Business Name)"].trim(),
+  //     provider_name_prefix:data["Provider Name Prefix Text"].trim(),
+  //     provider_first_name:data["Provider First Name"].trim(),
+  //     provider_middle_name:data["Provider Middle Name"].trim(),
+  //     provider_last_name:data["Provider Last Name (Legal Name)"].trim(),
+  //     provider_name_suffix:data["Provider Name Suffix Text"].trim()
+  //   })).save();
+
+  // }).on("end", function(){
+  //   console.log("NPI csv saved.");
+  // });
+
+  // add Care evolution
+  (new NPI({
+    npi_code:9999999999,
+    type:2,
+    org_name:"CareEvolution",
+    provider_name_prefix:"",
+    provider_first_name:"",
+    provider_middle_name:"",
+    provider_last_name:"",
+    provider_name_suffix:""
+  })).save();
   
 }
+
 
 // start server
 app.listen(port);
