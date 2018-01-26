@@ -28,9 +28,9 @@ exports.provider_callback = function(req, res){
     })
   }).then(function(resp) {
     console.error(resp.data)
+    return res.status(200).send(resp.data);
   }, function(err) {
     console.error(err.response.data);
+    return res.status(500).send(err.response.data);
   });
-
-  return res.status(200).send();
 }
