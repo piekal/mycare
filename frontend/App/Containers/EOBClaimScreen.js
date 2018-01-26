@@ -87,7 +87,7 @@ class EOBClaimScreen extends Component {
             let year = date.getFullYear();
             claimsData.push(
                 <View key={year}>
-                    <ListItem itemDivider style={{ borderBottomColor: '#A8A8A8', borderTopColor: '#A8A8A8', borderBottomWidth: 1, borderTopWidth: 1 }}>
+                    <ListItem itemDivider style={{ borderBottomColor: '#BDBDBD', borderTopColor: '#BDBDBD', borderBottomWidth: 1, borderTopWidth: 1 }}>
                         <Text>{year}</Text>
                     </ListItem>
                     {this.renderData(timeLineData[start_date])}
@@ -225,21 +225,24 @@ const styles = StyleSheet.create({
     },
     topLine: {
         flex: 1,
-        width: 2,
-        backgroundColor: '#A8A8A8',
+        width: 1,
+        backgroundColor: '#BDBDBD',
+        alignSelf: 'center'
     },
     bottomLine: {
         flex: 1,
-        width: 2,
-        backgroundColor: '#A8A8A8',
+        width: 1,
+        backgroundColor: '#BDBDBD',
+        alignSelf: 'center'
     },
     hiddenLine: {
         width: 0,
     },
     dot: {
-        width: 10,
-        height: 10,
+        width: 8,
+        height: 8,
         borderRadius: 5,
-        backgroundColor: '#1C58B5',
+        backgroundColor: Colors.appBlue,
+        alignSelf: 'center'
     },
 });

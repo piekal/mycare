@@ -1,14 +1,22 @@
 import React, { Component } from 'react'
 import { AsyncStorage, StyleSheet, Linking, Alert } from 'react-native'
-import { Content, Container, Header, Left, Right, Body, View, Button, Text, Title, Icon, List, ListItem, CheckBox, Input, Spinner } from 'native-base'
+import { Content, Container, Header, Left, Right, Body, View, Button, Text, Title, Icon, List, ListItem, CheckBox, Input, Spinner, Separator } from 'native-base'
 import { connect } from 'react-redux'
 import styles from './Styles/ProfileScreenStyle';
 import { timeLineStyles } from './Styles/TimelineStyles';
 import { Image } from 'react-native';
+import PopupDialog, {
+  DialogTitle,
+  DialogButton,
+  ScaleAnimation,
+} from 'react-native-popup-dialog';
+
 import { Images, Metrics, Colors } from "../Themes";
 // import { timelineStatus } from './Constants';
 
 import * as axios from 'axios';
+
+const scaleAnimation = new ScaleAnimation();
 
 const timelineStatus = {
   blueButtonConnected: 'connected',
@@ -28,12 +36,23 @@ class ProfileScreen extends Component {
       dob: '',
       race: '',
       token: '',
-      connectedToCms: false
+      connectedToCms: false,
+      dialogShow: false,
+      connectedToProviders: false,
+      dataFromBrowser: true
     }
+
+    this.showConnectToProvidersDialog = this.showConnectToProvidersDialog.bind(this);
 
     this.redirectToBrowser = this.redirectToBrowser.bind(this);
 
     this.authUrl = `https://fhir.careevolution.com/Master.Adapter1.WebClient/OAuth2/Authorize?response_type=code&client_id=adc97029-f891-4931-ad16-2a311c76076d&redirect_uri=mycare://careevolution/callback&scope=patient/*.read&state=s06Up0SpUg&aud=https://fhir.careevolution.com/Master.Adapter1.WebClient/api/fhir`;
+
+  }
+
+
+  showConnectToProvidersDialog() {
+    this.connectToProvidersDialog.show();
 
   }
 
@@ -71,7 +90,32 @@ class ProfileScreen extends Component {
 
     if (routeName === 'careevolution/callback') {
       Alert.alert('new url', event.url);
-    }    
+    }
+  }
+
+  renderMediCareView() {
+    if (this.state.dataFromBrowser) {
+      return (
+        <Button onPress={() => {
+          this.state.connectedToProviders ?
+            this.props.navigation.navigate('EOBClaimScreen')
+            :
+            this.showConnectToProvidersDialog();
+        }}
+          bordered rounded style={[styles.btnOutline,{ width: 230, alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }]}>
+
+          <Text uppercase={true} style={styles.outlineBtnText}>medical history</Text>
+
+        </Button>
+      )
+    } else {
+      return (
+        <Button onPress={this.redirectToBrowser}
+          bordered rounded style={[styles.btnOutline, { width: 230, alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }]}>
+          <Text uppercase={true} style={styles.outlineBtnText}>explanation of benefit</Text>
+        </Button>
+      )
+    }
   }
 
   connectToProviders() {
@@ -79,8 +123,8 @@ class ProfileScreen extends Component {
       return (
         <ListItem itemDivider>
           <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
-            <Button rounded style={styles.btn} onPress={() => { this.props.navigation.navigate('BlueButtonScreen') }}>
-              <Text>Connect to CMS</Text>
+            <Button rounded style={[styles.btn, styles.btnFill]} onPress={() => { this.props.navigation.navigate('BlueButtonScreen') }}>
+              <Text uppercase={false}>Connect to CMS Medicare</Text>
             </Button>
 
             <Button rounded bordered style={[styles.btn, styles.btnOutline]}>
@@ -92,29 +136,30 @@ class ProfileScreen extends Component {
       )
     } else {
       return (
+
         <View>
           <ListItem>
             <Left>
               <Text style={styles.textLabel} uppercase={true}>Blue Button</Text>
             </Left>
+            <Right>
+              <Icon name='ios-checkmark-circle' style={{ color: '#1AD972' }} />
+            </Right>
           </ListItem>
 
-          <ListItem itemDivider style={{ maxHeight: 2 }} />
+          <Separator style={{ height: 5 }}></Separator>
 
           <ListItem style={{ justifyContent: 'center', alignItems: 'center' }}>
             <View>
               <View>
-                <Button onPress={this.redirectToBrowser}
-                 bordered rounded style={{ width: 230, alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}>
-                  <Text uppercase={true}>explanation of benefit</Text>
-                </Button>
+                {this.renderMediCareView()}
               </View>
               <View>
               </View>
 
-              <View style={{marginTop: 20}}>
-                <Button bordered rounded style={{ width: 230, alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}>
-                  <Text uppercase={true}>providers list</Text>
+              <View style={{ marginTop: 20 }}>
+                <Button bordered rounded style={[styles.btnOutline,{ width: 230, alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }]}>
+                  <Text uppercase={true} style={styles.outlineBtnText}>providers list</Text>
                 </Button>
               </View>
             </View>
@@ -122,6 +167,39 @@ class ProfileScreen extends Component {
         </View>
       );
     }
+  }
+
+  renderConnectToProvidersDialog() {
+    return (
+      <PopupDialog
+        dialogTitle={<DialogTitle title="Connect to Providers" titleStyle={styles.dialogTitle} titleTextStyle={styles.dialogTitleText} />}
+        ref={(popupDialog) => {
+          this.connectToProvidersDialog = popupDialog;
+        }}
+        dialogAnimation={scaleAnimation}
+        width={0.8}
+        height={0.25}
+        dismissOnTouchOutside={false}
+      >
+        <View style={styles.dialogContentView}>
+          <Text style={{ color: '#828282' }}>Medicare has a lsit of providers you need to connect to.</Text>
+          <View style={styles.dialogBtn}>
+            <Button transparent onPress={() => this.connectToProvidersDialog.dismiss()}>
+              <Text style={{ color: '#BDBDBD' }}>NOT NOW</Text>
+            </Button>
+            <Button transparent onPress={
+              () => {
+                this.connectToProvidersDialog.dismiss()
+                this.props.navigation.navigate('ProviderListScreen')
+              }
+            }>
+              <Text style={{color: Colors.appBlue}}>CONNECT</Text>
+            </Button>
+          </View>
+        </View>
+
+      </PopupDialog>
+    )
   }
 
   renderEOBTargets(targetsList) {
@@ -170,6 +248,14 @@ class ProfileScreen extends Component {
         lastName: userDetails.lastName,
         email: userDetails.email,
       })
+
+      AsyncStorage.multiSet([
+        ["firstName", userDetails.firstName],
+        ["lastName", userDetails.lastName],
+        ["email", userDetails.email]
+
+      ]).catch((err) => 'An error occoured ASYS');
+
     }).catch((err) => {
 
       if (err.response.status === 401) {
@@ -185,7 +271,7 @@ class ProfileScreen extends Component {
 
   renderUserData() {
     if (this.state.fetching) {
-      return (<Spinner color="#000000" />)
+      return (<Spinner color={Colors.appBlue} />)
     } else {
       return (
         <View>
@@ -209,9 +295,7 @@ class ProfileScreen extends Component {
                 <Text style={styles.textLabel}>CITY</Text>
               </Left>
 
-              <Button icon transparent primary>
-                <Icon name='ios-arrow-forward' style={{ color: '#000' }} />
-              </Button>
+              <Text style={styles.textValue} >{(this.state.city) ? this.state.city : ''}</Text>
             </ListItem>
 
             <ListItem>
@@ -219,7 +303,7 @@ class ProfileScreen extends Component {
                 <Text style={styles.textLabel} >DOB</Text>
               </Left>
 
-              <Text style={styles.textValue} >{this.state.city}</Text>
+              <Text style={styles.textValue} >{(this.state.dob) ? this.state.dob : ''}</Text>
             </ListItem>
 
             <ListItem>
@@ -227,7 +311,7 @@ class ProfileScreen extends Component {
                 <Text style={styles.textLabel} >RACE</Text>
               </Left>
 
-              <Text style={styles.textValue} >{this.state.race}</Text>
+              <Text style={styles.textValue} >{(this.state.race) ? this.state.race : ''}</Text>
             </ListItem>
 
             <ListItem itemDivider />
@@ -288,7 +372,11 @@ class ProfileScreen extends Component {
             <Title style={{ color: Colors.coal }}>Profile</Title>
           </Body>
 
-          <Right />
+          <Right>
+            <Button iconLeft transparent onPress={() => this.props.navigation.navigate("EditProfileScreen")}>
+              <Icon name="md-create" style={{ color: '#000' }} />
+            </Button>
+          </Right>
 
         </Header>
 
@@ -296,7 +384,10 @@ class ProfileScreen extends Component {
 
           {this.renderUserData()}
 
+
         </Content>
+
+        {this.renderConnectToProvidersDialog()}
 
       </Container>
     )

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { ApplicationStyles } from '../../Themes/'
+import { ApplicationStyles, Colors } from '../../Themes/'
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
@@ -30,14 +30,38 @@ export default StyleSheet.create({
     alignSelf: 'center',
     marginBottom: 25,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
-  
+  btnFill : {
+    backgroundColor: Colors.appBlue
+  },
+
   btnOutline: {
-    borderColor: '#4B74FF',
+    borderColor: Colors.appBlue,
   },
 
   outlineBtnText: {
-    color: '#4B74FF',
+    color: Colors.appBlue,
+  },
+
+  dialogContentView: {
+    paddingLeft: 15,
+    paddingRight: 15,
+    flex: 1,
+    justifyContent: 'center'
+  },
+
+  dialogTitle: {
+    alignSelf: 'flex-start',
+    backgroundColor: 'transparent'
+  },
+  dialogTitleText: {
+    color: '#333333',
+    fontWeight: '700'
+  },
+  dialogBtn: {
+    flexDirection: 'row',
+    alignSelf: 'flex-end' 
   }
+
 })

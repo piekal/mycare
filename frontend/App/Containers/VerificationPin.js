@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 import styles from './Styles/VerificationPinStyle'
 
 import { Images, Metrics, Colors } from "../Themes";
+import BackgroundImage from '../Components/BackgroundImage';
 
 
 class VerificationPin extends Component {
@@ -35,71 +36,75 @@ class VerificationPin extends Component {
   render() {
     return (
       <Container style={{ backgroundColor: '#FBFBFB' }}>
-        <Content padder>
-          <View style={styles.logoContainer} >
-            <Text style={{ color: Colors.appBlue, fontSize: 24, lineHeight: 32, textAlign: 'center' }}>
-              my<Text style={{ fontWeight: 'bold', color: Colors.appBlue, fontSize: 24, lineHeight: 32 }}>Care.</Text>
-            </Text>
-            {/* <Text style={styles.logoText}> my<Text style={[styles.logoText, styles.boldText]}>Care. </Text> </Text> */}
-          </View>
-          <View style={{ alignItems: 'center' }}>
-            {/* <Text style={[styles.boldText, styles.themeColor, { fontSize: 20, marginTop: 15 }]}>Verify PIN</Text> */}
-            <Text style={[styles.boldText, styles.themeColor, { fontSize: 18, lineHeight:20, marginTop: 15 }]}>Verify PIN</Text>
-            <Text style={[{ fontSize: 16, marginTop: 15 }]}>Enter pin</Text>
+        <BackgroundImage>
+          <Content padder>
 
-            <View style={{ flexDirection: 'row' }}>
-              <View>
-                <Item underline>
-                  <Input ref={(input) => { this.input1 = input; }}
-                    onChangeText={(text) => { this.focusNextInput(text, this.input2) }}
-                    keyboardType='numeric' maxLength={1} />
-                </Item>
-                <View style={{ width: 50, borderBottomWidth: 1, borderBottomColor: '#000' }} />
+            <View style={styles.logoContainer} >
+              <Text style={{ color: Colors.appBlue, fontSize: 24, lineHeight: 32, textAlign: 'center' }}>
+                my<Text style={{ fontWeight: 'bold', color: Colors.appBlue, fontSize: 24, lineHeight: 32 }}>Care.</Text>
+              </Text>
+            </View>
+
+            <View style={{ alignItems: 'center' }}>
+            
+              <Text style={[styles.boldText, styles.themeColor, { fontSize: 18, lineHeight: 20, marginTop: 15 }]}>Verify PIN</Text>
+              <Text style={[{ fontSize: 16, marginTop: 15 }]}>Enter pin</Text>
+
+              <View style={{ flexDirection: 'row' }}>
+                <View>
+                  <Item underline>
+                    <Input ref={(input) => { this.input1 = input; }}
+                      onChangeText={(text) => { this.focusNextInput(text, this.input2) }}
+                      keyboardType='numeric' maxLength={1} />
+                  </Item>
+                  <View style={{ width: 50, borderBottomWidth: 1, borderBottomColor: '#000' }} />
+
+                </View>
+
+                <View style={{ marginLeft: 10 }}>
+                  <Item underline>
+                    <Input onChangeText={(text) => { this.focusNextInput(text, this.input3) }}
+                      ref={(input) => { this.input2 = input; }} keyboardType='numeric' maxLength={1} />
+                  </Item>
+                  <View style={{ width: 50, borderBottomWidth: 1, borderBottomColor: '#000' }} />
+
+                </View>
+
+                <View style={{ marginLeft: 10 }}>
+                  <Item underline>
+                    <Input onChangeText={(text) => { this.focusNextInput(text, this.input4) }}
+                      ref={(input) => { this.input3 = input; }} keyboardType='numeric' maxLength={1} />
+                  </Item>
+                  <View style={{ width: 50, borderBottomWidth: 1, borderBottomColor: '#000' }} />
+
+                </View>
+
+                <View style={{ marginLeft: 10 }}>
+                  <Item underline>
+                    <Input ref={(input) => { this.input4 = input; }} keyboardType='numeric' maxLength={1} />
+                  </Item>
+                  <View style={{ width: 50, borderBottomWidth: 1, borderBottomColor: '#000' }} />
+
+                </View>
 
               </View>
 
-              <View style={{ marginLeft: 10 }}>
-                <Item underline>
-                  <Input onChangeText={(text) => { this.focusNextInput(text, this.input3) }}
-                    ref={(input) => { this.input2 = input; }} keyboardType='numeric' maxLength={1} />
-                </Item>
-                <View style={{ width: 50, borderBottomWidth: 1, borderBottomColor: '#000' }} />
+              <Button rounded style={styles.verifyBtn} onPress={() => { this.props.navigation.navigate('EmailSignin') }}>
+                <Text>VERIFY</Text>
+              </Button>
 
-              </View>
+              <Button transparent style={{ alignSelf: 'center', marginTop: 15 }} >
+                <Text style={[styles.boldText, { color: '#333' }]} >RESEND PIN</Text>
+              </Button>
 
-              <View style={{ marginLeft: 10 }}>
-                <Item underline>
-                  <Input onChangeText={(text) => { this.focusNextInput(text, this.input4) }}
-                    ref={(input) => { this.input3 = input; }} keyboardType='numeric' maxLength={1} />
-                </Item>
-                <View style={{ width: 50, borderBottomWidth: 1, borderBottomColor: '#000' }} />
-
-              </View>
-
-              <View style={{ marginLeft: 10 }}>
-                <Item underline>
-                  <Input ref={(input) => { this.input4 = input; }} keyboardType='numeric' maxLength={1} />
-                </Item>
-                <View style={{ width: 50, borderBottomWidth: 1, borderBottomColor: '#000' }} />
-
-              </View>
 
             </View>
 
-            <Button rounded style={styles.verifyBtn} onPress={() => { this.props.navigation.navigate('EmailSignin') }}>
-              <Text>VERIFY</Text>
-            </Button>
-
-            <Button transparent style={{ alignSelf: 'center', marginTop: 15 }} >
-              <Text style={[styles.boldText, { color: '#333' }]} >RESEND PIN</Text>
-            </Button>
 
 
-          </View>
+          </Content>
 
-
-
-        </Content>
+        </BackgroundImage>
 
       </Container>
     )

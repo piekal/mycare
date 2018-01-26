@@ -10,6 +10,7 @@ import { connect } from 'react-redux'
 import styles from './Styles/VerificationStyle'
 
 import { Images, Metrics, Colors } from "../Themes";
+import BackgroundImage from '../Components/BackgroundImage';
 
 
 class Verification extends Component {
@@ -54,6 +55,7 @@ class Verification extends Component {
   render() {
     return (
       <Container style={{ backgroundColor: '#FBFBFB' }}>
+      <BackgroundImage>
         <Content padder>
           <View style={styles.logoContainer} >
             <Text style={{ color: Colors.appBlue, fontSize: 24, lineHeight: 32, textAlign: 'center' }}>
@@ -117,6 +119,7 @@ class Verification extends Component {
           </Button>
 
         </Content>
+        </BackgroundImage>
 
       </Container>
     )
