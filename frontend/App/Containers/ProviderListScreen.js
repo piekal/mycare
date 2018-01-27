@@ -64,6 +64,7 @@ class ProviderListScreen extends Component {
               'content-type': 'application/json'
             }      
           }).then((resp) => {
+            console.log(resp)
             this.props.navigation.navigate('EOBClaimScreen');
           }).catch((err) => {
           });    

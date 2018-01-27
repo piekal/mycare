@@ -122,13 +122,17 @@ exports.timeline = async function(req, res) {
       // if EOB is ready
       if (obj.status.indexOf("READY") > -1) {
         var ret = [];
-        
+
+
+        // 1. start with eob
         EOB.findOne({
           eob_type:eobtype,
           user_id:req.user
         },function(err,eob) {
           //console.error(eob);
 
+
+          // 2. get all entries
           entry.find({
             eob_id:eob
           },function(err, entries) {
@@ -139,12 +143,20 @@ exports.timeline = async function(req, res) {
               return new Promise(function(resolve,reject) {
                 // create new timeline
                 var timeline = {};
-                timeline.entry_id = e._id;
+                var hit_id;
+
+                timeline.entry_id = e._id;               
                 
                 // add provider
                 var providerPromise = provider.findOne({
                   entry_id:e              
-                }).populate('npi').exec(function(err,p){
+                }).populate({ 
+                  path: 'npi',
+                  populate: {
+                    path: 'hit',
+                    model: 'HIT'
+                  } 
+                }).exec(function(err,p){
                   if (p && p.npi) {
                     var n = p.npi;
                     if (n.type == 1) {
@@ -161,18 +173,21 @@ exports.timeline = async function(req, res) {
                     } else {
                       timeline.provider = n.org_name.trim();
                     }
+                    timeline.HIT = n.hit.name;
                   }
                 });
                 
                 // add first diagnosis
-                var diagnosisPromise = diagnosis.findOne({
-                  entry_id:e
-                }).populate('icd').exec(function(err,d) {
-                  if (d && d.icd && d.sequence == 1) {
-                    timeline.first_icd_code = d.icd.code;
-                    timeline.first_icd_desc = d.icd.desc;
-                  }
+                var diagnosisPromise = ICD.findOne({
+                  code:/Z.+/
+                }).exec(function(err,d) {
+
+                  console.error("Found D : ",d);
                   
+                  if (d != null) {
+                    timeline.first_icd_code = d.code;
+                    timeline.first_icd_desc = d.desc;
+                  }
                 });
                 
                 // add date
@@ -184,8 +199,7 @@ exports.timeline = async function(req, res) {
                     timeline.end_date = b.end_date;
                     ret.push(timeline);
                   }
-                });
-                                
+                });                                
                 
                 // resolve all
                 Promise.all([

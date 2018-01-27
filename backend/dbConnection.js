@@ -1,4 +1,5 @@
-var url = 'mongodb://admin:admin@ds046357.mlab.com:46357/mycare_sandbox';      
+//var url = 'mongodb://admin:admin@ds046357.mlab.com:46357/mycare_sandbox';
+var url = 'mongodb://admin:admin@ds046357.mlab.com:46357/mycare-v2';      
 
 var mongoose = require('mongoose');
 

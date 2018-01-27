@@ -18,4 +18,8 @@ module.exports = function(router) {
   
   router.route('/bb/:entry_id/diagnosis')
     .get(commonHandler.loginRequired, bbHandler.get_diagnosis);
+
+//  router.route('/bb/eob/unique')
+//     .get(commonHandler.loginRequired, bbHandler.get_unique_provider);
+
 };
