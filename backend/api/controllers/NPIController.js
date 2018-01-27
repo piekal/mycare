@@ -8,9 +8,12 @@ var mongoose = require('mongoose'),
 /*
  * provider callback with token
  */
-exports.provider_callback = function(req, res){
-  console.log('GET /npi/:npi_id/callback : ',req.params, req.query);
+exports.provider_code_callback = function(req, res){
+  console.log('GET /oauth/code/',req.params, req.query);
 
+
+  // TODO
+  
   axios({
     method:'post',
     url:'https://fhir.careevolution.com/Master.Adapter1.WebClient/api/OAuth2/Token',
@@ -27,7 +30,7 @@ exports.provider_callback = function(req, res){
       redirect_uri:'mycare://careevolution/callback'
     })
   }).then(function(resp) {
-    console.error(resp.data)
+    console.error(resp.data);
     return res.status(200).send(resp.data);
   }, function(err) {
     console.error(err.response.data);

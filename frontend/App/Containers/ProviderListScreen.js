@@ -57,8 +57,15 @@ class ProviderListScreen extends Component {
         Linking.getInitialURL().then(url => {
           
           var code = querystring.parse(url)['mycare://careevolution/callback?code'];
+
+          var provider = '';
+          if (url.indexOf('careevolution') > -1) {
+            provider = 'careevolution';
+          } else {
+            provider = 'cerner';
+          }          
           
-          axios.get('https://www.mycare-api.com/api/v1/npi/9999999999/callback?code='+code, {
+          axios.get('https://www.mycare-api.com/api/v1/oauth/code?code='+code+'&provider='+provider, {
             headers: {
               'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15Y2FyZUBteWNhcmUuY29tIiwiX2lkIjoiNWE2YWFjMjFiNDIwN2QwMDA0ODA5MTljIiwiaWF0IjoxNTE2OTg1MTU1fQ.Oi01pEkbxX_pbvfjd4U6g0BvuvqQxNsrunCuvxcl4O4',
               'content-type': 'application/json'
