@@ -243,3 +243,8 @@ exports.purge_eob = function(req, res) {
   provider.remove({}).exec();
   return res.status(200).send("Purge complete");      
 }
+
+
+exports.observation = function(req, res) {
+  return res.status(200).send("Observation endpoint");      
+}
