@@ -38,7 +38,7 @@ exports.provider_code_callback = function (req, res) {
         console.error(err.response.data);
         return res.status(500).send(err.response.data);
       });
-    } else {
+    } else if(hit.name == 'cerner'){
       console.log("In cerner", hit.token_endpoint)
       axios({
         method: 'post',
@@ -51,6 +51,27 @@ exports.provider_code_callback = function (req, res) {
           code: req.query.code,
           client_id: hit.client_id,
           state: hit.state
+        })
+      }).then(function (resp) {
+        console.error(resp.data);
+        return res.status(200).send(resp.data);
+      }, function (err) {
+        console.error(err.response.data);
+        return res.status(500).send(err.response.data);
+      });
+    }
+    else{
+      axios({
+        method: 'post',
+        url: hit.token_endpoint,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        data: querystring.stringify({
+          grant_type: 'authorization_code',
+          code: req.query.code,
+          redirect_uri: 'mycare://' + hit.name + '/callback',
+          client_id: hit.client_id
         })
       }).then(function (resp) {
         console.error(resp.data);
