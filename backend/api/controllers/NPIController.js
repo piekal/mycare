@@ -1,39 +1,68 @@
 'use strict';
-
 var mongoose = require('mongoose'),
-    axios = require('axios'),
-    querystring = require('querystring');
-
+  axios = require('axios'),
+  querystring = require('querystring'),
+  HIT = mongoose.model('HIT');
 
 /*
  * provider callback with token
  */
-exports.provider_code_callback = function(req, res){
-  console.log('GET /oauth/code/',req.params, req.query);
-
+exports.provider_code_callback = function (req, res) {
+  console.log('GET /oauth/code/', req.params, req.query);
 
   // TODO
-  
-  axios({
-    method:'post',
-    url:'https://fhir.careevolution.com/Master.Adapter1.WebClient/api/OAuth2/Token',
-    headers: {
-      'Content-Type':'application/x-www-form-urlencoded'
-    },
-    auth:{
-      username:'adc97029-f891-4931-ad16-2a311c76076d',
-      password:'s06Up0SpUg'
-    },
-    data:querystring.stringify({
-      grant_type:'authorization_code',
-      code:req.query.code,
-      redirect_uri:'mycare://careevolution/callback'
-    })
-  }).then(function(resp) {
-    console.error(resp.data);
-    return res.status(200).send(resp.data);
-  }, function(err) {
-    console.error(err.response.data);
-    return res.status(500).send(err.response.data);
+  var hits = HIT.findOne({
+    'name': req.query.provider
+  }, function (err, hit) {
+
+    if (hit.name == 'CareEvolution') {
+      axios({
+        method: 'post',
+        url: hit.token_endpoint,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        auth: {
+          username: 'adc97029-f891-4931-ad16-2a311c76076d',
+          password: 's06Up0SpUg'
+        },
+        data: querystring.stringify({
+          grant_type: 'authorization_code',
+          code: req.query.code,
+          redirect_uri: 'mycare://' + hit.name + '/callback'
+        })
+      }).then(function (resp) {
+        console.error(resp.data);
+        return res.status(200).send(resp.data);
+      }, function (err) {
+        console.error(err.response.data);
+        return res.status(500).send(err.response.data);
+      });
+    } else {
+      console.log("In cerner", hit.token_endpoint)
+      axios({
+        method: 'post',
+        url: hit.token_endpoint,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        data: querystring.stringify({
+          grant_type: 'authorization_code',
+          code: req.query.code,
+          client_id: hit.client_id,
+          state: hit.state
+        })
+      }).then(function (resp) {
+        console.error(resp.data);
+        return res.status(200).send(resp.data);
+      }, function (err) {
+        console.error(err.response.data);
+        return res.status(500).send(err.response.data);
+      });
+    }
   });
+
+
+
+
 }
