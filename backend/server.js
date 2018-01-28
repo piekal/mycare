@@ -7,7 +7,7 @@ var express = require('express'),
     app = express(),
     router = express.Router(),
     port = process.env.PORT || 3000,
-    mongoose = require('mongoose'),    
+    mongoose = require('mongoose'),
     db = require('./dbConnection'),
     User = require('./api/models/userModel'),
     ICD = require('./api/models/ICDModel'),
@@ -19,12 +19,14 @@ var express = require('express'),
     entry = require('./api/models/entryModel'),
     billable = require('./api/models/billableDateModel'),
     provider = require('./api/models/providerModel'),
+    observation = require('./api/models/observationModel'),
     HIT = require('./api/models/HITModel'),
     providerToken = require('./api/models/providerTokenModel'),
-    diagonosis = require('./api/models/diagnosisModel'),    	
+    diagonosis = require('./api/models/diagnosisModel'),
     userRoute = require('./api/routes/userRoute'),
     bbRoute = require('./api/routes/blueButtonRoute'),
     npiRoute = require('./api/routes/NPIRoute'),
+    // observationRoute = require('./api/routes/observationRoute'), //Observation route
     bodyParser = require('body-parser'),
     jsonwebtoken = require('jsonwebtoken');
 
@@ -65,7 +67,7 @@ npiRoute(router);
 // root
 app.use('/', express.static('public'));
 
-// base 
+// base
 app.use('/api/v1',router);
 
 // to start with meta data loading:
@@ -76,7 +78,7 @@ console.log(argv);
 if (argv.meta == 'LOAD') {
 
   console.log('Loading meta');
-  
+
   var csv = require("fast-csv");
   var ICD = mongoose.model('ICD');
   var NPI = mongoose.model('NPI');
@@ -100,7 +102,7 @@ if (argv.meta == 'LOAD') {
     // 3.load npi
     csv.fromPath("./public/npidata_20180108-20180114.csv", { headers : true }
     ).on("data", function(data){
-      
+
       // save
       var newNPI = new NPI({
         npi_code:data["NPI"],
@@ -112,7 +114,7 @@ if (argv.meta == 'LOAD') {
         provider_last_name:data["Provider Last Name (Legal Name)"].trim(),
         provider_name_suffix:data["Provider Name Suffix Text"].trim()
       });
-      
+
       // add randm hit
       HIT.count().exec(function (err, count) {
         var random = Math.floor(Math.random() * count);
@@ -120,21 +122,21 @@ if (argv.meta == 'LOAD') {
 	  function (err, result) {
             newNPI.hit = result;
             newNPI.save();
-	  });	
-      });    
+	  });
+      });
     }).on("end", function(){
       console.log("NPI csv saved.");
     });
-    
+
   });
-  
+
   // 4. load icd
   csv.fromPath("./public/icd10cm_codes_2018.csv", { headers : true }
   ).on("data", function(data){
-    
+
     // save
     (new ICD({ code:data.CODE, desc:data.DESC })).save();
-    
+
   }).on("end", function(){
     console.log("ICD codes saved.");
   });
