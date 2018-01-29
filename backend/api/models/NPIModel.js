@@ -32,7 +32,8 @@ var NPISchema = new mongoose.Schema({
   },
   provider_phone:{
     type: String
-  }
+  },
+  hit:{type: mongoose.Schema.Types.ObjectId, ref: 'HIT'}
 }, {timestamps: true});
 
 mongoose.model('NPI', NPISchema);

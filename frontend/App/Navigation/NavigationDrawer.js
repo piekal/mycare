@@ -4,6 +4,7 @@ import ClaimsDataScreen from '../Containers/ClaimsDataScreen'
 import UploadScreen from '../Containers/UploadScreen'
 import NoteListScreen from '../Containers/NoteListScreen'
 import ProviderListScreen from '../Containers/ProviderListScreen'
+import PayerListScreen from '../Containers/PayerListScreen'
 import VerificationPin from '../Containers/VerificationPin'
 import Verification from '../Containers/Verification'
 import ProfileScreen from '../Containers/ProfileScreen'
@@ -15,16 +16,17 @@ import styles from "./Styles/NavigationStyles";
 
 const NavigationDrawer = DrawerNavigator({
 	Profile: { screen: ProfileScreen },
-	// ClaimsDataScreen: { screen: ClaimsDataScreen },
-	// UploadScreen: { screen: UploadScreen },
-	// NoteListScreen: { screen: NoteListScreen, key: 'Note List' },
-	// ProviderListScreen: { screen: ProviderListScreen },
-	// ProfileScreen: { screen: ProfileScreen },
-	// BlueButtonScreen: { screen: BlueButtonScreen },
-	// EOBClaimScreen: { screen: EOBClaimScreen }
+	ClaimsDataScreen: { screen: ClaimsDataScreen },
+	UploadScreen: { screen: UploadScreen },
+	NoteListScreen: { screen: NoteListScreen, key: 'Note List' },
+        ProviderListScreen: { screen: ProviderListScreen },
+  	PayerListScreen: { screen: PayerListScreen },
+	ProfileScreen: { screen: ProfileScreen },
+	BlueButtonScreen: { screen: BlueButtonScreen },
+	EOBClaimScreen: { screen: EOBClaimScreen }
 },
 	{
-		initialRouteName: "Profile",
+		initialRouteName: "PayerListScreen",
 		contentComponent: props => <DrawerContent {...props} />,
 	}
 );

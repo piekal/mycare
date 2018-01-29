@@ -15,7 +15,7 @@ class BlueButtonScreen extends Component {
         super(props);
 
         this.state = {
-            isFetching: true
+            isFetching: false
         };
     }
 
@@ -42,7 +42,7 @@ class BlueButtonScreen extends Component {
                 let self = this;
 
                 setTimeout(function() {
-                    self.props.navigation.navigate('ProfileScreen');
+                    self.props.navigation.navigate('ProviderListScreen');
                 }, 5000);
 
                 // this.props.navigation.navigate('ProfileScreen');
@@ -69,7 +69,7 @@ class BlueButtonScreen extends Component {
         return (
             <Container>
                 <Content contentContainerStyle={{ justifyContent: 'center', alignItems: 'center', flex: 1 }} style={{ backgroundColor: '#FBFBFB' }}>
-                    <Text style={styles.textStyle}>BLUE BUTTON</Text>
+                    <Text style={styles.textStyle}>CMS BLUE BUTTON</Text>
                     <Text style={styles.textStyle}>ENDPOINT</Text>
                     {this.renderSpinner()}
                 </Content>

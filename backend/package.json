@@ -20,6 +20,7 @@
     "minimalist": "^1.0.0",
     "mongodb": "^3.0.1",
     "mongoose": "^4.13.9",
+    "querystring": "^0.2.0",
     "uuid": "^3.2.1"
   },
   "devDependencies": {

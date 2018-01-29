@@ -6,6 +6,7 @@ import RehydrationServices from '../Services/RehydrationServices'
 import ReduxPersist from '../Config/ReduxPersist'
 import ScreenTracking from './ScreenTrackingMiddleware'
 
+
 // creates the store
 export default (rootReducer, rootSaga) => {
   /* ------------- Redux Configuration ------------- */
@@ -14,7 +15,7 @@ export default (rootReducer, rootSaga) => {
   const enhancers = []
 
   /* ------------- Analytics Middleware ------------- */
-  middleware.push(ScreenTracking)
+  middleware.push(ScreenTracking);
 
   /* ------------- Saga Middleware ------------- */
 

@@ -87,7 +87,19 @@ exports.parseEOB = function(req, eobparse) {
               
               bill.entry_id = entryl;
               bill.save();
-              
+
+              // DUMMY have at least one diagnosis
+              if (e.resource.diagnosis.length == 0) {
+                e.resource.diagnosis.push({
+                  sequence:1,
+	          diagnosisCodeableConcept: {
+                    coding: [{
+                      system: "http://hl7.org/fhir/sid/unknown-icd-version/9",
+                      code: "38010"
+                    }]
+                  }
+                });                
+              }
               
               // save diagonosis
               _.each(e.resource.diagnosis, function(d,i) {
@@ -95,7 +107,6 @@ exports.parseEOB = function(req, eobparse) {
 	          sequence:d.sequence,
 	          icd_version:d.diagnosisCodeableConcept.coding[0].system
                 });
-
                 //console.error(entryl);
                 diag1.entry_id = entryl;
                 
@@ -111,13 +122,13 @@ exports.parseEOB = function(req, eobparse) {
 	            });	
                 });
               });
-
+              
               // save provider
               var pr = new provider();
               pr.entry_id = entryl;
               NPI.count().exec(function (err, count) {
 	        //console.log("NPI count : ",count);
-	        var random = Math.floor(Math.random() * count);
+	        var random = Math.floor(Math.random() * 3) + 1 ;
 	        NPI.findOne().skip(random).exec(
 	          function (err, result) {
 	            //console.log(result);

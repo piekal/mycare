@@ -239,15 +239,14 @@ class ClaimsDataScreen extends Component {
   render() {
     return (
       <Container>
-
+        
         <Header style={{ backgroundColor: Colors.snow }}>
-
           <Left>
-            <Button onPress={() => this.props.navigation.dispatch(NavigationActions.back())} transparent>
-              <Icon name="ios-arrow-back" style={{ color: '#000' }} />
+            <Button transparent onPress={() => { this.props.navigation.navigate('EOBClaimScreen'); }}>
+              <Icon name="ios-arrow-back" style={{ color: "#000" }} />
             </Button>
           </Left>
-
+          
           <Body>
             <Title style={{ color: '#000' }}>ClaimsData</Title>
           </Body>

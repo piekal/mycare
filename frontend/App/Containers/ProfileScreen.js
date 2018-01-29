@@ -14,6 +14,7 @@ import PopupDialog, {
 import { Images, Metrics, Colors } from "../Themes";
 // import { timelineStatus } from './Constants';
 
+
 import * as axios from 'axios';
 
 const scaleAnimation = new ScaleAnimation();
@@ -25,9 +26,10 @@ const timelineStatus = {
 
 class ProfileScreen extends Component {
 
+  
   constructor(props) {
     super(props)
-
+      
     this.state = {
       fetching: true,
       firstName: '',
