@@ -88,6 +88,7 @@ exports.provider_callback = function(req, res) {
 }
 
 
+
 /*
  * send status
  */
@@ -247,4 +248,119 @@ exports.purge_eob = function(req, res) {
 
 exports.observation = function(req, res) {
   return res.status(200).send("Observation endpoint");      
+}
+
+
+exports.get_unique_provider = function(req,res) {
+  EOBType.findOne({
+    name: "CMS_BLUE_BUTTON"
+  }).then(function(eobtype) {    
+    EOBStatus.findOne({
+      user_id:req.user,
+      eob_type:eobtype
+    },function(err,obj) {
+
+      // if EOB is ready
+      if (obj.status.indexOf("READY") > -1) {
+        var ret = [];
+
+        // 1. start with eob
+        EOB.findOne({
+          eob_type:eobtype,
+          user_id:req.user
+        },function(err,eob) {
+          //console.error(eob);
+
+          // 2. get all entries
+          entry.find({
+            eob_id:eob
+          },function(err, entries) {
+            //console.error(entries);
+
+            var promises = entries.map(function(e) {
+              
+              return new Promise(function(resolve,reject) {
+                // create new timeline
+                var timeline = {};
+                var hit_id;
+
+                timeline.entry_id = e._id;               
+                
+                // add provider
+                var providerPromise = provider.findOne({
+                  entry_id:e              
+                }).populate({ 
+                  path: 'npi',
+                  populate: {
+                    path: 'hit',
+                    model: 'HIT'
+                  } 
+                }).exec(function(err,p){
+                  if (p && p.npi) {
+                    var n = p.npi;
+                    if (n.type == 1) {
+		      var prefix = n.provider_name_prefix.trim.length > 0 ?
+			  n.provider_name_prefix.trim() + " " : "";
+		      var suffix = n.provider_name_suffix.trim.length > 0 ?
+			  " " +n.provider_name_suffix.trim() : "";		      
+		      
+		      timeline.provider =
+			prefix +
+			n.provider_first_name.trim() + " "+
+			n.provider_last_name.trim() +
+			suffix;
+                    } else {
+                      timeline.provider = n.org_name.trim();
+                    }
+                    timeline.HIT = n.hit.name;
+                  }
+                });
+                
+                // add first diagnosis
+                var diagnosisPromise = ICD.findOne({
+                  code:/Z.+/
+                }).exec(function(err,d) {
+
+                  console.error("Found D : ",d);
+                  
+                  if (d != null) {
+                    timeline.first_icd_code = d.code;
+                    timeline.first_icd_desc = d.desc;
+                  }
+                });
+                
+                // add date
+                var billablePromise = billable.findOne({
+                  entry_id:e              
+                }).exec(function(err,b){
+                  if (b) {
+                    timeline.start_date = b.start_date;
+                    timeline.end_date = b.end_date;
+                    ret.push(timeline);
+                  }
+                });                                
+                
+                // resolve all
+                Promise.all([
+                  billablePromise,
+                  providerPromise,
+                  diagnosisPromise
+                ]).then(function() {
+                  resolve();
+                });
+              });
+            });
+
+            // when all promises are resolved
+            Promise.all(promises).then(function() {
+              return res.status(200).send(ret);
+            });
+          })
+        })          
+      } else {
+        return res.status(200).send("EOB NOT READY");
+      }
+    });
+  });
+
 }

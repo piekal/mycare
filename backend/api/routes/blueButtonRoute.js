@@ -23,7 +23,6 @@ module.exports = function(router) {
     .get(commonHandler.loginRequired, bbHandler.observation);
 
   
-//  router.route('/bb/eob/unique')
-//     .get(commonHandler.loginRequired, bbHandler.get_unique_provider);
-
+  router.route('/bb/eob/unique')
+      .get(commonHandler.loginRequired, bbHandler.get_unique_provider);
 };

@@ -119,12 +119,12 @@ paths:
         '200':
           description: OK  
   /user/profile:
-    post:
+    put:
       tags:
         - User
-      summary: create or update user profile
+      summary: update user profile
       description: >-
-        Create or update user profile
+        update user profile
       security: []
       responses:
         '200':
@@ -139,6 +139,27 @@ paths:
       responses:
         '200':
           description: OK
+  /payer:
+    post:
+      tags:
+        - Payer
+      summary: Create payer
+      description: >-
+        Get all available payers
+      security: []
+      responses:
+        '200':
+          description: OK  
+    get:
+      tags:
+        - Payer
+      summary: Get all integrated payers
+      description: >-
+        Get all available payers
+      security: []
+      responses:
+        '200':
+          description: OK  
   /payer/{payer_id}/code:
     get:
       tags:
