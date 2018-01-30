@@ -15,9 +15,13 @@ security:
 tags:
   - name: User
     description: user related endpoint
-  - name: Blue Button
-    description: CMS Blue Button endpoints 
-      
+  - name: Payer
+    description: Payer endpoints 
+  - name: Patient
+    description: Patient endpoints 
+  - name: Provider
+    description: Provider endpoints
+    
 paths:
   /user:
     post:
@@ -115,12 +119,12 @@ paths:
         '200':
           description: OK  
   /user/profile:
-    post:
+    put:
       tags:
         - User
-      summary: create or update user profile
+      summary: update user profile
       description: >-
-        Create or update user profile
+        update user profile
       security: []
       responses:
         '200':
@@ -135,32 +139,108 @@ paths:
       responses:
         '200':
           description: OK
-  /bb/callback:
-    get:
+  /payer:
+    post:
       tags:
-        - Blue Button
-      summary: callback for send token to backend - called after myapp://callback#token=... to store token and start fetching EOB.
+        - Payer
+      summary: Create payer
       description: >-
-        Obtain token and start pulling data
+        Get all available payers
       security: []
       responses:
         '200':
           description: OK  
-  /bb/eob:
     get:
       tags:
-        - Blue Button
-      summary: ping EOB ETL status for blue button. If EOB exists send summary with eob_id
+        - Payer
+      summary: Get all integrated payers
       description: >-
-        Get user\'s blue button eob
+        Get all available payers
       security: []
       responses:
         '200':
           description: OK  
-  /bb/eob/{eob_id}/entry:
+  /payer/{payer_id}/code:
     get:
       tags:
-        - Blue Button
+        - Payer
+      summary: callback for send code to backend - called after myapp://callback#code=... to store code and start fetching EOB.
+      description: >-
+        Obtain code and start pulling data
+      security: []
+      responses:
+        '200':
+          description: OK  
+  /payer/{payer_id}/eob:
+    get:
+      tags:
+        - Payer
+      summary: get eobs from payer
+      description: >-
+        Get user\'s payer eob
+      security: []
+      responses:
+        '200':
+          description: OK  
+  /payer/{payer_id}/eob/status:
+    get:
+      tags:
+        - Payer
+      summary: ping EOB ETL status for payer. If EOB exists send summary with eob_id
+      description: >-
+        Get user\'s payer eob
+      security: []
+      responses:
+        '200':
+          description: OK  
+  /payer/{payer_id}/eob/{eob_id}/provider:
+    get:
+      tags:
+        - Payer
+      summary: Get list of unique providers in eob
+      description: >-
+        Get list of entries of eob
+      security: []
+      responses:
+        '200':
+          description: OK
+  /payer/{payer_id}/eob/{eob_id}/provider/{provider_id}:
+    get:
+      tags:
+        - Payer
+      summary: Get provider infomation
+      description: >-
+        Get list of entries of eob
+      security: []
+      responses:
+        '200':
+          description: OK
+  /payer/{payer_id}/eob/{eob_id}/provider/{provider_id}/code:
+    get:      
+      tags:
+        - Payer
+      summary: provider callback after OAuth
+      description: >-
+        Get list of entries of eob
+      security: []
+      responses:
+        '200':
+          description: OK
+  /payer/{payer_id}/eob/{eob_id}/provider/{provider_id}/consent:
+    post:
+      tags:
+        - Payer
+      summary: Get list of providers within organization
+      description: >-
+        Get list of entries of eob
+      security: []
+      responses:
+        '200':
+          description: OK  
+  /payer/{payer_id}/eob/{eob_id}/entry:
+    get:
+      tags:
+        - Payer
       summary: Get list of entries of eob (timeline)
       description: >-
         Get list of entries of eob
@@ -168,10 +248,10 @@ paths:
       responses:
         '200':
           description: OK
-  /bb/eob/{eob_id}/entry/{entry_id}:
+  /payer/{payer_id}/eob/{eob_id}/entry/{entry_id}:
     get:
       tags:
-        - Blue Button
+        - Payer
       summary: Get entry summary (counts?)
       description: >-
         Get entry summary (counts?)
@@ -179,10 +259,10 @@ paths:
       responses:
         '200':
           description: OK
-  /bb/eob/{eob_id}/entry/{entry_id}/diagnosis:
+  /payer/{payer_id}/eob/{eob_id}/entry/{entry_id}/diagnosis:
     get:
       tags:
-        - Blue Button
+        - Payer
       summary: Get diagnosis list of entry
       description: >-
         Get diagnosis list of entry
@@ -190,21 +270,10 @@ paths:
       responses:
         '200':
           description: OK
-  /bb/eob/{eob_id}/entry/{entry_id}/diagnosis/{diagnosis_id}:
+  /payer/{payer_id}/eob/{eob_id}/entry/{entry_id}/procedure:
     get:
       tags:
-        - Blue Button
-      summary: Get diagnosis detail
-      description: >-
-        Get diagnosis detail
-      security: []
-      responses:
-        '200':
-          description: OK
-  /bb/eob/{eob_id}/entry/{entry_id}/procedure:
-    get:
-      tags:
-        - Blue Button
+        - Payer
       summary: Get procedure list of entry
       description: >-
         Get procedure list of entry
@@ -212,21 +281,10 @@ paths:
       responses:
         '200':
           description: OK
-  /bb/eob/{eob_id}/entry/{entry_id}/procedure/{procedure_id}:
+  /payer/{payer_id}/eob/{eob_id}/entry/{entry_id}/cost:
     get:
       tags:
-        - Blue Button
-      summary: Get procedure details
-      description: >-
-        Get procedure details
-      security: []
-      responses:
-        '200':
-          description: OK
-  /bb/eob/{eob_id}/entry/{entry_id}/cost:
-    get:
-      tags:
-        - Blue Button
+        - Payer
       summary: Get payment summary
       description: >-
         Get payment summary
@@ -234,10 +292,10 @@ paths:
       responses:
         '200':
           description: OK
-  /bb/eob/{eob_id}/entry/{entry_id}/prescription:
+  /payer/{payer_id}/eob/{eob_id}/entry/{entry_id}/prescription:
     get:
       tags:
-        - Blue Button
+        - Payer
       summary: Get prescription list
       description: >-
         Get prescription list
@@ -245,21 +303,10 @@ paths:
       responses:
         '200':
           description: OK
-  /bb/eob/{eob_id}/entry/{entry_id}/prescription/{prescription_id}:
+  /payer/{payer_id}/eob/{eob_id}/entry/{entry_id}/note:
     get:
       tags:
-        - Blue Button
-      summary: Get prescription details
-      description: >-
-        Get prescription detail
-      security: []
-      responses:
-        '200':
-          description: OK
-  /bb/eob/{eob_id}/entry/{entry_id}/note:
-    get:
-      tags:
-        - Blue Button
+        - Payer
       summary: Get notes
       description: >-
         Get notes
@@ -267,7 +314,60 @@ paths:
       responses:
         '200':
           description: OK
-
+  /patient/timeline:
+    get:
+      tags:
+        - Patient
+      summary: Get aggregated EOB timeline 
+      description: >-
+        Get aggregated EOB timeline 
+      security: []
+      responses:
+        '200':
+          description: OK
+  /patient/share:
+    get:
+      tags:
+        - Patient
+      summary: Show shared providers
+      description: >-
+        Show shared providers
+      security: []
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+        - Patient
+      summary: Share data with provider
+      description: >-
+        Share data with provider
+      security: []
+      responses:
+        '200':
+          description: OK
+  /provider/patient:
+    get:
+      tags:
+        - Provider
+      summary: Show list of patients who agreed to share
+      description: >-
+        Show list of patients who agreed to share
+      security: []
+      responses:
+        '200':
+          description: OK
+  /provider/search:
+    get:
+      tags:
+        - Provider
+      summary: Search provider list
+      description: >-
+        Search provider list
+      security: []
+      responses:
+        '200':
+          description: OK
 components:
   schemas: {}
   securitySchemes:
