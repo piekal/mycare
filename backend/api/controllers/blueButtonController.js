@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var axios = require('axios');
 var fs = require('fs');
 var providerToken = mongoose.model('ProviderToken');
-var EOBType = mongoose.model('EOBType');
+var Payer = mongoose.model('Payer');
 var EOB = mongoose.model('EOB');
 var EOBStatus = mongoose.model('EOBStatus');
 var entry = mongoose.model('Entry');
@@ -16,7 +16,7 @@ var NPI = mongoose.model('NPI');
 var _ = require('lodash');
 var uuid = require('uuid');
 var EOBHelper = require('../helpers/EOBHelper');
-var eobTypeConstants = require('../constants/EOBTypeConstants');
+var payerConstants = require('../constants/PayerConstants');
 var eobStatusConstants = require('../constants/EOBStatusConstants');
 
 /*
@@ -38,12 +38,12 @@ exports.provider_callback = function(req, res) {
   //-----------------------------------------------
   
   // get BB type 
-  EOBType.findOne({
-    name: eobTypeConstants.CMS_BLUE_BUTTON
-  }, function(err,eobtype) {
+  Payer.findOne({
+    name: payerConstants.CMS_BLUE_BUTTON
+  }, function(err,payer) {
     
-    if (err || !eobtype) {
-      console.error('EOBType not found : ',err);
+    if (err || !payer) {
+      console.error('Payer not found : ',err);
       return res.status(500).send({
 	messege:err
       });
@@ -52,7 +52,7 @@ exports.provider_callback = function(req, res) {
     // upsert token
     providerToken.findOneAndUpdate({
       user_id:req.user,
-      eob_type:eobtype      
+      payer:payer      
     },{
       token:bbToken
     },{upsert:true, new:true }, function(err,t){
@@ -64,7 +64,7 @@ exports.provider_callback = function(req, res) {
     // upsert status
     EOBStatus.findOneAndUpdate({
       user_id:req.user,
-      eob_type:eobtype
+      payer:payer
     },{
       status:"LOADING_EOB"
     },{upsert:true, new:true }, function(err,st){
@@ -95,13 +95,13 @@ exports.provider_callback = function(req, res) {
 exports.status = function(req, res) {
   console.log('GET /bb/status : ',req.params);
 
-  EOBType.findOne({
+  Payer.findOne({
     name: "CMS_BLUE_BUTTON"
-  }).then(function(eobtype) {
+  }).then(function(payer) {
     
     EOBStatus.findOne({
       user_id:req.user,
-      eob_type:eobtype
+      payer:payer
     },function(err,obj) {
       return res.status(200).send(obj.status);
     });
@@ -111,13 +111,13 @@ exports.status = function(req, res) {
 exports.timeline = async function(req, res) {
   console.log('GET /bb/timeline : ',req.params);
   
-  EOBType.findOne({
+  Payer.findOne({
     name: "CMS_BLUE_BUTTON"
-  }).then(function(eobtype) {
+  }).then(function(payer) {
     
     EOBStatus.findOne({
       user_id:req.user,
-      eob_type:eobtype
+      payer:payer
     },function(err,obj) {
 
       // if EOB is ready
@@ -127,7 +127,7 @@ exports.timeline = async function(req, res) {
 
         // 1. start with eob
         EOB.findOne({
-          eob_type:eobtype,
+          payer:payer,
           user_id:req.user
         },function(err,eob) {
           //console.error(eob);
@@ -252,12 +252,12 @@ exports.observation = function(req, res) {
 
 
 exports.get_unique_provider = function(req,res) {
-  EOBType.findOne({
+  Payer.findOne({
     name: "CMS_BLUE_BUTTON"
-  }).then(function(eobtype) {    
+  }).then(function(payer) {    
     EOBStatus.findOne({
       user_id:req.user,
-      eob_type:eobtype
+      payer:payer
     },function(err,obj) {
 
       // if EOB is ready
@@ -266,7 +266,7 @@ exports.get_unique_provider = function(req,res) {
 
         // 1. start with eob
         EOB.findOne({
-          eob_type:eobtype,
+          payer:payer,
           user_id:req.user
         },function(err,eob) {
           //console.error(eob);

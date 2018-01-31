@@ -2,7 +2,7 @@
 
 var mongoose = require('mongoose');
 
-var EOBTypeSchema = new mongoose.Schema({  
+var PayerSchema = new mongoose.Schema({  
   name: {
     type: String
   },
@@ -12,4 +12,4 @@ var EOBTypeSchema = new mongoose.Schema({
 }, {timestamps: true});
 
 
-mongoose.model('EOBType', EOBTypeSchema);
+mongoose.model('Payer', PayerSchema);

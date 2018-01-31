@@ -3,7 +3,7 @@
 var mongoose = require('mongoose');
 var axios = require('axios');
 var fs = require('fs');
-var EOBType = mongoose.model('EOBType');
+var Payer = mongoose.model('Payer');
 var EOB = mongoose.model('EOB');
 var EOBStatus = mongoose.model('EOBStatus');
 var entry = mongoose.model('Entry');
@@ -24,17 +24,17 @@ exports.parseEOB = function(req, eobparse) {
   var eob = new EOB({ user_id:req.user, total: eobparse.total});
   
   // find eob type
-  EOBType.findOne({
+  Payer.findOne({
     name: "CMS_BLUE_BUTTON"
   }, function(err, res) {
 
     //console.log(res);
-    eob.eob_type = res;
+    eob.payer = res;
 
     // update status
     EOBStatus.findOne({
       user_id:req.user,
-      eob_type:res
+      payer:res
     },function(err,obj) {
       if (err) {
 	console.error('EOBStatus not found : ',err);
@@ -57,7 +57,7 @@ exports.parseEOB = function(req, eobparse) {
         if (i == eobparse.total-1) {
           EOBStatus.findOne({
             user_id:req.user,
-            eob_type:res
+            payer:res
           },function(err,obj) {
             obj.status = "EOB_READY";
 	    console.log("Parsing complete");
