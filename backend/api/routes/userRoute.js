@@ -12,7 +12,7 @@ module.exports = function(router) {
   router.route('/user/sign_in')
      .post(userHandler.sign_in);
   
-  router.route('/user/:user_id/profile')
+  router.route('/user/profile')
      .get(commonHandler.loginRequired, profileHandler.get_profile)
-     .post(commonHandler.loginRequired, profileHandler.create_profile);  
+     .put(commonHandler.loginRequired, profileHandler.update_profile);  
 };

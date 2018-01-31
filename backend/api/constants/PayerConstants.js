@@ -1,1 +1,2 @@
 exports.CMS_BLUE_BUTTON = "CMS_BLUE_BUTTON";
+exports.PAYER_TYPE = "PAYER";

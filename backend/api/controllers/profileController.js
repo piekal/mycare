@@ -24,8 +24,8 @@ exports.get_profile = function(req, res) {
   });
 }
 
-exports.create_profile = function(req, res) {
+exports.update_profile = function(req, res) {
   console.log('POST Profile : ',req.params);
 
-  
+  // RAMA
 }

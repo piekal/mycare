@@ -6,8 +6,6 @@ module.exports = function(router) {
   router.route('/metadata')
     .post(commonHandler.loginRequired, commonHandler.load_metadata);
 
-  router.route('/purge')
-    .post(commonHandler.loginRequired, commonHandler.purge_metadata);
-  
-  
+  router.route('/db')
+    .delete(commonHandler.loginRequired, commonHandler.purge_data);  
 };

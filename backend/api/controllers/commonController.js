@@ -3,23 +3,25 @@
 var mongoose = require('mongoose');
 var axios = require('axios');
 var fs = require('fs');
-var providerToken = mongoose.model('ProviderToken');
+var ProviderToken = mongoose.model('ProviderToken');
 var Payer = mongoose.model('Payer');
 var EOB = mongoose.model('EOB');
 var EOBStatus = mongoose.model('EOBStatus');
-var entry = mongoose.model('Entry');
-var billable = mongoose.model('Billable');
-var provider = mongoose.model('Provider');
-var diagnosis = mongoose.model('Diagnosis');
+var Entry = mongoose.model('Entry');
+var Billable = mongoose.model('Billable');
+var Provider = mongoose.model('Provider');
+var Diagnosis = mongoose.model('Diagnosis');
 var ICD = mongoose.model('ICD');
 var NPI = mongoose.model('NPI');
 var _ = require('lodash');
 var uuid = require('uuid');
 var EOBHelper = require('../helpers/EOBHelper');
-var payerConstants = require('../constants/PayerConstants');
+var PayerConstants = require('../constants/PayerConstants');
 var eobStatusConstants = require('../constants/EOBStatusConstants');
 var csv = require("fast-csv");
 var ICD = mongoose.model('ICD');
+var TokenType = mongoose.model('TokenType');
+var UserToken = mongoose.model('UserToken');
 var NPI = mongoose.model('NPI');
 var HIT = mongoose.model('HIT');
 var Payer = mongoose.model('Payer');
@@ -38,15 +40,24 @@ exports.loginRequired = function(req, res, next){
   }
 }
 
-exports.purge_metadata = function(req, res, next) {
+exports.purge_data = function(req, res, next) {
   
   NPI.remove({}).exec();
   ICD.remove({}).exec();
   Payer.remove({}).exec();
-  payer.remove({}).exec();
   HIT.remove({}).exec();
-  return res.status(200).send("Purge complete");      
 
+  Billable.remove({}).exec();
+  Diagnosis.remove({}).exec();
+  Provider.remove({}).exec();
+  Entry.remove({}).exec();
+  EOB.remove({}).exec();
+  EOBStatus.remove({}).exec();
+  ProviderToken.remove({}).exec();
+  TokenType.remove({}).exec();
+  UserToken.remove({}).exec();
+  
+  return res.status(200).send("Purge complete");      
 }
 
 exports.load_metadata = function(req, res, next){
@@ -55,11 +66,29 @@ exports.load_metadata = function(req, res, next){
 
   console.log("Saving ICD codes...");
 
-  // 1. add payer type
-  (new Payer({ name:'CMS_BLUE_BUTTON', desc:'CMS_BLUE_BUTTON' })).save();
+  //------------------------------
+  // Begin load metadata
+  
+  // add payer type
+  (new Payer({
+    name:'CMS_BLUE_BUTTON',
+    desc:'CMS_BLUE_BUTTON'
+  })).save();
 
-  // 2. add HIT
+  // add token type
+  (new TokenType({
+    name:'PAYER',
+    desc:'Token for Payer'
+  })).save();
 
+  (new TokenType({
+    name:'PROVIDER',
+    desc:'Token for Provider'
+  })).save();
+
+  
+  // add HIT
+  console.log("Saving NPI codes...");
   // add Care evolution
   (new HIT({
     name:'CareEvolution',
@@ -67,11 +96,9 @@ exports.load_metadata = function(req, res, next){
     token_endpoint: 'https://fhir.careevolution.com/Master.Adapter1.WebClient/api/OAuth2/Token'
   })).save(function(err, hit) {
 
-    // 3.load npi
+    // load npi
     csv.fromPath("./public/npidata_20180108-20180114.csv", { headers : true }
     ).on("data", function(data){
-
-      console.log("Saving NPI codes...");
       
       // save
       var newNPI = new NPI({
@@ -100,7 +127,7 @@ exports.load_metadata = function(req, res, next){
     
   });
   
-  // 4. load icd
+  // load icd
   csv.fromPath("./public/icd10cm_codes_2018.csv", { headers : true }
   ).on("data", function(data){
     

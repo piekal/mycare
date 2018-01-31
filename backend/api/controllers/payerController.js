@@ -4,6 +4,8 @@ var mongoose = require('mongoose');
 var axios = require('axios');
 var fs = require('fs');
 var providerToken = mongoose.model('ProviderToken');
+var TokenType = mongoose.model('TokenType');
+var UserToken = mongoose.model('UserToken');
 var Payer = mongoose.model('Payer');
 var EOB = mongoose.model('EOB');
 var EOBStatus = mongoose.model('EOBStatus');
@@ -19,13 +21,21 @@ var EOBHelper = require('../helpers/EOBHelper');
 var payerConstants = require('../constants/PayerConstants');
 var eobStatusConstants = require('../constants/EOBStatusConstants');
 
+
+exports.get_payer = function(req,res) {
+  Payer.find({
+  }).then(function(payers) {
+    return res.status(200).send(payers);
+  });
+}
+
 /*
- * GET /bb/provider/callback
+ * GET /payer/provider/callback
  *
  * handle provider callback
  */
-exports.provider_callback = function(req, res) {
-  console.log('GET /bb/provider/callback : ',req.params);
+exports.payer_callback = function(req, res) {
+  console.log('GET /payer/:payer_id/code : ',req.params);
 
   /*
    * exchange token at /o/token
@@ -34,10 +44,26 @@ exports.provider_callback = function(req, res) {
   
   //-----------------------------------------------
   // assume token is found
-  var bbToken = 'PETf15vD2vTvMj2c7lB2V0to3wAANG';
+  var payerToken = 'PETf15vD2vTvMj2c7lB2V0to3wAANG';
   //-----------------------------------------------
-  
-  // get BB type 
+
+  // save token
+  TokenType.findOne({
+    name:payerConstants.PAYER_TYPE
+  }).then(function(type) {
+    UserToken.findOneAndUpdate({
+      user:req.user,
+      token_type: type
+    },{
+      token:payerToken
+    },{
+      upsert:true
+    }).then(function(userToken){
+    })
+  });
+
+    
+  // get PAYER type 
   Payer.findOne({
     name: payerConstants.CMS_BLUE_BUTTON
   }, function(err,payer) {
@@ -45,7 +71,7 @@ exports.provider_callback = function(req, res) {
     if (err || !payer) {
       console.error('Payer not found : ',err);
       return res.status(500).send({
-	messege:err
+  	messege:err
       });
     };
 
@@ -54,12 +80,14 @@ exports.provider_callback = function(req, res) {
       user_id:req.user,
       payer:payer      
     },{
-      token:bbToken
+      token:payerToken
     },{upsert:true, new:true }, function(err,t){
       if(t) {
-	console.log('BB Token Saved');
+  	console.log('PAYER Token Saved');
       }
     });
+
+
     
     // upsert status
     EOBStatus.findOneAndUpdate({
@@ -69,19 +97,22 @@ exports.provider_callback = function(req, res) {
       status:"LOADING_EOB"
     },{upsert:true, new:true }, function(err,st){
       console.log('Fetching EOB...');
-      res.status(200).send("Fetching EOB");
-
-      // call bb eob
+      
+      // call payer eob
       axios({
         method:'get',
-        url:'https://sandbox.bluebutton.cms.gov/v1/fhir/ExplanationOfBenefit/?patient=20140000008324',
+        url:'https://sandbox.bluebutton.cms.gov/v1/fhir/ExplanationOfBenefit/',
         headers: {
-          'Authorization': 'Bearer ' + bbToken
+          'Authorization': 'Bearer ' + payerToken
         },
         responseType:'json'
       }).then(function(resp) {
-	console.log('Parsing EOB...');
-        EOBHelper.parseEOB(req,resp.data);	
+  	console.log('Parsing EOB...');
+        EOBHelper.parseEOB(req,resp.data);
+	return res.status(200).send("Fetching EOB Successful");
+      },function(err) {
+	console.error('Fetching EOB Failed!');
+	return res.status(500).send("Fetching EOB Failed!");
       });
     });
   });
@@ -93,7 +124,7 @@ exports.provider_callback = function(req, res) {
  * send status
  */
 exports.status = function(req, res) {
-  console.log('GET /bb/status : ',req.params);
+  console.log('GET /payer/status : ',req.params);
 
   Payer.findOne({
     name: "CMS_BLUE_BUTTON"
@@ -109,7 +140,7 @@ exports.status = function(req, res) {
 }
 
 exports.timeline = async function(req, res) {
-  console.log('GET /bb/timeline : ',req.params);
+  console.log('GET /payer/timeline : ',req.params);
   
   Payer.findOne({
     name: "CMS_BLUE_BUTTON"
