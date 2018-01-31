@@ -3,7 +3,7 @@
 var mongoose = require('mongoose');
 
 var ProviderTokenSchema = new mongoose.Schema({  
-  eob_type: {type: mongoose.Schema.Types.ObjectId, ref: 'EOBType'},
+  payer: {type: mongoose.Schema.Types.ObjectId, ref: 'Payer'},
   user_id:  {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
   token: {
     type: String
