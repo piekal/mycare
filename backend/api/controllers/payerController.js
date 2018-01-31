@@ -23,6 +23,7 @@ var eobStatusConstants = require('../constants/EOBStatusConstants');
 
 
 exports.get_payer = function(req,res) {
+  console.log('GET /payer');
   Payer.find({
   }).then(function(payers) {
     return res.status(200).send(payers);
@@ -139,7 +140,7 @@ exports.eob_status = function(req, res) {
   });
 }
 
-exports.timeline = async function(req, res) {
+exports.timeline =  function(req, res) {
   console.log('GET /payer/timeline : ',req.params);
   
   Payer.findOne({

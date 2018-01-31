@@ -13,6 +13,19 @@ var ProfileSchema = new mongoose.Schema({
   lastName: {
     type:String
   },
+  city: {
+    type: String
+  },
+  dob : {
+    type : String
+  },
+  race : {
+    type : String
+  },
+  avatar : {
+    type : String
+  },
+  payer: {type: mongoose.Schema.Types.ObjectId, ref: 'Payer'},
   user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 }, {timestamps: true});
 
