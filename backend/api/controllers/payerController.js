@@ -36,7 +36,6 @@ exports.get_payer = function(req,res) {
  */
 exports.payer_callback = function(req, res) {
   console.log('GET /payer/:payer_id/code : ',req.params);
-
   /*
    * exchange token at /o/token
    */
@@ -65,13 +64,13 @@ exports.payer_callback = function(req, res) {
     
   // get PAYER type 
   Payer.findOne({
-    name: payerConstants.CMS_BLUE_BUTTON
+    _id: req.params.payer_id
   }, function(err,payer) {
     
     if (err || !payer) {
       console.error('Payer not found : ',err);
       return res.status(500).send({
-  	messege:err
+  	messege:"Payer not found"
       });
     };
 
@@ -87,8 +86,6 @@ exports.payer_callback = function(req, res) {
       }
     });
 
-
-    
     // upsert status
     EOBStatus.findOneAndUpdate({
       user_id:req.user,
@@ -118,23 +115,26 @@ exports.payer_callback = function(req, res) {
   });
 }
 
-
-
 /*
  * send status
  */
-exports.status = function(req, res) {
-  console.log('GET /payer/status : ',req.params);
+exports.eob_status = function(req, res) {
+  console.log('GET /payer/:payer_id/eob/status : ',req.params);
 
   Payer.findOne({
-    name: "CMS_BLUE_BUTTON"
+    _id: req.params.payer_id 
   }).then(function(payer) {
-    
+    console.log(payer);
+
+    if (!payer) {
+      return res.status(500).send("Payer Not Found");
+    }
     EOBStatus.findOne({
       user_id:req.user,
       payer:payer
-    },function(err,obj) {
-      return res.status(200).send(obj.status);
+    }).then(function(eobstatus) {
+      console.log(eobstatus);
+      return res.status(200).send(eobstatus.status);
     });
   });
 }

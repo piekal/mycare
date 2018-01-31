@@ -10,14 +10,8 @@ module.exports = function(router) {
   router.route('/payer/:payer_id/code')
     .get(commonHandler.loginRequired, payerHandler.payer_callback);
   
-  router.route('/payer/status')
-    .get(commonHandler.loginRequired, payerHandler.status);
-  
-  router.route('/payer/timeline')
-    .get(commonHandler.loginRequired, payerHandler.timeline);   
-  
-  router.route('/payer/purge')
-    .get(commonHandler.loginRequired, payerHandler.purge_eob);
+  router.route('/payer/:payer_id/eob/status')
+    .get(commonHandler.loginRequired, payerHandler.eob_status);
   
   router.route('/payer/:entry_id/diagnosis')
     .get(commonHandler.loginRequired, payerHandler.get_diagnosis);

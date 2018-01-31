@@ -26,6 +26,7 @@ var express = require('express'),
     diagonosis = require('./api/models/diagnosisModel'),    	
     userRoute = require('./api/routes/userRoute'),
     bbRoute = require('./api/routes/payerRoute'),
+    patientRoute = require('./api/routes/patientRoute'),
     npiRoute = require('./api/routes/NPIRoute'),
     commonRoute = require('./api/routes/commonRoute'),    
     bodyParser = require('body-parser'),
@@ -65,6 +66,7 @@ userRoute(router);
 bbRoute(router);
 npiRoute(router);
 commonRoute(router);
+patientRoute(router);
 
 // root
 app.use('/', express.static('public'));

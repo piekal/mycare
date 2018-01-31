@@ -36,4 +36,22 @@ var NPISchema = new mongoose.Schema({
   hit:{type: mongoose.Schema.Types.ObjectId, ref: 'HIT'}
 }, {timestamps: true});
 
+NPISchema.methods.getProviderName = function() {
+  var providerName;
+  if (this.type === 1) {    
+    var prefix = this.provider_name_prefix.trim.length > 0 ?
+	this.provider_name_prefix.trim() + " " : "";
+    var suffix = this.provider_name_suffix.trim.length > 0 ?
+	" " +this.provider_name_suffix.trim() : "";		      		      
+    providerName =
+      prefix +
+      this.provider_first_name.trim() + " "+
+      this.provider_last_name.trim() +
+      suffix;
+  } else {
+    providerName = this.org_name.trim();
+  }  
+  return providerName;
+}
+
 mongoose.model('NPI', NPISchema);
